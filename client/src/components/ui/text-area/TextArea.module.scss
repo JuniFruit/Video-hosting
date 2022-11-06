@@ -1,0 +1,19 @@
+.editor {
+    @apply relative block mt-6;
+
+    >textarea {
+        @apply rounded-lg resize-none w-full py-4 px-2 outline-none block bg-gray-800 text-white shadow transition-shadow focus:shadow-md;
+        max-height: 200px;
+    }
+
+    &::placeholder {
+        color: '#5c5a69';s
+    }
+
+    
+}
+
+.error {
+    @apply absolute bottom-5 left-0 w-full text-primary;
+    font-size: .8rem;
+}

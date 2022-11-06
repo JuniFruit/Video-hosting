@@ -1,0 +1,28 @@
+.search_wrapper {
+    @apply relative w-7/12;
+
+    >label {
+
+        >div {
+            >input {
+
+                padding-right: 3rem;
+            }
+        }
+
+        >svg {
+            @apply absolute right-4 top-2.5 text-lg text-gray-600;
+            
+        }
+    }
+
+    .search_results {
+        @apply absolute rounded-md left-0 top-full bg-gray-700 z-40 w-full p-5 animate-fadeIn duration-75;
+        
+        
+    }
+    .search_no_vids {
+        @apply flex justify-center text-gray-300;
+        font-weight: 500;
+    }
+}

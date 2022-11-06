@@ -1,0 +1,37 @@
+.wrapper {
+    @apply relative inline-flex;
+
+    >button {
+        @apply flex items-center justify-center gap-2 outline-none;
+
+        >span {
+            @apply text-white text-sm;
+            font-weight: 600;
+        }
+
+        .icon {
+            @apply text-gray-500;
+            font-size: 1.2rem;
+        }
+
+    }
+    .menu {
+        @apply absolute left-0 w-full p-3 rounded-lg bg-gray-800 animate-fadeIn duration-150;
+        top: calc(100% + 1.4rem);
+        >ul {
+            @apply flex-col flex gap-4;
+            >li {
+                @apply text-white  opacity-75 relative;
+
+                &:hover::before {
+                    @apply w-full
+                }
+                &::before {
+                    @apply absolute bottom-0 left-0 w-0 h-1 bg-primary transition-all duration-200;
+                    content: '';
+                    
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,10 @@
+.sidebar {
+    @apply p-5;
+    width: 18%;
+
+    >.logo {
+        @apply font-semibold text-2xl;
+        color: white;
+    }
+  
+}

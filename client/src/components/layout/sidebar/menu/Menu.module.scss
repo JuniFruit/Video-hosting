@@ -1,0 +1,58 @@
+.menu_sidebar {
+    
+    @apply my-8;
+
+    >h3 {
+        @apply text-gray-600 mb-6;
+        font-weight: 500
+    }
+    >ul {
+
+        >li {
+            @apply mb-8;
+
+            &:last-child {
+                @apply mb-0
+            }
+
+            >a {
+                @apply flex items-center font-medium relative;
+
+                &.active {
+                    @apply text-white;
+                    >span {
+                        @apply bg-primary text-white;
+                    }
+                    >p {
+                        @apply text-white
+                    }
+                }
+
+                >span {
+                    @apply mr-4 rounded-xl p-2 bg-gray-800 text-gray-500;
+                     
+
+                    &.img {
+                        @apply flex justify-center items-center;
+                        border: 1px solid '#363440';
+                    }
+                }
+                >p {
+                    @apply text-gray-600;
+                    font-size: 500;
+                }
+
+                &::before {
+                    @apply h-full w-1 absolute top-0  -left-5 transition-opacity opacity-0  bg-primary duration-200 ease-in-out;
+                    content: '';
+                }
+
+                &:hover:before {
+                    @apply opacity-70; 
+                }
+            }
+        }
+    }
+
+
+}
