@@ -10,5 +10,4 @@ export const errCatch = (err:any):string => {
         return err.response.data.message
     }
 
-    return err.message
 }

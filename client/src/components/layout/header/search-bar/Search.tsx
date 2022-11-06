@@ -27,7 +27,7 @@ export const Search: FC = () => {
                     {data?.length
                         ?
                         data.map(item => {
-                            return <VideoItem />
+                            return <VideoItem item={item} key={item.id} />
                         })
                         :
                         <div className={styles.search_no_vids}> No results </div>

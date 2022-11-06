@@ -2,7 +2,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import { BASE_URL } from '../../api/axios'
 import { USER_PATH } from '../../services/user/user.service'
 import { IUser } from '../../types/user.interface'
-import { TypeRootState } from '../store'
+
 
 export const api = createApi({
     reducerPath: 'api',

@@ -1,0 +1,15 @@
+
+.videos_wrapper {
+    
+
+
+    .videos_block {
+        @apply flex flex-wrap gap-5;
+
+        >div {
+            @apply mb-2.5;
+            flex: 1 1 calc((100% / 4) - 2.5rem);
+            width: 20%;
+        }
+    }
+}

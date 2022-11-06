@@ -1,0 +1,19 @@
+
+.wrapper {    
+   
+    >h1 {
+        @apply text-4xl text-white;
+        font-weight: 600;
+    }
+    .video_wrapper {
+        @apply flex gap-8;
+
+        .top_video {
+            width: 70%;
+        }
+
+        .random_video {
+            @apply w-1/3;
+        }
+    }
+}

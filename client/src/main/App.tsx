@@ -6,8 +6,8 @@ import styles from './App.module.scss';
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Home />}>
-      </Route>
+      
+      <Route path='/' element={<Home />} /> 
       <Route path='/studio' element={<Studio />} />
 
 

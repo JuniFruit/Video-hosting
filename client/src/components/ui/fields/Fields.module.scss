@@ -2,17 +2,18 @@
     @apply relative block;
 
     >input {
-        @apply rounded-lg py-3 px-2 outline-0 block text-white shadow-md transition-shadow bg-gray-800 w-full;
+        @apply rounded-lg py-3 px-2 outline-none appearance-none block text-white shadow-md transition-shadow bg-gray-800 w-full;
         
         &:focus {
-            @apply shadow
+            @apply shadow outline-none
         }
         
+        &::placeholder {
+            color: '#5c5a69';
+           
+        }
     }
 
-    &::placeholder {
-        color: '#5c5a69';
-    }
 
 }
 
