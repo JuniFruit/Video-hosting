@@ -1,16 +1,15 @@
 import express from 'express';
 import { VideoService } from '../entities/video/video.service';
-import { DEFALUT_MSG } from '../utils/utils';
 
 const router = express.Router();
 
 
 router.get('/all', async (req, res) => {
     try {
-        const videos = await VideoService.getAll(req.query.searchTerm?.toString());
+        const videos = await VideoService.getAll(req.query?.searchTerm?.toString());
         res.send(videos);
     } catch (e:any) {
-        res.status(500).send({message: e.message || DEFALUT_MSG.ERR_UNKNOWN_MSG});
+        res.status(500).send({message: e.message});
     }
 })
 
@@ -22,7 +21,7 @@ router.put('/update/:id', async (req, res) => {
         const updated = await VideoService.updateVideo(Number(id), videoDto);
         res.send(updated);
     } catch (e:any) {
-        res.status(500).send({message: e.message || DEFALUT_MSG.ERR_UNKNOWN_MSG});
+        res.status(500).send({message: e.message});
     }
 
 })
@@ -33,7 +32,7 @@ router.get('/by_id/:id', async (req, res) => {
         const video = await VideoService.getById(Number(id));
         res.send(video);
     } catch (e:any) {
-        res.status(500).send({message: e.message || DEFALUT_MSG.ERR_UNKNOWN_MSG});
+        res.status(500).send({message: e.message});
     }
 })
 
@@ -42,7 +41,7 @@ router.get('/most_viewed', async(req, res) => {
         const videos = await VideoService.getMostViewed();
         res.send(videos);
     } catch (e:any) {
-        res.status(500).send({message: e.message || DEFALUT_MSG.ERR_UNKNOWN_MSG});
+        res.status(500).send({message: e.message});
     }
 })
 
@@ -51,7 +50,7 @@ router.put('/update_reaction/:id', async (req, res) => {
         const video = await VideoService.updateReaction(Number(req.params.id));
         res.send(video);
     } catch (e:any) {
-        res.status(500).send({message: e.message || DEFALUT_MSG.ERR_UNKNOWN_MSG});
+        res.status(500).send({message: e.message});
     }
 })
 
@@ -69,7 +68,7 @@ router.delete('/delete/:id', async(req,res) => {
         const deletedResults = await VideoService.delete(Number(req.params.id));
         res.status(201).send()
     } catch (e:any) {
-        res.status(500).send({message: e.message || DEFALUT_MSG.ERR_UNKNOWN_MSG});
+        res.status(500).send({message: e.message});
     }
 })
 

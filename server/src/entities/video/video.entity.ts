@@ -39,8 +39,10 @@ export class VideoEntity extends Base {
     user!: UserEntity
 
     @OneToMany(() => CommentEntity, comment => comment.video)
+    @JoinColumn({name: 'comments'})
     comments!: CommentEntity[]
 
     @ManyToMany(() => UserEntity, user => user.likedVideos)
+    @JoinColumn({name: 'likedByUsers'})
     likedBy!: UserEntity[]
 }

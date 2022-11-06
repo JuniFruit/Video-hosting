@@ -70,11 +70,7 @@ export const VideoService = {
                 isPublic: true
             },
             relations: {
-                comments: {
-                    author: true,
-                    body: true,
-                    id: true
-                },
+                comments: true,
                 user: true
             },
             select: {
