@@ -1,44 +1,42 @@
 import { UserEntity } from "./user.entity"
 import { userRepository } from "../../database/db";
+import { subscriptionsRespository } from "../../database/db";
 export const UserService = {
 
-    subscribe: async function (userId: number, userToSubId: number):Promise<boolean> {
-
-        const currentUser = await this.getById(userId);
-        const userToSub = await this.getById(userToSubId);
-        if (!currentUser || !userToSub) throw new Error('Trying to subscribe to non-existing user');
-        
-        const isSubscribed = currentUser.subscriptions.find((user: UserEntity) => user.id === userToSubId);
-        
-
-        if (!isSubscribed) {
-            currentUser.subscriptions = [...currentUser.subscriptions, userToSub];
-            userToSub.subscribers = [...userToSub.subscribers, currentUser];
-            userToSub.subscrubersCount++;
-
-            await userRepository.save(currentUser);
-            await userRepository.save(userToSub);
-            return true
+    subscribe: async function (userId: number, userToSubId: number): Promise<boolean> {
+        const query = {
+            fromUser: { id: userId },
+            toUser: { id: userToSubId }
         }
 
-        currentUser.subscriptions = currentUser.subscriptions.filter((user: UserEntity) => user.id !== userToSubId);
-        userToSub.subscribers = userToSub.subscribers.filter((user: UserEntity) => user.id !== userId);
-        userToSub.subscrubersCount--;
+        const isSubscribed = await subscriptionsRespository.findOneBy(query);
 
-        await userRepository.save(currentUser);
-        await userRepository.save(userToSub);
-
-        return false;
+        if (!isSubscribed) {
+            const newSub = await subscriptionsRespository.create(query);
+            await subscriptionsRespository.save(newSub);
+            return true
+        }
+        await subscriptionsRespository.delete(query);
+        return false
     },
 
-    getById: async function (id: number):Promise<UserEntity> {
+    getById: async function (id: number): Promise<UserEntity> {
         const user = await userRepository.findOne({
             where: {
                 id: id
             },
             relations: {
-                videos: true,
-                subscriptions: true
+                videos: {
+                    user: true
+                },
+                subscribers: {
+                    fromUser:true,
+                    toUser:true
+                },
+                subscriptions: {
+                    fromUser: true,
+                    toUser: true
+                }
             },
             order: {
                 createdAt: "DESC"
@@ -48,7 +46,7 @@ export const UserService = {
         if (!user) throw new Error('User not found!');
         return user
     },
-    getAll: async function():Promise<UserEntity[]> {
+    getAll: async function (): Promise<UserEntity[]> {
         return await userRepository.find()
-    } 
+    }
 }

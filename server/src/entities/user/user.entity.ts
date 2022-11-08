@@ -1,7 +1,7 @@
-import { Entity, Column, OneToMany, ManyToMany, ManyToOne} from 'typeorm';
+import { Entity, Column, OneToMany, ManyToMany, ManyToOne, JoinColumn} from 'typeorm';
 import { Base } from '../../utils/base';
 import { VideoEntity } from '../video/video.entity';
-
+import {SubscriptionEntity} from './subscriptions.entity';
 
 @Entity('User')
 
@@ -27,13 +27,13 @@ export class UserEntity extends Base{
     @Column({default:'', name: 'avatar_path'})
     avatarPath!: string
 
-    @OneToMany(() => UserEntity, user => user.subscriptions)
-    subscribers!: UserEntity[];
+    @OneToMany(() => SubscriptionEntity, sub => sub.toUser)
+    subscribers!: SubscriptionEntity[];
 
-    @ManyToOne(() => UserEntity, user => user.subscribers)
-    subscriptions!: UserEntity[];
+    @OneToMany(() => SubscriptionEntity, sub => sub.fromUser)
+    subscriptions!: SubscriptionEntity[];
 
-    @OneToMany(() => VideoEntity, video => video.user)
+    @OneToMany(() => VideoEntity, video => video.user)    
     videos!: VideoEntity[]
 
     @ManyToMany(() => VideoEntity, video => video.likedBy)

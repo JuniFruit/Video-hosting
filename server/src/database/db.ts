@@ -3,6 +3,7 @@ import { DataSource } from 'typeorm';
 import { UserEntity } from '../entities/user/user.entity';
 import { VideoEntity } from '../entities/video/video.entity';
 import { CommentEntity } from '../entities/comments/comment.entity';
+import { SubscriptionEntity } from '../entities/user/subscriptions.entity';
 
 const postgresDB = new DataSource(getConfigTypeOrm());
 
@@ -18,4 +19,4 @@ postgresDB.initialize()
 export const userRepository = postgresDB.getRepository(UserEntity);
 export const videoRepository = postgresDB.getRepository(VideoEntity);
 export const commentRepository = postgresDB.getRepository(CommentEntity);
-
+export const subscriptionsRespository = postgresDB.getRepository(SubscriptionEntity);

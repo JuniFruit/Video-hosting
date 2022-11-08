@@ -4,6 +4,7 @@ import { UserEntity } from '../entities/user/user.entity';
 import { CommentEntity } from '../entities/comments/comment.entity';
 import { DataSourceOptions } from 'typeorm';
 import dotenv from 'dotenv';
+import { SubscriptionEntity } from '../entities/user/subscriptions.entity';
 dotenv.config();
 
 export const getConfigTypeOrm = ():DataSourceOptions => {
@@ -15,7 +16,7 @@ export const getConfigTypeOrm = ():DataSourceOptions => {
         username: process.env.DB_USERNAME,
         port: Number(process.env.DB_PORT),
         synchronize: true,
-        logging: true,
-        entities: [VideoEntity, UserEntity, CommentEntity]
+        logging: false,
+        entities: [VideoEntity, UserEntity, CommentEntity, SubscriptionEntity]
     }
 }

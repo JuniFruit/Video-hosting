@@ -5,7 +5,7 @@ import { UserEntity } from './user.entity';
 @Entity('Subscription')
 
 export class SubscriptionEntity extends Base {
-    @OneToMany(() => UserEntity, user => user.subscriptions)
+    @ManyToOne(() => UserEntity, user => user.subscriptions)
     @JoinColumn({name: 'from_user'})
     fromUser!: UserEntity
 

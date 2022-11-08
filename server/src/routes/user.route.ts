@@ -32,8 +32,9 @@ router.get('/by_id/:id', async (req, res) => {
     }
 })
 
-router.post('/subscribe', async (req, res) => {
+router.put('/subscribe', async (req, res) => {
     try{        
+        console.log(req.body)
         const subSuccess = await UserService.subscribe(req.body.userId, req.body.channelToSub)
         res.send(subSuccess);
     } catch (e:any) {   
