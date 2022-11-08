@@ -118,8 +118,9 @@
     }
 
     .small_avatar {
-        @apply absolute right-6;
-        top: 45%;
+        @apply absolute;
+        right: 10%;
+        top: 40%;
         
     }
 }
@@ -130,5 +131,22 @@
     >button {
         @apply rounded-lg p-1 text-gray-600 hover:text-gray-300;
         background-color: rgba(0, 0, 0, 0.353);
+    }
+}
+
+.search_results {
+    @apply h-40;
+
+    >.small_content {
+        @apply px-2 gap-0;
+
+        
+        >h3 {
+            @apply mt-4;
+        }
+
+        >div {
+            @apply mt-2;
+        }
     }
 }

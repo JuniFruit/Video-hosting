@@ -1,0 +1,15 @@
+.info_wrapper {
+    @apply flex items-center gap-4;
+
+    >div {
+        
+        >.name {
+            @apply text-base text-white;
+            font-weight: 500;
+        }
+        >.subscribers_count {
+            @apply text-xs text-gray-500;
+        }
+    }
+
+}

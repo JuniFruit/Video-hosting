@@ -1,6 +1,11 @@
 import { IBase } from "./base.interface"
 import { IVideo } from "./video.interface"
 
+interface ISubscription {
+    fromUser: IUser;
+    toUser: IUser;
+}
+
 export interface IUser extends IBase {
     email: string
     name: string
@@ -8,8 +13,8 @@ export interface IUser extends IBase {
     subscrubersCount?: number
     description: string
     avatarPath: string
-    subscribers: IUser[];
-    subscriptions: IUser[];
+    subscribers: ISubscription[];
+    subscriptions: ISubscription[];
     videos?: IVideo[]
     likedVideos: IVideo[]
 }

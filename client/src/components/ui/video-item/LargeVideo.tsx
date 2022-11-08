@@ -6,7 +6,7 @@ import { VideoDuration } from "./VideoDuration";
 import styles from './VideoItem.module.scss';
 import { VideoStats } from "./VideoStats";
 export const LargeVideo: FC<IVideo> = ({ views, duration, name, user, thumbnailPath, createdAt }) => {
-  
+
     return (
         <div className={styles.large_wrapper}>
             <img
@@ -20,15 +20,23 @@ export const LargeVideo: FC<IVideo> = ({ views, duration, name, user, thumbnailP
                     <h3>Publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. </h3>
                 </div>
                 <div className={styles.large_stats_wrapper}>
-                    <UserAvatar />
+                    <UserAvatar 
+                        avatarPath={user.avatarPath}
+                        id={user.id}
+                        isVerified={user.isVerified}
+                    />
                     <div>
                         <span>{user.name || 'Test'}</span>
-                        <VideoStats createdAt={createdAt} views={views} />
+                        <VideoStats
+                            createdAt={createdAt}
+                            views={views}
+                            isSmall={false}
+                        />
                     </div>
                 </div>
 
             </div>
-            <VideoDuration duration={duration}/>
+            <VideoDuration duration={duration} />
         </div>
     )
 }

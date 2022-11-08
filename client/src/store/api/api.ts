@@ -20,10 +20,10 @@ export const api = createApi({
             query: ({id, channelToSub}) => ({
                 url: `${USER_PATH}/subscribe`,
                 method: "PUT",
-                body: JSON.stringify({
+                body: {
                     userId: id,
                     channelToSub
-                })
+                }
             }),
             invalidatesTags: () => [{type: 'Profile'}]
         })

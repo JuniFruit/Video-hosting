@@ -4,6 +4,7 @@
     >label {
 
         >div {
+           
             >input {
 
                 padding-right: 3rem;
@@ -17,7 +18,14 @@
     }
 
     .search_results {
-        @apply absolute rounded-md left-0 top-full bg-gray-700 z-40 w-full p-5 animate-fadeIn duration-75;
+        @apply absolute mt-2 bg-gray-900 rounded-md flex flex-wrap gap-5 left-0 top-full z-40 w-full p-5 animate-fadeIn duration-75;
+     
+    
+        >div {
+            @apply mb-1;            
+            width: 25%;
+        }
+       
         
         
     }

@@ -16,8 +16,9 @@
 
     }
     .menu {
-        @apply absolute left-0 w-full p-3 rounded-lg bg-gray-800 animate-fadeIn duration-150;
+        @apply absolute left-0 w-full p-3 rounded-lg z-50 bg-gray-800 animate-fadeIn duration-150;
         top: calc(100% + 1.4rem);
+        
         >ul {
             @apply flex-col flex gap-4;
             >li {

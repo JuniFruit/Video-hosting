@@ -39,7 +39,7 @@ export const ProfileMenu: FC = () => {
                 <div className={styles.menu}> 
                     <ul>
                         <li>
-                            <Link to={`/my-channel/${user?.id}`}>My Channel</Link>
+                            <Link to={`/channel/${user?.id}`}>My Channel</Link>
                         </li>
                         <li>
                             <Link to={`/studio`}>Studio</Link>

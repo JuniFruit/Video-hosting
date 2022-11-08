@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { Channel } from '../components/pages/channel/Channel';
 import { Home } from '../components/pages/home/Home';
 import { Studio } from '../components/pages/studio/Studio';
 import styles from './App.module.scss';
@@ -9,7 +10,7 @@ function App() {
       
       <Route path='/' element={<Home />} /> 
       <Route path='/studio' element={<Studio />} />
-
+      <Route path='/channel/:id' element={<Channel />} />
 
 
     </Routes>

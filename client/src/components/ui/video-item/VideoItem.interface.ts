@@ -14,3 +14,9 @@ export interface IDuration {
     duration: number;
     position?: 'top-r' | 'top-l' | 'bot-r' | 'bot-l';
 }
+
+export interface IVideoStats {
+    isSmall?: boolean;
+    views: number;
+    createdAt: string;
+}
