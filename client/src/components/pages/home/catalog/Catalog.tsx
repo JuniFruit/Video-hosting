@@ -5,19 +5,19 @@ import { Heading } from "../../../ui/heading/Heading";
 import { VideoItem } from "../../../ui/video-item/VideoItem";
 import styles from './Catalog.module.scss';
 
-export const Catalog: FC<{userVideos:IVideo[] | null, title:string}> = ({ userVideos, title }) => {
+export const Catalog: FC<{videosToRender:IVideo[] | null, title:string}> = ({ videosToRender, title }) => {
     const [videos, setVideos] = useState<IVideo[] | null>(null);
 
 
     useEffect(() => {
-        if (!userVideos) {
+        if (!videosToRender) {
             VideoService.getAll()
                 .then(data => setVideos(data))
         } else {
-            setVideos(userVideos)
+            setVideos(videosToRender)
         }
        
-    }, [userVideos]);
+    }, [videosToRender]);
 
     return (
         <div className={styles.videos_wrapper}>

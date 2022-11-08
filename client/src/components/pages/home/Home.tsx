@@ -7,7 +7,7 @@ import { Discover } from "./discover/Discover";
 export const Home: FC = () => {
     return <Layout title="MeTube - New broadcasting service">
             <Discover />
-            <Catalog userVideos={null} title='New videos' />
+            <Catalog videosToRender={null} title='New videos' />
         </Layout>
     
 }

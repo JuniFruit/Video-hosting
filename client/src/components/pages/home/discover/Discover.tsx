@@ -28,7 +28,6 @@ export const Discover: FC = () => {
     return (
 
         <section className={styles.wrapper}>
-            <h1>Discover</h1>
             <div className={styles.video_wrapper}>
                 <div className={styles.top_video}>
                     <LargeVideo {...topVideo} />

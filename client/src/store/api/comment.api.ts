@@ -11,7 +11,7 @@ export const commentApi = api.injectEndpoints({
                 method: "POST",
                 body
             }),
-            invalidatesTags: (result, error, {video}) => [{type: 'Video', id: video.id}]
+            invalidatesTags: (result, error, {videoId}) => [{type: 'Video', id: videoId}]
         })
         
     })

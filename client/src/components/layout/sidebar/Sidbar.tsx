@@ -14,12 +14,13 @@ export const Sidebar: FC = () => {
         skip: !user
     })
 
+    const subsToRender = data?.subscriptions.slice(0, 10);
 
     return <aside className={styles.sidebar}>
         <Logo />
         <Menu title="Menu" items={MenuArr} />
-        {user && !!data?.subscriptions.length &&
-            <Menu title="My subscriptions" items={data?.subscriptions.map(sub => ({
+        {user && !!subsToRender?.length &&
+            <Menu title="My subscriptions" items={subsToRender.map(sub => ({
                 image: sub.toUser.avatarPath,
                 link: `/channel/${sub.toUser.id}`,
                 title: sub.toUser.name

@@ -10,15 +10,16 @@ import { useClickOutside } from "../../../../hooks/useClickOutside";
 export const Search: FC = () => {
 
     const { handleSearch, data, isSuccess, searchTerm } = useSearch();
-    const {ref, isShow} = useClickOutside(true);
-
-    return (
+    const {ref, isShow, setIsShow} = useClickOutside(false);
+    
+    return (        
         <div className={styles.search_wrapper} ref={ref}>
             <label>
                 <Field
                     onChange={handleSearch}                    
                     value={searchTerm}
                     placeholder={'Search videos'}
+                    onClick={() => setIsShow(true)}
                 />
                 <IoSearchOutline />
             </label>

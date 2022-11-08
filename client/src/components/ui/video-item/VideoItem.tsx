@@ -14,42 +14,47 @@ export const VideoItem: FC<IVideoItem> = ({ removeHandler, item, isSmall, isUpda
 
 
     return (
-        <div className={`${styles.small_wrapper} ${isSmall ? styles.search_results : ''}`}>
-            
-            <img
-                src={mockups.designMain}
-                alt={item.name}
-            />
+        <div>
+            <Link to={`/videos/${item.name}/${item.id}`}>
+                <div className={`${styles.small_wrapper} ${isSmall ? styles.search_results : ''}`}>
 
-            <VideoDuration duration={item.duration} position={'top-r'} />
-            <div className={styles.small_content}>
+                    <img
+                        src={mockups.designMain}
+                        alt={item.name}
+                    />
 
-                {!isSmall ?
-                    <>
-                        <span className={styles.span}>{item.user.name || 'No name'}</span>
-                        <h3>{truncTitle(item.name, 100)}</h3>
+                    <VideoDuration duration={item.duration} position={'top-r'} />
+                    <div className={styles.small_content}>
 
-                    </>
-                    :
-                    <h3>{truncTitle(item.name, 10)}</h3>
-                }
+                        {!isSmall ?
+                            <>
+                                <span className={styles.span}>{item.user.name || 'No name'}</span>
+                                <h3>{truncTitle(item.name, 100)}</h3>
 
-                <VideoStats
-                    createdAt={item.createdAt}
-                    views={item.views}
-                    isSmall={isSmall}
-                />
+                            </>
+                            :
+                            <h3>{truncTitle(item.name, 10)}</h3>
+                        }
 
-            </div>
-            <div className={styles.small_avatar}>
-                <UserAvatar
-                    avatarPath={item.user.avatarPath}
-                    isVerified={item.user.isVerified}
-                    id={item.user.id}
-                />
-            </div>
+                        <VideoStats
+                            createdAt={item.createdAt}
+                            views={item.views}
+                            isSmall={isSmall}
+                        />
 
-            {!!removeHandler && <VideoManipulations />}
+
+                    </div>
+                    <div className={styles.small_avatar}>
+                        <UserAvatar
+                            avatarPath={item.user.avatarPath}
+                            isVerified={item.user.isVerified}
+                            id={item.user.id}
+                        />
+                    </div>
+
+                    {!!removeHandler && <VideoManipulations />}
+                </div>
+            </Link>
         </div>
     )
 }

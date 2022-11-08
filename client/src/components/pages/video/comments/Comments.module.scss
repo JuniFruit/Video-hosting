@@ -1,0 +1,36 @@
+
+.comments {
+    @apply rounded-lg p-5 relative bg-gray-800;
+
+    >h2 {
+        @apply text-white text-tiny;
+    }
+
+    .line {
+        @apply w-full h-0.5 my-4;
+    }
+    >p {
+        @apply text-gray-500 mb-4;
+    }
+
+    .commentItem {
+        @apply mt-7;
+
+        >div > div > {
+            div {
+                &:first-child {
+                    @apply text-xs;
+                }
+
+                &:last-child {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+
+    .bottomForm {
+        @apply absolute bottom-0 left-5;
+        width: calc(100% - 2.5rem);
+    }
+}

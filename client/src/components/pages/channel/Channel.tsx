@@ -28,7 +28,7 @@ export const Channel: FC = () => {
                 </div>
                 <article className={styles.channel_description}>{user?.description}</article>
             </div>
-            <Catalog userVideos={user?.videos || []} title='User videos' />
+            <Catalog videosToRender={user?.videos || []} title='User videos' />
         </Layout>
     )
 }

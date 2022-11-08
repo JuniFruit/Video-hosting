@@ -8,4 +8,6 @@ export interface IComment extends IBase {
     video: IVideo
 }
 
-export interface ICommentDto extends IComment {}
+export interface ICommentDto extends Pick<IComment, 'body'> {
+    videoId:number
+}

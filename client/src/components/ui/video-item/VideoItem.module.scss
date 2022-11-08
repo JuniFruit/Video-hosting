@@ -1,7 +1,13 @@
 
 .large_wrapper {
-    @apply rounded-2xl relative overflow-hidden shadow;
+    @apply rounded-2xl relative overflow-hidden shadow ;
     height: 22rem;
+
+    &:hover {
+        box-shadow: 0px 3px 12px rgba(0,0,0,1)
+    }
+
+   
     
     .large_thumbnail {
         @apply  h-full w-full absolute object-cover object-center;
@@ -90,7 +96,11 @@
 
 
 .small_wrapper {
-    @apply shadow rounded-2xl h-72 overflow-hidden relative;
+    @apply shadow rounded-2xl h-72 overflow-hidden relative transition-all;
+
+    &:hover {
+        transform: translateY(-.25rem)
+    }
 
     >img {
         @apply w-full object-cover;
@@ -98,23 +108,25 @@
     }
 
     .small_content {
-        @apply text-white px-5 flex flex-col gap-5;
-       
+        @apply text-white px-5 flex flex-col gap-5;       
 
-        >span {
-            @apply mt-3 opacity-70;
-            font-size: .8rem;
-            font-weight: 500;
-        }
+      
+            >span {
+                @apply mt-3 opacity-70;
+                font-size: .8rem;
+                font-weight: 500;
+            }
 
-        >h3 {
-            @apply opacity-90 w-full;
-            word-wrap: break-word;
-            font-weight: 600;
-        }
-        >div {
-            @apply mt-3;
-        }
+            >h3 {
+                @apply opacity-90 w-full;
+                word-wrap: break-word;
+                font-weight: 600;
+            }
+
+            >div {
+                @apply mt-3;
+            }
+      
     }
 
     .small_avatar {
