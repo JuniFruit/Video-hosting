@@ -7,6 +7,7 @@ import authRouter from './routes/auth.route';
 import userRouter from './routes/user.route';
 import commentRouter from './routes/comment.route';
 import videoRouter from './routes/video.route';
+import mediaRouter from './routes/media.route';
 
 dotenv.config();
 
@@ -22,7 +23,7 @@ app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/comment', commentRouter);
 app.use('/videos', videoRouter);
-
+app.use('/media', mediaRouter);
 
 app.listen(port, () => {
     console.log('Server is online');

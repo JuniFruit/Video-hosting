@@ -50,7 +50,6 @@ export const AuthService = {
         if (!user) throw new Error('User is not found')
 
         const matchedPassword = await compare(dto.password, user.password);
-        console.log(matchedPassword)
         if (!matchedPassword) throw new Error('Incorrect password');
 
         return user

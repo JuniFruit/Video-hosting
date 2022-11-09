@@ -110,7 +110,7 @@ export const VideoService = {
             videoPath: '',
             thumbnailPath: '',
             description: '',
-            user: {id: userId},
+            user: {id: userId},          
             name: ''
         }
         const newVideo = videoRepository.create(defaultFields);

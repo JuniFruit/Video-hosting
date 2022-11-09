@@ -55,9 +55,10 @@ router.put('/update_reaction/:id', async (req, res) => {
 })
 
 router.post('/create', async (req, res) => {
-    try {
+    try {      
+        console.log(req.body);
         const videoId = await VideoService.create(Number(req.body.userId));
-        res.send(videoId);
+        res.send(videoId.toString());
     } catch (e:any) {
         res.status(500).send({message: e.message});
     }
@@ -81,5 +82,13 @@ router.put('/increment_views/:id', async (req, res) => {
         res.status(500).send({message: e.message});
     }
 })
+
+// router.post('/upload', async (req, res) => {
+//     try {
+        
+//     } catch (e:any) {
+        
+//     }
+// })
 
 export default router;
