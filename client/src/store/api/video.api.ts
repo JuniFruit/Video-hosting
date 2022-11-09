@@ -14,11 +14,14 @@ export const videoApi = api.injectEndpoints({
             }),
             invalidatesTags: (result, error, {id}) => [{type: 'Video', id}, {type: 'Profile'}]
         }),
-        create: builder.mutation<number, void>({
-            query: (body) => ({
-                url: `${VIDEO_PATH}/upload`,
+        create: builder.mutation<number, number>({
+            query: (id) => ({
+                url: `${VIDEO_PATH}/create`,
                 method: "POST",
-                body
+                body: {
+                    userId: id
+                } 
+
             }),
             invalidatesTags: () => [{type:'Video'}]
         }),

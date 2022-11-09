@@ -1,0 +1,15 @@
+
+.success {
+    @apply absolute top-5 left-1/4 text-lg p-2 z-10 flex items-center justify-center shadow-block animate-scaleIn w-1/2 bg-green-500 
+    text-white mx-auto text-center;
+
+}
+
+.form_wrapper {
+    @apply flex flex-wrap;
+
+    .fields_wrapper {
+        @apply w-7/12 pr-6 pt-3;
+    }
+
+}

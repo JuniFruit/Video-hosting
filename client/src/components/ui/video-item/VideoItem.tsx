@@ -12,10 +12,10 @@ import { Link } from "react-router-dom";
 
 export const VideoItem: FC<IVideoItem> = ({ removeHandler, item, isSmall, isUpdateLink }) => {
 
-
+   
     return (
         <div>
-            <Link to={`/videos/${item.name}/${item.id}`}>
+            <Link to={`/videos/${item.name || 'default'}/${item.id}`}>
                 <div className={`${styles.small_wrapper} ${isSmall ? styles.search_results : ''}`}>
 
                     <img
