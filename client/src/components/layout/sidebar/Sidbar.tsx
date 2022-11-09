@@ -10,7 +10,7 @@ import styles from './Sidebar.module.scss';
 export const Sidebar: FC = () => {
 
     const { user } = useAuth();
-    const { data } = api.useGetProfileQuery(2, {
+    const { data } = api.useGetProfileQuery(user?.id!, {
         skip: !user
     })
 

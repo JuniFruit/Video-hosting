@@ -6,6 +6,8 @@ const {addMsg} = messmessageActions;
 
 export const rtkQueryErrorLogger:Middleware = (api:MiddlewareAPI) => (next) => (action) => {
   if (isRejectedWithValue(action)) {
+    if (action.payload.name === "AxiosError") return next(action);
+    
     api.dispatch(addMsg({message: 'Request failed', status: 500}));
 
   }

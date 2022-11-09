@@ -16,7 +16,7 @@ export const InfoPop: FC = () => {
 
         const timeout = setTimeout(() => {
             clearMsg()
-        }, 5000)
+        }, 3000)
 
         return () => {
             clearTimeout(timeout);

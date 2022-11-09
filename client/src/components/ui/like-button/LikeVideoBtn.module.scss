@@ -1,0 +1,12 @@
+
+.wrapper {
+
+    >button {
+        @apply flex items-center p-2.5 gap-1 bg-gray-700;  
+        font-size: 1rem;
+
+        >svg {
+            @apply text-base;
+        }
+    }
+}

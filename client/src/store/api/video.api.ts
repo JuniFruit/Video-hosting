@@ -16,7 +16,7 @@ export const videoApi = api.injectEndpoints({
         }),
         create: builder.mutation<number, void>({
             query: (body) => ({
-                url: `${VIDEO_PATH}/create`,
+                url: `${VIDEO_PATH}/upload`,
                 method: "POST",
                 body
             }),
@@ -24,14 +24,14 @@ export const videoApi = api.injectEndpoints({
         }),
         incrementViews: builder.mutation<IVideo, number>({
             query: (id) => ({
-                url: `${VIDEO_PATH}/${id}`,
+                url: `${VIDEO_PATH}/increment_views/${id}`,
                 method: "PUT"
             }),
             invalidatesTags: (result ,error, id) => [{type: 'Video', id}] 
         }),
         updateReaction: builder.mutation<IVideo, number>({
             query: (id) => ({
-                url: `${VIDEO_PATH}/${id}`,
+                url: `${VIDEO_PATH}/update_reaction/${id}`,
                 method: "PUT"
             }),
             invalidatesTags: (result, error, id) => [{type: 'Video', id}]

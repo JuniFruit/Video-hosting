@@ -42,7 +42,8 @@
 
     .line {
         @apply absolute top-0 left-0 bg-gray-300 h-full animate-progressCountDown w-full;
-        
+        animation-duration: 3s;
+        animation-timing-function: cubic-bezier(0, 0, 0, 0);
         
     }
 }

@@ -5,8 +5,9 @@
         @apply flex items-center justify-center gap-2 outline-none;
 
         >span {
-            @apply text-white text-sm;
-            font-weight: 600;
+            @apply text-sm;
+            font-weight: 500;
+            color: #e2c9e2aa;
         }
 
         .icon {

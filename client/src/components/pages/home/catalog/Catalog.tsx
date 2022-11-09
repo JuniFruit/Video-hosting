@@ -5,7 +5,14 @@ import { Heading } from "../../../ui/heading/Heading";
 import { VideoItem } from "../../../ui/video-item/VideoItem";
 import styles from './Catalog.module.scss';
 
-export const Catalog: FC<{videosToRender:IVideo[] | null, title:string}> = ({ videosToRender, title }) => {
+interface ICatalog {
+    title: string;
+    videosToRender: IVideo[] | null;
+    removeHandler?: (videoId:number) => void;
+    isUpdateLink?: boolean;
+}
+
+export const Catalog: FC<ICatalog> = ({ videosToRender, title, removeHandler, isUpdateLink }) => {
     const [videos, setVideos] = useState<IVideo[] | null>(null);
 
 
@@ -16,16 +23,22 @@ export const Catalog: FC<{videosToRender:IVideo[] | null, title:string}> = ({ vi
         } else {
             setVideos(videosToRender)
         }
-       
+
     }, [videosToRender]);
 
     return (
         <div className={styles.videos_wrapper}>
             <Heading title={title} />
             <div className={styles.videos_block}>
-                {videos?.length 
+                {videos?.length
                     ? videos.map(item => {
-                        return <VideoItem item={item} isSmall={false} key={item.id} />
+                        return <VideoItem
+                            item={item}
+                            removeHandler={removeHandler}
+                            isUpdateLink={isUpdateLink}
+                            isSmall={false}
+                            key={item.id}
+                        />
                     })
                     : null
                 }

@@ -19,7 +19,7 @@ export const MenuArr: IMenuItem[] =
     },
     {
         title: "My channel",
-        link: '/my-channel',
+        link: '/channel',
         icon: HiStar
     }
     ]
