@@ -1,0 +1,10 @@
+
+.wrapper {
+    @apply p-3 ;
+
+    .img_container {
+        @apply rounded-xl shadow-md p-2 bg-gray-800;
+        height: 9.5rem;
+        width: 15rem;
+    }
+}

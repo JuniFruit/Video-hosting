@@ -23,3 +23,8 @@ a {
   text-decoration: none;
   outline: none;
 }
+
+input, button {
+  outline: none;
+  appearance: none;
+}
