@@ -25,6 +25,8 @@ app.use('/comment', commentRouter);
 app.use('/videos', videoRouter);
 app.use('/media', mediaRouter);
 
+app.use('/files', express.static(__dirname + '/uploads'))
+
 app.listen(port, () => {
     console.log('Server is online');
 })
