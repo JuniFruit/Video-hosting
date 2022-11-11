@@ -1,5 +1,6 @@
 import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useActions } from '../../../hooks/useActions';
 import { useAuth } from '../../../hooks/useAuth';
 import { api } from '../../../store/api/api';
 import { videoApi } from '../../../store/api/video.api';
@@ -14,7 +15,18 @@ export const Studio: FC = () => {
         skip: !user
     })
     const [deleteVideo] = videoApi.useDeleteMutation()
+    const {addMsg} = useActions()
+    
+    console.log(profile)
+    const handleDelete = (id:number) => {
+  
+        deleteVideo(id).unwrap().then(() => addMsg({message: 'Video was deleted', status: 200}));
+    }
 
+    const handleUpdate = (id:number) => {
+        navigate(`/studio/edit/video/${id}`)
+    }
+    
     useEffect(() => {
         if (isLoading) return;
         if (!user) {
@@ -30,7 +42,8 @@ export const Studio: FC = () => {
             <Catalog
                 videosToRender={videos || []}
                 title='My videos'
-                removeHandler={deleteVideo}
+                removeHandler={handleDelete}
+                updateHandler={handleUpdate}
             />
         </Layout>
     )

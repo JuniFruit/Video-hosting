@@ -5,4 +5,5 @@ export interface IUploadField {
     folder?:string;
     setValue?: (val:number) => void;
     onChooseFile?: (val:boolean) => void;
+    type: 'video' | 'image'
 }

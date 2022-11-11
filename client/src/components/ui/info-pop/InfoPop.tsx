@@ -8,7 +8,7 @@ import { useActions } from '../../../hooks/useActions';
 
 export const InfoPop: FC = () => {
 
-    const { message, type } = useTypedSelector(state => state.error);
+    const { message, type } = useTypedSelector(state => state.message);
     const { clearMsg } = useActions();
 
 

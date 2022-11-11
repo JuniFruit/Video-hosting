@@ -18,13 +18,13 @@ export const VideoDetails: FC<IVideo> = (video) => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.description}>
-                <ShortInfo channel={video.user} />
+                {video.user && <ShortInfo channel={video.user} />}
                 <h2>{video.name}</h2>
                 <p>{video.description}</p>
             </div>
             <div className={styles.stats}>
                 <div className={styles.buttons}>
-                    <Subscribe channelIdToSub={video.user.id} />
+                   {video.user && <Subscribe channelIdToSub={video.user.id} />}
                     <LikeVideoButton videoId={video.id} />
                 </div>
                 <div className={styles.video_perfomance}>

@@ -3,7 +3,6 @@ import { Controller } from "react-hook-form";
 import Field from "../../../../ui/fields/Fields";
 import { UploadField } from "../../../../ui/fields/upload-field/UploadField";
 import TextArea from "../../../../ui/text-area/TextArea";
-import { SuccessMsg } from "./SuccessMsg";
 import { useUploadForm } from "./useUploadForm"
 import { IMediaResponse } from "../../../../../services/media/Media.interface";
 import { UploadVideoInfo } from "./upload-video-info/UploadVideoInfo";
@@ -11,20 +10,19 @@ import { UploadFormFooter } from "./upload-footer/UploadFormFooter";
 import { ToggleSwitch } from "../../../../ui/switcher/ToggleSwitch";
 import styles from './UploadForm.module.scss';
 
-export const UploadForm: FC<{handleCloseModal: () => void }> = (
+
+export const UploadForm: FC<{ handleCloseModal: () => void, videoId:number, isEdit?:boolean }> = (
     {
-        
-        handleCloseModal
+        handleCloseModal,
+        videoId,
+        isEdit
     }) => {
 
-    const { form, media, status } = useUploadForm({ handleCloseModal });
-
-
+    const { form, media, status } = useUploadForm({ handleCloseModal, videoId });    
 
     return (
-        <form onSubmit={form.handleSubmit(form.onSubmit)}>
-            {status.isSuccess && <SuccessMsg />}
-            {status.isChosen
+        <form onSubmit={form.handleSubmit(form.onSubmit)}>            
+            {status.isChosen || isEdit
                 ?
                 <>
 
@@ -47,13 +45,18 @@ export const UploadForm: FC<{handleCloseModal: () => void }> = (
                             <div className="mt-8">
                                 <Controller
                                     control={form.control}
-                                    name='thumbnailPath'
+
+                                    {...form.register('thumbnailPath', {
+                                        required: 'Please choose a thumbnail first'
+                                    })}
                                     render={({ field: { onChange } }) => (
 
                                         <UploadField
                                             folder="thumbnails"
                                             title="Choose a thumbnail"
                                             onChange={(value: IMediaResponse) => onChange(value.url)}
+                                            type={'image'}
+
                                         />
                                     )}
                                 />
@@ -62,7 +65,10 @@ export const UploadForm: FC<{handleCloseModal: () => void }> = (
                             </div>
 
                         </div>
-                        <UploadVideoInfo thumbnailPath={media.thumbnailPath} />
+                        <UploadVideoInfo
+                            error={form.errors.thumbnailPath}
+                            thumbnailPath={media.thumbnailPath} 
+                        />
 
                     </div>
                     <div>
@@ -82,6 +88,7 @@ export const UploadForm: FC<{handleCloseModal: () => void }> = (
                     <UploadFormFooter
                         progress={status.percent}
                         isUploaded={status.isUploaded}
+                        isEdit={isEdit}
                     />
 
 
@@ -93,12 +100,13 @@ export const UploadForm: FC<{handleCloseModal: () => void }> = (
                         name="videoPath"
                         render={() => (
 
-                            <UploadField
-                                onChooseFile={status.setIsChosen}
+                            <UploadField                               
                                 title={'Choose a video to upload'}
                                 folder="videos"
                                 setValue={status.setProgress}
                                 onChange={media.handleUploadVideo}
+                                onChooseFile={status.setIsChosen}
+                                type={'video'}
                             />
                         )}
                     />

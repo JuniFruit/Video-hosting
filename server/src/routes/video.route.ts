@@ -56,7 +56,6 @@ router.put('/update_reaction/:id', async (req, res) => {
 
 router.post('/create', async (req, res) => {
     try {      
-        console.log(req.body);
         const videoId = await VideoService.create(Number(req.body.userId));
         res.send(videoId.toString());
     } catch (e:any) {
@@ -65,9 +64,9 @@ router.post('/create', async (req, res) => {
 })
 
 router.delete('/delete/:id', async(req,res) => {
-    try {
+    try {   
         const deletedResults = await VideoService.delete(Number(req.params.id));
-        res.status(201).send()
+        res.status(200).send()
     } catch (e:any) {
         res.status(500).send({message: e.message});
     }

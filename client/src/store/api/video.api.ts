@@ -10,7 +10,9 @@ export const videoApi = api.injectEndpoints({
             query: (body) => ({
                 url: `${VIDEO_PATH}/update/${body.id}`,
                 method: 'PUT',
-                body
+                body: {
+                    dto: body
+                }
             }),
             invalidatesTags: (result, error, {id}) => [{type: 'Video', id}, {type: 'Profile'}]
         }),
@@ -45,7 +47,7 @@ export const videoApi = api.injectEndpoints({
                 url: `${VIDEO_PATH}/delete/${id}`,
                 method: "DELETE"
             }),
-            invalidatesTags: () => [{type: "Video"}, {type: 'Profile'}]
+            invalidatesTags: (result, error, id) => [{type: 'Profile'}]
         }),
         getById: builder.query<IVideo, number>({
             query: (id) => ({

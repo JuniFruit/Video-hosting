@@ -4,7 +4,12 @@
 
     .img_container {
         @apply rounded-xl shadow-md p-2 bg-gray-800;
-        height: 9.5rem;
-        width: 15rem;
+        height: 11rem;
+       
+    }
+    
+    .error {
+        @apply mt-1 ml-1 text-primary;
+        font-size: .8rem;
     }
 }

@@ -3,11 +3,13 @@ import {IVideo} from '../../../types/video.interface'
 export interface IVideoItem {
     item: IVideo;
     removeHandler?: (videoId:number) => void;
-    isUpdateLink?:boolean;
+    updateHandler?: (videoId:number) => void;
     isSmall?: boolean
 } 
 
-export interface IManipulation extends Pick<IVideoItem,'removeHandler' | 'isUpdateLink'> {}
+export interface IManipulation extends Pick<IVideoItem, 'removeHandler' | 'updateHandler'> {    
+    id: number;
+}
 
 
 export interface IDuration {

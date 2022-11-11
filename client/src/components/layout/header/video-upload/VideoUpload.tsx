@@ -7,23 +7,29 @@ import styles from './VideoUpload.module.scss';
 
 
 export const VideoUpload: FC = () => {
-
+    const [videoId, setVideoId] = useState<number>();
     const [isOpen, setIsOpen] = useState(false);
-   
+    const { user } = useAuth()
+    const [createVideo] = videoApi.useCreateMutation();
+
+
     return (
         <>
             <button
                 onClick={(e) => {
                     e.preventDefault();
-                    setIsOpen(true);
+                    createVideo(user?.id!).unwrap().then((res) => {
+                        setVideoId(res);
+                        setIsOpen(true);
+                    })
                 }}
-                
-              
+
+                title='Upload a video'
                 className={styles.button}
             >
                 <HiUpload />
             </button>
-            <UploadModal isOpen={isOpen} setIsOpen={setIsOpen} />
+            {videoId && <UploadModal isOpen={isOpen} setIsOpen={setIsOpen} videoId={videoId} />}
         </>
     )
 }

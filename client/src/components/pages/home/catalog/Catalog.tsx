@@ -9,12 +9,11 @@ interface ICatalog {
     title: string;
     videosToRender: IVideo[] | null;
     removeHandler?: (videoId:number) => void;
-    isUpdateLink?: boolean;
+    updateHandler?: (videoId: number) => void;
 }
 
-export const Catalog: FC<ICatalog> = ({ videosToRender, title, removeHandler, isUpdateLink }) => {
+export const Catalog: FC<ICatalog> = ({ videosToRender, title, removeHandler, updateHandler }) => {
     const [videos, setVideos] = useState<IVideo[] | null>(null);
-
 
     useEffect(() => {
         if (!videosToRender) {
@@ -35,7 +34,7 @@ export const Catalog: FC<ICatalog> = ({ videosToRender, title, removeHandler, is
                         return <VideoItem
                             item={item}
                             removeHandler={removeHandler}
-                            isUpdateLink={isUpdateLink}
+                            updateHandler={updateHandler}
                             isSmall={false}
                             key={item.id}
                         />

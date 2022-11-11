@@ -1,0 +1,18 @@
+
+.edit_wrapper {
+    @apply mt-7  p-5;
+
+    >form {
+        >div {
+            @apply my-4;
+
+            >div:first-child {
+                /* @apply w-1/2; */
+            }
+            >div:last-child {
+                /* @apply w-1/3 */
+            }
+
+        }
+    }
+}

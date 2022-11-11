@@ -6,5 +6,5 @@ import { messageSlice } from "./message/message.slice";
 export const rootReducers = combineReducers({
     [api.reducerPath]: api.reducer,
     auth: authSlice.reducer,
-    error: messageSlice.reducer,
+    message: messageSlice.reducer,
 })

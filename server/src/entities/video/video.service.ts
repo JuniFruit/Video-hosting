@@ -52,7 +52,6 @@ export const VideoService = {
 
     updateVideo: async function (id: number, dto: VideoDto): Promise<VideoEntity> {
         const video = await videoRepository.findOneBy({ id: id });
-
         return await videoRepository.save({ ...video, ...dto });
     },
 
@@ -120,8 +119,12 @@ export const VideoService = {
     },
 
     delete: async function (id:number):Promise<DeleteResult> {      
-
-        return await videoRepository.delete({id});
+        try {
+            return await videoRepository.delete({id});
+            
+        } catch (error:any) {
+            throw new Error(error);
+        }
     },
 
     incrementViews: async function (id: number):Promise<VideoEntity> {
