@@ -12,7 +12,15 @@ router.get('/profile/:id', async (req,res) => {
         res.status(500).send({message: e.message})
     }
 })
-
+router.put('/profile_update/:id', async (req, res) => {
+    try {
+        const updated = await UserService.update(req.body.data, Number(req.body.id));
+        res.send(updated)
+    } catch (e:any) {
+        res.status(500).send({message: e.message})
+    }
+    
+})
 
 router.get('/all', async (req, res) => {
     try {

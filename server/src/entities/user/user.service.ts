@@ -1,6 +1,8 @@
 import { UserEntity } from "./user.entity"
 import { userRepository } from "../../database/db";
 import { subscriptionsRespository } from "../../database/db";
+import { UserEditDto} from './user.dto';
+
 export const UserService = {
 
     subscribe: async function (userId: number, userToSubId: number): Promise<boolean> {
@@ -48,5 +50,11 @@ export const UserService = {
     },
     getAll: async function (): Promise<UserEntity[]> {
         return await userRepository.find()
-    }
+    },
+
+    update: async function (data:UserEditDto, id: number) {
+
+        const user = await userRepository.findOneBy({ id: id});
+        return await userRepository.save({ ...user, ...data });
+    }   
 }

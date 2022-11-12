@@ -14,7 +14,7 @@ router.post('/login', async(req, res) =>{
 })
 router.post('/register', async (req, res) => {
     try {
-        const newUser = await AuthService.registerUser({email: req.body.email, password: req.body.password});
+        const newUser = await AuthService.registerUser(req.body);
         res.send(newUser);
 
     } catch (e:any) {

@@ -1,7 +1,7 @@
 
 import {userRepository} from '../database/db';
 import { UserEntity } from '../entities/user/user.entity';
-import { AuthDto } from './auth.dto';
+import { AuthDto, RegisterDto } from './auth.dto';
 import { genSalt, hash, compare } from 'bcrypt';
 import { NextFunction, Request, Response } from 'express';
 
@@ -18,7 +18,7 @@ export const AuthService = {
         }
     },
 
-    registerUser: async function(dto: AuthDto): Promise<object> {
+    registerUser: async function(dto: RegisterDto): Promise<object> {
         const oldUser = await this.userTable.findOneBy({ email: dto.email });
 
         if (oldUser) throw new Error('Email is already in use');
@@ -29,7 +29,10 @@ export const AuthService = {
         const newUser = new UserEntity()
 
         newUser.email = dto.email;
-        newUser.password = hashedPass
+        newUser.password = hashedPass;
+        newUser.description = dto.description;
+        newUser.avatarPath = dto.avatarPath;
+        newUser.name = dto.name || 'default_user';
 
         await this.userTable.save(newUser);
 
