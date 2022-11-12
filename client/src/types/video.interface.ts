@@ -4,7 +4,7 @@ import { IUser } from "./user.interface"
 
 export interface IVideo extends IBase {
     isPublic: boolean
-    duration: number
+    duration?: number
     name: string
     commentsCount: number
     likes: number
@@ -17,4 +17,4 @@ export interface IVideo extends IBase {
     likedBy: IUser[]
 }
 
-export interface IVideoDto extends Pick<IVideo, 'id' | 'name' | 'isPublic' | 'description' | 'videoPath' | 'thumbnailPath'> {}
+export interface IVideoDto extends Pick<IVideo, 'id' | 'name' | 'isPublic' | 'description' | 'videoPath' | 'thumbnailPath' | 'duration'> {}

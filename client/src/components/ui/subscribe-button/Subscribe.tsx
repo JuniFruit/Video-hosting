@@ -1,13 +1,13 @@
 import { FC, MouseEventHandler } from 'react';
 import { BsPersonPlusFill } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
+import { useActions } from '../../../hooks/useActions';
 import { useAuth } from '../../../hooks/useAuth';
 import { api } from '../../../store/api/api';
 import styles from './Subscribe.module.scss';
 export const Subscribe: FC<{ channelIdToSub: number | undefined }> = ({ channelIdToSub }) => {
 
     const { user } = useAuth();
-    const navigate = useNavigate();
+    const {addMsg} = useActions();
 
     const { data: profile } = api.useGetProfileQuery(user?.id!, {
         skip: !user
@@ -21,7 +21,7 @@ export const Subscribe: FC<{ channelIdToSub: number | undefined }> = ({ channelI
     
     const onSubscribe:MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
-        if (!user) return navigate('/');
+        if (!user) return addMsg({message: 'You are not logged in', status: 500})
 
         subscribe({id: profile?.id!, channelToSub: channelIdToSub}).unwrap() 
     }

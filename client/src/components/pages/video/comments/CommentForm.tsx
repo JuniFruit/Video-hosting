@@ -4,6 +4,7 @@ import { commentApi } from '../../../../store/api/comment.api';
 import { ICommentDto } from '../../../../types/comment.interface';
 import {MdSend} from 'react-icons/md';
 import Field from '../../../ui/fields/Fields';
+import styles from './Comments.module.scss';
 
 export const CommentForm: FC<{ videoId: number }> = ({ videoId }) => {
 
@@ -18,11 +19,12 @@ export const CommentForm: FC<{ videoId: number }> = ({ videoId }) => {
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className={'relative'}>
+            <div className={styles.wrapper}>
                 <Field
                     {
                     ...register('body', {
-                        required: 'Please enter a message'
+                        required: 'Please enter a message',
+                        maxLength: 200
 
                     })}
                     placeholder="Share your thoughts"
@@ -31,7 +33,7 @@ export const CommentForm: FC<{ videoId: number }> = ({ videoId }) => {
 
                 <button 
                     disabled={isLoading}
-                    className="absolute text-xl right-2 text-purple top-1.5"
+                    className="text-xl text-purple mx-2"
                 >
                     <MdSend />
                 </button>

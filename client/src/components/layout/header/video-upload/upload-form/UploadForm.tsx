@@ -11,17 +11,17 @@ import { ToggleSwitch } from "../../../../ui/switcher/ToggleSwitch";
 import styles from './UploadForm.module.scss';
 
 
-export const UploadForm: FC<{ handleCloseModal: () => void, videoId:number, isEdit?:boolean }> = (
+export const UploadForm: FC<{ handleCloseModal: () => void, videoId: number, isEdit?: boolean }> = (
     {
         handleCloseModal,
         videoId,
         isEdit
     }) => {
 
-    const { form, media, status } = useUploadForm({ handleCloseModal, videoId });    
+    const { form, media, status } = useUploadForm({ handleCloseModal, videoId });
 
     return (
-        <form onSubmit={form.handleSubmit(form.onSubmit)}>            
+        <form onSubmit={form.handleSubmit(form.onSubmit)}>
             {status.isChosen || isEdit
                 ?
                 <>
@@ -35,6 +35,7 @@ export const UploadForm: FC<{ handleCloseModal: () => void, videoId:number, isEd
                                 placeholder="Name"
                                 error={form.errors.name}
                             />
+                                                        
                             <TextArea
                                 {...form.register('description', {
                                     required: "Description is required"
@@ -67,7 +68,7 @@ export const UploadForm: FC<{ handleCloseModal: () => void, videoId:number, isEd
                         </div>
                         <UploadVideoInfo
                             error={form.errors.thumbnailPath}
-                            thumbnailPath={media.thumbnailPath} 
+                            thumbnailPath={media.thumbnailPath}
                         />
 
                     </div>
@@ -100,7 +101,7 @@ export const UploadForm: FC<{ handleCloseModal: () => void, videoId:number, isEd
                         name="videoPath"
                         render={() => (
 
-                            <UploadField                               
+                            <UploadField
                                 title={'Choose a video to upload'}
                                 folder="videos"
                                 setValue={status.setProgress}

@@ -1,18 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { IAuthForm } from '../../components/layout/header/right-elements/auth-form/AuthForm.interface';
+import { IRegisterForm } from '../../components/pages/register/Register.interface';
 import { IAuthData } from '../../services/auth/auth.interface'
 import { AuthService } from '../../services/auth/auth.service'
 import messageActions from '../message/message.slice'
 
 const {addMsg} = messageActions;
 
-export const register = createAsyncThunk<IAuthData, IAuthForm>(`auth/register`, async ({ email, password }, thunkAPI) => {
+export const register = createAsyncThunk<IAuthData, IRegisterForm>(`auth/register`, async (data, thunkAPI) => {
     
 
     try {
-        const response = await AuthService.register(email, password);
+        const response = await AuthService.register(data);
         //Handle success
         thunkAPI.dispatch(addMsg({message: 'Registration successful', status: 200}))
+      
         return response
     } catch (e:any) {
         thunkAPI.dispatch(addMsg({message: e.response.data.message, status: e.response.status}))

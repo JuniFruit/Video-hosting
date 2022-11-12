@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAuth } from "../../../../../hooks/useAuth";
 import { useClickOutside } from "../../../../../hooks/useClickOutside";
@@ -10,26 +10,23 @@ import styleElements from '../RightElements.module.scss';
 import { validEmail } from "../../../../../utils/generalUtils";
 import { Button } from "../../../../ui/button/Button";
 import { useActions } from "../../../../../hooks/useActions";
+import { Link } from "react-router-dom";
 
 
 export const AuthForm: FC = () => {
 
     const { ref, isShow, setIsShow } = useClickOutside(false);
-    const [type, setType] = useState<'login' | 'register'>('login');
+   
 
     const {isLoading } = useAuth();
-    const {login, register: registerAction} = useActions();
+    const {login} = useActions();
     
     const { register, formState: { errors }, handleSubmit} = useForm<IAuthForm>({
         mode: 'onChange'
     });
 
-    const onSubmit:SubmitHandler<IAuthForm> = (data) => {
-        if (type === 'login') {
-            login(data)
-        } else if (type === 'register') {
-            registerAction(data);
-        }
+    const onSubmit:SubmitHandler<IAuthForm> = (data) => {  
+            login(data)      
     }
    
 
@@ -65,12 +62,12 @@ export const AuthForm: FC = () => {
                         error={errors.password}
                     />
                     <div className={'mt-5 mb-1 text-center'}>
-                        <Button onClick={(e) => setType('login')} >
+                        <Button type="submit">
                             Log in
                         </Button>
-                        <Button onClick={() => setType('register')} disabled={isLoading} className={styles.register}>
-                            Sign up
-                        </Button>
+                        <Link to={'/registration'} className={styles.register}>
+                            Sign Up
+                        </Link>
                     </div>
                 </form>
                 :

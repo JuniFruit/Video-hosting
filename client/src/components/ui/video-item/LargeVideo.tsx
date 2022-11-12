@@ -1,6 +1,5 @@
 import { FC } from "react"
 import { Link } from "react-router-dom";
-import { mockups } from "../../../assets/mockups/images";
 import { IVideo } from "../../../types/video.interface"
 import { truncTitle } from "../../../utils/format.utils";
 import { UserAvatar } from "../user-avatar/UserAvatar";

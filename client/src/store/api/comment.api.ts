@@ -9,7 +9,11 @@ export const commentApi = api.injectEndpoints({
             query: (body) => ({
                 url: `${COMMENT_PATH}/create`,
                 method: "POST",
-                body
+                body: {
+                    dto: body,
+                    id: body.videoId 
+
+                }
             }),
             invalidatesTags: (result, error, {videoId}) => [{type: 'Video', id: videoId}]
         })

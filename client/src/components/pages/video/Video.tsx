@@ -28,7 +28,7 @@ export const Video: FC = () => {
     return (
         <Layout title={video.name}>
             <div className={styles.layout}>
-                <VideoPlayer videoPath={video.videoPath} />
+                <VideoPlayer videoPath={video.videoPath} thumbnailPath={video.thumbnailPath} />
                 <Comments videoId={video.id} comments={video.comments || {}} />
             </div>
             <div className={`${styles.layout} ${'mt-7'}`}>

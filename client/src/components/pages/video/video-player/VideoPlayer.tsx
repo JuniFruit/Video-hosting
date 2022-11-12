@@ -4,21 +4,22 @@ import { IoPause, IoPlay, IoVolumeMuteSharp, IoVolumeHigh } from 'react-icons/io
 import { useVideoLogic } from './useVideoLogic';
 import styles from './VideoPlayer.module.scss';
 
-export const VideoPlayer: FC<{ videoPath: string }> = ({ videoPath }) => {
+export const VideoPlayer: FC<{ videoPath: string, thumbnailPath: string }> = ({ videoPath, thumbnailPath }) => {
     const {
         refs,
         functions,
         status
     } = useVideoLogic();
 
-    console.log(status.controlsOpen)
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} ref={refs.videoWrapperRef}>
             <video
                 ref={refs.videoRef}
+                poster={thumbnailPath}
                 onClick={functions.togglePlay}
-                src='https://v.redd.it/qxtvgfwq6bz91/DASH_480.mp4?source=fallback'
+                src={videoPath}
                 preload='metadata'
+                className={styles.player}
             />
             <div
                 className={`${styles.controls} ${status.controlsOpen ? styles.controls_active : styles.controls_disabled}`}

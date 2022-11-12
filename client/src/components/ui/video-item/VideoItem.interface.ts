@@ -13,7 +13,7 @@ export interface IManipulation extends Pick<IVideoItem, 'removeHandler' | 'updat
 
 
 export interface IDuration {
-    duration: number;
+    duration?: number;
     position?: 'top-r' | 'top-l' | 'bot-r' | 'bot-l';
 }
 

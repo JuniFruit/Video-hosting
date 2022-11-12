@@ -1,17 +1,29 @@
 
 .comments {
-    @apply rounded-xl p-5 relative bg-gray-900;
+    @apply rounded-xl p-5 relative bg-gray-900 shadow;
 
     >h2 {
-        @apply text-white text-tiny;
+        @apply text-gray-500 text-tiny;
     }
 
     .line {
-        @apply w-full h-0.5 my-4;
+        @apply w-full h-0.5 my-4 bg-gray-800;
     }
-    >p {
+    p {
         @apply text-gray-500 mb-4;
     }
+
+    .comments_block {
+        @apply overflow-y-scroll pb-2;
+        word-wrap: break-word;
+        max-height: 17rem;
+        scrollbar-width: 0;
+       
+        &::-webkit-scrollbar {
+            width: 0px;
+        }
+    }
+    
 
     .commentItem {
         @apply mt-7;
@@ -23,14 +35,27 @@
                 }
 
                 &:last-child {
+                    word-wrap:break-word;
+                    max-width: 10rem;
                     font-size: 1rem;
                 }
             }
         }
     }
+    
 
-    .bottomForm {
-        @apply absolute bottom-0 left-5;
+    .bottomForm {  
+        @apply absolute bottom-1 bg-gray-900;      
         width: calc(100% - 2.5rem);
+
+        .wrapper {
+            @apply relative flex bg-gray-900 rounded-lg justify-between shadow-md transition-all duration-150 hover:shadow ;
+
+            >div >input {
+                @apply bg-gray-900;
+                box-shadow: none;
+            }
+        }
+       
     }
 }

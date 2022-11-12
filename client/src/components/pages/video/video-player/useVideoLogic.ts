@@ -6,6 +6,7 @@ export const useVideoLogic = () => {
     const videoRef = useRef<IVideoElement>(null);
     const progressBarRef = useRef<HTMLDivElement>(null)
     const controlsRef = useRef<HTMLDivElement>(null);
+    const videoWrapperRef = useRef<HTMLDivElement>(null);
 
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [progress, setProgress] = useState<number>(0);
@@ -22,6 +23,7 @@ export const useVideoLogic = () => {
     }, [videoRef.current?.duration])
 
     const togglePlay = useCallback(() => {
+        console.log(isPlaying)
         if (isPlaying) {
             videoRef.current?.pause();
             setIsPlaying(false)
@@ -62,8 +64,8 @@ export const useVideoLogic = () => {
         if (!progressBarRef.current) return;
         const node = progressBarRef.current.getBoundingClientRect();
         const percentage = Number(((Math.min(Math.max(0, e.x - node.x), node.width) / node.width) * 100).toFixed(4));
-
         // if user activated scrubbing by MouseDown event, start seekchange;
+
         if (isScrubbing && videoRef.current) {
             videoRef.current!.currentTime = Number(((percentage / 100) * videoTime).toFixed(4));
         }
@@ -82,13 +84,13 @@ export const useVideoLogic = () => {
 
     const skipForward = () => {
         if (videoRef.current) {
-            videoRef.current.currentTime += 15
+            videoRef.current.currentTime += 5
         }
     }
 
     const skipBackwards = () => {
         if (videoRef.current) {
-            videoRef.current.currentTime -= 15
+            videoRef.current.currentTime -= 5
         }
     }
 
@@ -120,7 +122,7 @@ export const useVideoLogic = () => {
 
         const updateProgress = () => {
             setCurrentTime(video.currentTime);
-            setProgress(Math.floor((video.currentTime / videoTime) * 100));
+            setProgress(Number((video.currentTime / videoTime * 100).toFixed(4)));
 
         }
 
@@ -146,7 +148,7 @@ export const useVideoLogic = () => {
 
         if (isPlaying && controlsOpen) {
             timeout = setTimeout(() => toggleControls(false), 2000)
-            videoRef.current!.addEventListener('mousemove', () => toggleControls(true));
+            videoWrapperRef.current!.addEventListener('mousemove', () => toggleControls(true));
         } else if (!isPlaying && !controlsOpen) {
             toggleControls(true);
         }
@@ -154,7 +156,7 @@ export const useVideoLogic = () => {
 
         return () => {
             clearTimeout(timeout);
-            videoRef.current?.removeEventListener('mousemove', () => toggleControls(true));
+            videoWrapperRef.current?.removeEventListener('mousemove', () => toggleControls(true));
 
         }
 
@@ -180,12 +182,12 @@ export const useVideoLogic = () => {
     }, [progressBarRef.current, isScrubbing])
 
     useEffect(() => {
-        const video = videoRef.current;
+        const videoWrapper = videoWrapperRef.current;
 
-        if (!video) return;
+        if (!videoWrapper) return;
 
         const handleKeys = (e: KeyboardEvent) => {
-
+            if (e.target !== document.body) return;
             switch (e.code) {
                 case 'ArrowRight':
                     skipForward()
@@ -197,6 +199,7 @@ export const useVideoLogic = () => {
                     requestFullscreen();
                     break;
                 case 'Space':
+                    e.preventDefault();
                     togglePlay();
                     break;
                 default:
@@ -205,19 +208,18 @@ export const useVideoLogic = () => {
             }
         }
 
-        video.addEventListener('keydown', handleKeys);
-
+        document.addEventListener('keydown', handleKeys);
         return () => {
-            video.removeEventListener('keydown', handleKeys);
+            document.removeEventListener('keydown', handleKeys);
         }
-    }, [videoRef])
+    }, [videoWrapperRef, isPlaying])
 
     return {
         refs: {
             videoRef,
             progressBarRef,
             controlsRef,
-
+            videoWrapperRef,
         },
         functions: {
             requestFullscreen,

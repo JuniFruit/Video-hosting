@@ -3,6 +3,12 @@
 
     >button {
         @apply flex items-center justify-center gap-2 outline-none;
+        >div {
+            width: fit-content;
+            >img {
+                @apply w-9 h-9;
+            }
+        }
 
         >span {
             @apply text-sm;

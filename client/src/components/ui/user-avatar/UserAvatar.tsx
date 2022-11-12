@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { mockups } from "../../../assets/mockups/images";
 import { UserCheckMark } from "./UserCheckMark";
 import styles from './UserAvatar.module.scss';
 import { IUserAvatar } from "./UserAvatar.interface";
 import { Link } from "react-router-dom";
+import AvatarElement from "./AvatarElement";
 
 export const UserAvatar: FC<IUserAvatar> = ({ avatarPath, isVerified,id }) => {
 
@@ -11,12 +11,7 @@ export const UserAvatar: FC<IUserAvatar> = ({ avatarPath, isVerified,id }) => {
         <Link to={`/channel/${id}`}>
 
             <div className={styles.avatar_wrapper}>
-                <div className={styles.avatar}>
-                    <img
-                        src={`${avatarPath || mockups.defaultAvatar}`}
-
-                    />
-                </div>
+                <AvatarElement {...{avatarPath}} />
                 <div className={styles.avatar_check}>
                     {isVerified && <UserCheckMark />}
                 </div>
