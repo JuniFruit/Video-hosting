@@ -17,7 +17,6 @@ export const Studio: FC = () => {
     const [deleteVideo] = videoApi.useDeleteMutation()
     const {addMsg} = useActions()
     
-    console.log(profile)
     const handleDelete = (id:number) => {
   
         deleteVideo(id).unwrap().then(() => addMsg({message: 'Video was deleted', status: 200}));

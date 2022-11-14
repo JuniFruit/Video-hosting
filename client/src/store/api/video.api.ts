@@ -39,7 +39,7 @@ export const videoApi = api.injectEndpoints({
                 url: `${VIDEO_PATH}/update_reaction/${id}`,
                 method: "PUT"
             }),
-            invalidatesTags: (result, error, id) => [{type: 'Video', id}]
+            invalidatesTags: (result, error, id) => [{type: 'Video', id}, {type: 'Profile'}]
 
         }),
         delete: builder.mutation<void, number>({

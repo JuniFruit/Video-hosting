@@ -33,17 +33,16 @@ export const useUpload = (
             let videoDuration = 0;
             
             if (files[0].type.includes('video')) {
-
                 const videoTag = await validateVideoFile(files[0]);
-                videoDuration = videoTag.duration
-
+                videoDuration = videoTag.duration;
             }
 
-            onChooseFile && onChooseFile(true);
-            console.log(videoDuration);
+            onChooseFile && onChooseFile(true);           
             const formData = new FormData();
+            videoDuration !== 0 && window.sessionStorage.setItem('videoDuration', (videoDuration * 1000).toFixed(0));
+
             formData.append('media', files[0]);
-            formData.append('media', videoDuration.toString())
+           
 
             await mutateAsync(formData);
 

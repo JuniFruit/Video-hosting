@@ -1,10 +1,8 @@
-import { FC, useEffect, useState } from "react"
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { FC, useEffect } from "react"
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../hooks/useActions";
 import { useAuth } from "../../../hooks/useAuth";
-import { IMediaResponse } from "../../../services/media/Media.interface";
-import { validEmail, validPassword } from "../../../utils/generalUtils";
 import { Layout } from "../../layout/Layout"
 import RegisterForm from "../../ui/profile-form/ProfileForm";
 import { IRegisterForm } from "./Register.interface";
@@ -32,6 +30,7 @@ const RegisterPage: FC = () => {
     })
 
     const onSubmit: SubmitHandler<IRegisterForm> = (data) => {
+        console.log(data);
         registerAction(data)       
     }
 
@@ -41,7 +40,7 @@ const RegisterPage: FC = () => {
             <section className={styles.container}>
                 <RegisterForm 
                     form = {{
-                        handleSubmit: () => handleSubmit(onSubmit),
+                        handleSubmit: handleSubmit(onSubmit),
                         setValue,
                         control,
                         register,

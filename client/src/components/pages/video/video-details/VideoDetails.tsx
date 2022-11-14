@@ -8,6 +8,7 @@ import { formatToKilo } from "../../../../utils/format.utils";
 import LikeVideoButton from "../../../ui/like-button/LikeVideoButton";
 import { ShortInfo } from "../../../ui/short-info/ShortInfo";
 import { Subscribe } from "../../../ui/subscribe-button/Subscribe";
+import { HiOutlineChatBubbleOvalLeftEllipsis } from "react-icons/hi2";
 import styles from './VideoDetails.module.scss';
 
 
@@ -35,6 +36,10 @@ export const VideoDetails: FC<IVideo> = (video) => {
                     <div>
                         <RiHeart2Fill />
                         <span>{formatToKilo(video.likes)} likes</span>
+                    </div>
+                    <div>
+                        <HiOutlineChatBubbleOvalLeftEllipsis />
+                        <span>{formatToKilo(video.commentsCount)} comments</span>
                     </div>
                     <div>
                         <HiCalendar />

@@ -35,9 +35,13 @@ export const useUploadForm = (
 
     const onSubmit: SubmitHandler<IVideoDto> = (data) => {
         if (!videoId) return;
-        updateVideo({ ...data, id: videoId }).unwrap().then(() => {
+        const videoFileds = data;
+        videoFileds.duration = Number(window.sessionStorage.videoDuration);
+
+        updateVideo({ ...videoFileds, id: videoId }).unwrap().then(() => {
             handleCloseModal();
             addMsg({message: 'Video saved', status: 200})
+            window.sessionStorage.clear();
             reset();
         });
     }

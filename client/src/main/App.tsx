@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { Channel } from '../components/pages/channel/Channel';
 import { Home } from '../components/pages/home/Home';
+import NotFoundPage from '../components/pages/not-found/NotFound';
 import ProfileEditPage from '../components/pages/profile/ProfileEdit';
 import RegisterPage from '../components/pages/register/Register';
 import { Studio } from '../components/pages/studio/Studio';
@@ -22,6 +23,7 @@ function App() {
       <Route path='/videos/:name/:id' element={<Video />} />
       <Route path='/registration' element={<RegisterPage />} />
       <Route path='/user/profile/:id' element={<ProfileEditPage />} />
+      <Route path='*' element={<NotFoundPage />} />
 
     </Routes>
   );

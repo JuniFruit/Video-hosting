@@ -3,6 +3,7 @@ import { BASE_URL } from '../../api/axios'
 import { IProfileEditForm } from '../../components/pages/profile/ProfileEdit.interface'
 import { USER_PATH } from '../../services/user/user.service'
 import { IUser } from '../../types/user.interface'
+import { TypeRootState } from '../store'
 
 
 export const api = createApi({
@@ -10,7 +11,13 @@ export const api = createApi({
     tagTypes: ['Profile', 'Video'],
     baseQuery: fetchBaseQuery({
         baseUrl: BASE_URL,
+        prepareHeaders: (headers, {getState}) => {
+            const token = (getState() as TypeRootState).auth.user?.accessToken;
 
+            if (token) headers.set('Authorization', `Bearer ${token}`);
+
+            return headers;
+        }
     }),
     endpoints: builder => ({
         getProfile: builder.query<IUser, number>({

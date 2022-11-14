@@ -12,7 +12,7 @@ export const CommentForm: FC<{ videoId: number }> = ({ videoId }) => {
         mode: 'onChange'
     })
 
-    const [createComment, { data, isLoading }] = commentApi.useCreateCommentMutation()
+    const [createComment, { isLoading }] = commentApi.useCreateCommentMutation()
 
     const onSubmit: SubmitHandler<ICommentDto> = (data) => {
         createComment({ ...data, videoId }).unwrap().then(() => reset());
