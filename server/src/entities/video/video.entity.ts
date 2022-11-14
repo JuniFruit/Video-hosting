@@ -42,7 +42,6 @@ export class VideoEntity extends Base {
     @JoinColumn({name: 'comments'})
     comments!: CommentEntity[]
 
-    @ManyToMany(() => UserEntity, user => user.likedVideos)
-    @JoinColumn({name: 'likedByUsers'})
+    @ManyToMany(() => UserEntity, user => user.likedVideos)   
     likedBy!: UserEntity[]
 }

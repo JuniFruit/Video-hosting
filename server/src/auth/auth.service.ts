@@ -3,19 +3,19 @@ import {userRepository} from '../database/db';
 import { UserEntity } from '../entities/user/user.entity';
 import { AuthDto, RegisterDto } from './auth.dto';
 import { genSalt, hash, compare } from 'bcrypt';
-import { NextFunction, Request, Response } from 'express';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 
+dotenv.config()
 
 export const AuthService = {
 
     userTable: userRepository,
 
-    login: async function(dto: AuthDto): Promise<object> {
+    login: async function(dto: AuthDto) {
         const user = await this.validateUser(dto);
 
-        return {
-            user: this.returnUserMainFields(user)
-        }
+        return user;
     },
 
     registerUser: async function(dto: RegisterDto): Promise<object> {
@@ -41,7 +41,7 @@ export const AuthService = {
         }
     },
 
-    validateUser: async function(dto: AuthDto): Promise<UserEntity> {
+    validateUser: async function(dto: AuthDto): Promise<object> {
         const user = await this.userTable.findOne({
             where: {
                 email: dto.email
@@ -55,19 +55,34 @@ export const AuthService = {
         const matchedPassword = await compare(dto.password, user.password);
         if (!matchedPassword) throw new Error('Incorrect password');
 
-        return user
+        return {
+            user: this.returnUserMainFields(user)
+        }
     },
 
-    returnUserMainFields: function(user: UserEntity): object {
+    returnUserMainFields: function(user: UserEntity) {
+        const accessToken = this.generateToken(user);
+
         return {
             id: user.id,
-            email: user.email
+            email: user.email,
+            accessToken
         }
-    }
+    },
+
+    generateToken: function (user: UserEntity) {
+        const accessToken = jwt.sign(
+            {id: user.id, email: user.email},
+            process.env.JWT_SECRET!,
+            {
+                expiresIn: '24h'
+            }
+        )
+
+        return accessToken;
+    }   
+
 
 }
 
 
-export const isAuthorized = (req: Request,res: Response, next: NextFunction) => {
-    
-}

@@ -1,4 +1,5 @@
 import express from 'express';
+import { authGuard } from '../auth/auth.guard';
 import { UserService } from '../entities/user/user.service';
 
 const router = express.Router();
@@ -12,7 +13,7 @@ router.get('/profile/:id', async (req,res) => {
         res.status(500).send({message: e.message})
     }
 })
-router.put('/profile_update/:id', async (req, res) => {
+router.put('/profile_update/:id', authGuard, async (req, res) => {
     try {
         const updated = await UserService.update(req.body.data, Number(req.body.id));
         res.send(updated)
@@ -40,7 +41,7 @@ router.get('/by_id/:id', async (req, res) => {
     }
 })
 
-router.put('/subscribe', async (req, res) => {
+router.put('/subscribe', authGuard,async (req, res) => {
     try{        
         const subSuccess = await UserService.subscribe(req.body.userId, req.body.channelToSub)
         res.send(subSuccess);

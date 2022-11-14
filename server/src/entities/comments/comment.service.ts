@@ -1,6 +1,6 @@
 import { CommentDto } from "./comment.dto";
 import { CommentEntity } from "./comment.entity"
-import { commentRepository } from "../../database/db";
+import { commentRepository, videoRepository } from "../../database/db";
 
 
 export const CommentService = {
@@ -11,6 +11,9 @@ export const CommentService = {
             video: {id:  dto.videoId},
             author: {id: userId}
         })
+        const video = await videoRepository.findOneBy({id: dto.videoId});
+        video!.commentsCount++;
+        await videoRepository.save(video!);
 
         return await commentRepository.save(comment);
     },

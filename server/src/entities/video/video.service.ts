@@ -33,6 +33,7 @@ export const VideoService = {
                 comments: {
                     author: true
                 },
+                likedBy: true
             },
 
             select: {
@@ -77,15 +78,16 @@ export const VideoService = {
                     ...selectUserOptions
                 },
                 comments: {
-                  ...selectCommentOptions
+                    ...selectCommentOptions
                 }
             }
         })
     },
-    getMostViewed: async function ():Promise<VideoEntity[]> {
+    getMostViewed: async function (): Promise<VideoEntity[]> {
         const videos = await videoRepository.find({
             where: {
-                views: MoreThan(0)
+                views: MoreThan(0),
+                isPublic: true
             },
             relations: {
                 user: true,
@@ -103,41 +105,50 @@ export const VideoService = {
         return videos
     },
 
-    create: async function (userId: number):Promise<number> {
+    create: async function (userId: number): Promise<number> {
 
         const defaultFields = {
             videoPath: '',
             thumbnailPath: '',
             description: '',
-            user: {id: userId},          
+            user: { id: userId },
             name: ''
         }
         const newVideo = videoRepository.create(defaultFields);
         const video = await videoRepository.save(newVideo);
-        
+
         return video.id;
     },
 
-    delete: async function (id:number):Promise<DeleteResult> {      
+    delete: async function (id: number): Promise<DeleteResult> {
         try {
-            return await videoRepository.delete({id});
-            
-        } catch (error:any) {
+            return await videoRepository.delete({ id });
+
+        } catch (error: any) {
             throw new Error(error);
         }
     },
 
-    incrementViews: async function (id: number):Promise<VideoEntity> {
+    incrementViews: async function (id: number): Promise<VideoEntity> {
         const video = await this.getById(id);
         video.views++;
         return await videoRepository.save(video);
     },
 
-    updateReaction: async function (id:number, userId?: number) {
+    updateReaction: async function (id: number, userId: number) {
         const video = await this.getById(id);
+        const isLiked = video.likedBy.some(user => user.id === userId);
+       
+        if (isLiked) {
+            video.likes--;
+            video.likedBy = video.likedBy.filter(user => user.id !== userId);
+            return await videoRepository.save(video);
+        }
+        const user = await userRepository.findOneBy({ id: userId });
+        video.likes++;
 
-       video.likes++;
-       return await videoRepository.save(video); 
+        video.likedBy.push(user!);
+        return await videoRepository.save(video);
     }
 
 

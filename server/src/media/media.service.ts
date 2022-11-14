@@ -1,7 +1,5 @@
 import path from 'path';
-import fs from 'fs'
 import { IMediaResponse } from './media.interface';
-import { getVideoDurationInSeconds } from 'get-video-duration';
 
 export const MediaService = {
     saveMedia: async function (file: any, folder = 'default'): Promise<IMediaResponse> {

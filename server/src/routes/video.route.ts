@@ -1,4 +1,5 @@
 import express from 'express';
+import { authGuard } from '../auth/auth.guard';
 import { VideoService } from '../entities/video/video.service';
 
 const router = express.Router();
@@ -14,7 +15,7 @@ router.get('/all', async (req, res) => {
 })
 
 
-router.put('/update/:id', async (req, res) => {
+router.put('/update/:id', authGuard,async (req, res) => {
     try {
         const id = req.params.id;
         const videoDto = req.body.dto;
@@ -45,16 +46,16 @@ router.get('/most_viewed', async(req, res) => {
     }
 })
 
-router.put('/update_reaction/:id', async (req, res) => {
+router.put('/update_reaction/:id', authGuard,async (req, res) => {
     try {
-        const video = await VideoService.updateReaction(Number(req.params.id));
+        const video = await VideoService.updateReaction(Number(req.params.id), Number(req.body.currentUser));
         res.send(video);
     } catch (e:any) {
         res.status(500).send({message: e.message});
     }
 })
 
-router.post('/create', async (req, res) => {
+router.post('/create', authGuard, async (req, res) => {
     try {      
         const videoId = await VideoService.create(Number(req.body.userId));
         res.send(videoId.toString());
@@ -82,12 +83,5 @@ router.put('/increment_views/:id', async (req, res) => {
     }
 })
 
-// router.post('/upload', async (req, res) => {
-//     try {
-        
-//     } catch (e:any) {
-        
-//     }
-// })
 
 export default router;
