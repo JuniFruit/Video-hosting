@@ -10,7 +10,7 @@ const SearchResult: FC = () => {
     const [searchParams] = useSearchParams();
     const searchTerm = searchParams.get('q')
 
-    const {isSuccess, data} = videoApi.useGetBySearchTermQuery(searchTerm!, {
+    const {isLoading, data} = videoApi.useGetBySearchTermQuery(searchTerm!, {
         skip: !searchTerm,
         selectFromResult: ({data, ...rest}) => ({
            data: data?.slice(0, 25),
@@ -23,6 +23,7 @@ const SearchResult: FC = () => {
             <Catalog 
                 videosToRender={data || []}
                 title={`Results for ${searchTerm}`}
+                isLoading={isLoading}
             />
         </Layout>
     )

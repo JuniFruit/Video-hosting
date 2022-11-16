@@ -6,8 +6,8 @@ import { UserAvatar } from "../user-avatar/UserAvatar";
 import { VideoDuration } from "./VideoDuration";
 import styles from './VideoItem.module.scss';
 import { VideoStats } from "./VideoStats";
-export const LargeVideo: FC<IVideo> = ({ views, duration, name, user, thumbnailPath, createdAt, id }) => {
 
+export const LargeVideo: FC<IVideo> = ({ views, duration, name, user, thumbnailPath, createdAt, id }) => {
     return (
         <div className={styles.large_wrapper}>
             <Link to={`/videos/${name}/${id}`}>

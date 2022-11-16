@@ -1,9 +1,9 @@
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
+import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { useActions } from '../../../hooks/useActions';
+import { useAuth } from '../../../hooks/useAuth';
 import { UserService } from '../../../services/user/user.service';
-import { IUser } from '../../../types/user.interface';
-import { IVideo } from '../../../types/video.interface';
 import { Layout } from '../../layout/Layout';
 import { ShortInfo } from '../../ui/short-info/ShortInfo';
 import { Subscribe } from '../../ui/subscribe-button/Subscribe';
@@ -11,20 +11,25 @@ import { Catalog } from '../home/catalog/Catalog';
 import styles from './Channel.module.scss';
 
 export const Channel: FC = () => {
-    const [user, setUser] = useState<IUser | null>(null);
-    const [filtereVideos, setFilteredVideos] = useState<IVideo[]>([]);
     const { id } = useParams();
-    const {addMsg} = useActions();
-    useEffect(() => {
-        UserService.getById(Number(id))
-            .then(data => {
-                setUser(data);
-                setFilteredVideos(data.videos!.filter(video => video.isPublic === true))
-            })
-            .catch(e => addMsg({message: e.message, status: 500}))
+    const { addMsg } = useActions();
+    const { user: authUser } = useAuth()
 
-    }, [id])
+    const {
+        data: user,
+        isError,
+        isLoading,
+        error
+    } = useQuery(`Channel/${id}`, () => UserService.getById(Number(id)))
 
+    if (isError) addMsg({ message: error, status: 500 })
+
+    const filterVideos = () => {
+        //filtering public videos to avoid showing hidden videos. If it's our own channel then return everything
+        if (!user) return;
+
+        return authUser?.id === user.id ? user.videos : user.videos!.filter(video => video.isPublic == true);
+    }
     return (
 
         <Layout title={`${user?.name} - video channel` || 'Channel'}>
@@ -35,7 +40,11 @@ export const Channel: FC = () => {
                 </div>
                 <article className={styles.channel_description}>{user?.description}</article>
             </div>
-            <Catalog videosToRender={filtereVideos} title='User videos' />
+            <Catalog
+                videosToRender={filterVideos() || []}
+                title='User videos' 
+                isLoading={isLoading}
+                />
         </Layout>
     )
 }

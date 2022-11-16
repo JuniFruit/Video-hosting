@@ -1,23 +1,33 @@
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
+import { useQuery } from 'react-query';
+import { useActions } from '../../../hooks/useActions';
 import { VideoService } from '../../../services/video/video.service';
-import { IVideo } from '../../../types/video.interface';
 import { Layout } from '../../layout/Layout';
 import { Catalog } from '../home/catalog/Catalog';
 
-export const Trending: FC = () => {
+const Trending: FC = () => {
 
-    const [videos, setVideos] = useState<IVideo[] | []>([]);
+    const { addMsg } = useActions();
 
-    useEffect(() => {
-        VideoService.getMostViewed()
-            .then(data => setVideos(data))
+    const {
+        error,
+        isLoading,
+        isError,
+        data: videos
+    } = useQuery('Videos_query', VideoService.getMostViewed);
 
-    }, [])
+    if (isError) addMsg({ message: error, status: 500 });
 
 
     return (
         <Layout title='Trending videos'>
-            <Catalog title='Trending' videosToRender={videos} />
+            <Catalog
+                title='Trending'
+                videosToRender={videos || []}
+                isLoading={isLoading}
+            />
         </Layout>
     )
 }
+
+export default Trending

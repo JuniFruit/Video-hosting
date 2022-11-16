@@ -49,7 +49,20 @@ module.exports = {
             width: '0%'
           }
 
+        },
+        loading: {
+          '0%': {
+            transform: 'translateX(-150%)'
+          },
+          '50%': {
+            transform: 'translateX(-60%)'
+          },
+          '100%': {
+            transform: 'translateX(150%)'
+          }
+
         }
+
       },
       fontSize: {
         xs: '.9rem',
@@ -68,7 +81,8 @@ module.exports = {
       animation: {
         fadeIn: 'fadeIn .5s ease-in-out',
         scaleIn: 'scaleIn .35s ease-in-out',
-        progressCountDown: 'countDown 5s ease' 
+        progressCountDown: 'countDown 5s ease',
+        loading: 'loading 2s ease infinite'
 
       }
     },

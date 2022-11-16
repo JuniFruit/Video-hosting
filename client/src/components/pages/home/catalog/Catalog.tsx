@@ -1,36 +1,29 @@
-import { FC, useEffect, useState } from "react";
-import { VideoService } from "../../../../services/video/video.service";
+import { FC } from "react";
 import { IVideo } from "../../../../types/video.interface";
 import { Heading } from "../../../ui/heading/Heading";
+import { VideoLoader } from "../../../ui/skeleton/video-item/VideoLoader";
 import { VideoItem } from "../../../ui/video-item/VideoItem";
 import styles from './Catalog.module.scss';
 
 interface ICatalog {
     title: string;
-    videosToRender: IVideo[] | null;
+    videosToRender: IVideo[] | [];
+    isLoading: boolean;    
     removeHandler?: (videoId:number) => void;
     updateHandler?: (videoId: number) => void;
 }
 
-export const Catalog: FC<ICatalog> = ({ videosToRender, title, removeHandler, updateHandler }) => {
-    const [videos, setVideos] = useState<IVideo[] | null>(null);
-
-    useEffect(() => {
-        if (!videosToRender) {
-            VideoService.getAll()
-                .then(data => setVideos(data))
-        } else {
-            setVideos(videosToRender)
-        }
-
-    }, [videosToRender]);
+export const Catalog: FC<ICatalog> = ({ videosToRender, title, removeHandler, updateHandler, isLoading }) => {
+    
+    
 
     return (
         <div className={styles.videos_wrapper}>
             <Heading title={title} />
             <div className={styles.videos_block}>
-                {videos?.length
-                    ? videos.map(item => {
+                {isLoading && <VideoLoader  amount={5}/>}
+                {videosToRender.length
+                    ? videosToRender.map(item => {
                         return <VideoItem
                             item={item}
                             removeHandler={removeHandler}
@@ -40,6 +33,7 @@ export const Catalog: FC<ICatalog> = ({ videosToRender, title, removeHandler, up
                         />
                     })
                     : 
+                    !isLoading &&
                     <div className={styles.not_found}> 
                         No videos here
                     </div>

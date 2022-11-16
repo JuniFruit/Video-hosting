@@ -5,7 +5,7 @@ import { Layout } from '../../layout/Layout';
 import { Menu } from '../../layout/sidebar/menu/Menu';
 
 
-export const SubscriptionsPage: FC = () => {
+const SubscriptionsPage: FC = () => {
 
     const { user } = useAuth()
     const { data: profile } = api.useGetProfileQuery(user?.id!, {
@@ -27,3 +27,5 @@ export const SubscriptionsPage: FC = () => {
         </Layout>
     )
 }
+
+export default SubscriptionsPage

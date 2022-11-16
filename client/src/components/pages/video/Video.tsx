@@ -12,7 +12,7 @@ import styles from './Video.module.scss';
 export const Video: FC = () => {
 
     const { id } = useParams();
-    const {isMobile, isLaptopSmall} = useIsMobile();
+    const {isMobile} = useIsMobile();
     const { data: video = {} as IVideo } = videoApi.useGetByIdQuery(Number(id), {
         skip: !id
     })

@@ -7,7 +7,7 @@ import { videoApi } from '../../../store/api/video.api';
 import { Layout } from '../../layout/Layout';
 import { Catalog } from '../home/catalog/Catalog';
 
-export const Studio: FC = () => {
+const Studio: FC = () => {
     const { isLoading, user } = useAuth();
 
     const navigate = useNavigate();
@@ -43,7 +43,10 @@ export const Studio: FC = () => {
                 title='My videos'
                 removeHandler={handleDelete}
                 updateHandler={handleUpdate}
+                isLoading={isLoading}
             />
         </Layout>
     )
 }
+
+export default Studio;
