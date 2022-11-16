@@ -1,11 +1,19 @@
 .button {
-    @apply flex items-center justify-center rounded-lg bg-primary text-white p-2.5 transition-colors opacity-80 duration-150;
+    @apply flex items-center justify-center rounded-lg bg-primary text-white p-2 transition-colors opacity-80 duration-150;
+
+    @screen md {
+        @apply p-2.5
+    }
 
     &.subscribed {
         @apply bg-gray-500;
     }
     >svg {
-        @apply mr-2 text-base;
+        @apply mr-2 text-tiny;
+
+        @screen md {
+            @apply text-base;
+        }
     }
     &:hover {
         @apply opacity-100;

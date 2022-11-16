@@ -3,7 +3,7 @@ import { videoApi } from "../store/api/video.api";
 import { useDebounce } from "./useDebounce";
 
 
-export const useSearch = () => {
+export const useSearch = (resultsToShow = 4) => {
     const [searchTerm, setSearchTerm] = useState('');
     const debounced = useDebounce(searchTerm, 500);
 
@@ -14,7 +14,7 @@ export const useSearch = () => {
     const {isSuccess, data} = videoApi.useGetBySearchTermQuery(searchTerm, {
         skip: !debounced,
         selectFromResult: ({data, ...rest}) => ({
-           data: data?.slice(0,4),
+           data: data?.slice(0,resultsToShow),
            ...rest
         })
     });

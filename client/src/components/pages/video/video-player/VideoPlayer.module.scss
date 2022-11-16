@@ -15,12 +15,22 @@
         }
 
         .button {
-            @apply mx-1.5 text-base flex justify-center items-center text-purple text-opacity-80 transition-colors hover:text-opacity-100;
+            @apply mx-1 flex justify-center items-center text-purple text-opacity-80 transition-colors hover:text-opacity-100;
+            font-size: 1rem;
 
+            @screen sm {
+                @apply mx-1.5 text-base
+            }
         }
 
+
         .timeControls {
-            @apply flex items-center text-white opacity-60;
+            @apply flex items-center text-white opacity-60 mx-1;
+            font-size: .75rem;
+
+            @screen sm {
+                font-size: 1rem;
+            }
         }
 
         >p:nth-child(2) {
@@ -56,6 +66,7 @@
 
             .volume_slider {
                 @apply appearance-none outline-none absolute bg-gray-600 -rotate-90 opacity-0 transition-opacity duration-300;
+                display: none;
                 width: 4rem;
                 height: .3rem;
                 top: calc(-100% - 1.15rem);
@@ -87,6 +98,12 @@
                 -webkit-appearance: none;                
                 width: .9rem;
                 height: .9rem;
+            }
+
+            @screen md {
+                .volume_slider {
+                    @apply block;
+                }
             }
 
         }

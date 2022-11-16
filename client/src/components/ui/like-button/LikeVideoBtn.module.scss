@@ -2,11 +2,19 @@
 .wrapper {
 
     >button {
-        @apply flex items-center p-2.5 gap-1 bg-gray-700;  
+        @apply flex items-center p-2 gap-1 bg-gray-700;  
         font-size: 1rem;
 
+        @screen md {
+            @apply p-2.5
+        }
+
         >svg {
-            @apply text-base;
+            @apply text-tiny;
+            
+            @screen md {
+                @apply text-base;
+            }
         }
     }
 }

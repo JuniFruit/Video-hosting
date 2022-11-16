@@ -8,6 +8,7 @@ import {IoChevronUp, IoChevronDown} from 'react-icons/io5'
 import { api } from "../../../../../store/api/api";
 import styles from './ProfileMenu.module.scss';
 import AvatarElement from "../../../../ui/user-avatar/AvatarElement";
+import { useIsMobile } from "../../../../../hooks/useMobile";
 
 export const ProfileMenu: FC = () => {
 
@@ -18,6 +19,7 @@ export const ProfileMenu: FC = () => {
     });
     const {logout} = useActions()
     const {ref, isShow, setIsShow} = useClickOutside(false);
+    const {isMobile} = useIsMobile();
 
     if (isLoading) return null;
 
@@ -28,9 +30,9 @@ export const ProfileMenu: FC = () => {
                 <AvatarElement 
                     avatarPath={data?.avatarPath}
                 />
-                <span>
+                {!isMobile && <span>
                     {data?.name || ''}
-                </span>
+                </span>}
                 {isShow ? <IoChevronUp className={styles.icon} /> : <IoChevronDown className={styles.icon} />}
             </button>
             { isShow 

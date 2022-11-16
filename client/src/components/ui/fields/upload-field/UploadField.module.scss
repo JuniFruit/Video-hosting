@@ -7,11 +7,19 @@
     }
 
     >label {
-        @apply block;
+        @apply block; 
 
         >input {
-            @apply cursor-pointer block text-sm text-gray-500 file:mr-4 file:px-4 file:py-2 file:rounded-full file:border-0
-            file:bg-purple file:bg-opacity-80 file:text-sm file:text-white hover:file:bg-opacity-100
+            @apply cursor-pointer inline-block text-sm text-gray-500 file:bg-purple file:rounded-full
+            file:bg-opacity-80 file:text-sm file:text-white hover:file:bg-opacity-100 file:border-0 file:mr-4 file:px-4 file:py-2;
+            max-width: 10rem;
+            
+            
+
+            @screen md {
+                max-width: fit-content;
+         
+            }
         }
     }
 

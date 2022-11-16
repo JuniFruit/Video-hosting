@@ -1,6 +1,7 @@
 
 .container {
-    @apply relative z-50;
+    @apply relative;
+    z-index: 151;
 
     .wrapper {
         @apply fixed inset-0 flex items-center justify-center p-4;

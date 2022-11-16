@@ -9,11 +9,19 @@
         @apply flex gap-8;
 
         .top_video {
-            width: 70%;
+            width: 100%;
         }
 
-        .random_video {
-            @apply w-1/3;
+        @screen lg {
+            
+            .top_video {
+                width: 70%;
+            }
+            
+            .random_video {
+                @apply w-1/3;
+            }
+
         }
     }
 }

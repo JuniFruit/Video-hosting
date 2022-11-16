@@ -1,10 +1,25 @@
 .main {
     @apply flex flex-wrap relative;
     .content {
-        width: 82%;
-        
+        @apply relative;
+        width: 100%;
+
         .wrapper {
-            @apply pl-6 pr-8
+            @apply pl-3 pr-5;
         }
     }
+    @screen md {
+        .content {        
+            width: 82%;
+            
+            .wrapper {
+                @apply pl-6 pr-8
+            }
+    
+            
+        }
+
+    }
+    
+    
 }

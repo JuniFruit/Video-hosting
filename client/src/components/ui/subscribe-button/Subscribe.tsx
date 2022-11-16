@@ -23,7 +23,9 @@ export const Subscribe: FC<{ channelIdToSub: number | undefined }> = ({ channelI
         e.preventDefault();
         if (!user) return addMsg({message: 'You are not logged in', status: 500})
 
-        subscribe({id: profile?.id!, channelToSub: channelIdToSub}).unwrap() 
+        subscribe({id: profile?.id!, channelToSub: channelIdToSub})
+            .unwrap()
+            .catch(e => addMsg({message: e.message, status: 500})) 
     }
     return (
         <button

@@ -2,8 +2,8 @@
 .comments {
     @apply rounded-xl p-5 relative bg-gray-900 shadow;
 
-    >h2 {
-        @apply text-gray-500 text-tiny;
+    h2 {
+        @apply text-gray-500 text-tiny flex items-center gap-2;
     }
 
     .line {
@@ -13,15 +13,26 @@
         @apply text-gray-500 mb-4;
     }
 
-    .comments_block {
-        @apply overflow-y-scroll pb-2;
-        word-wrap: break-word;
-        max-height: 17rem;
-        scrollbar-width: 0;
+    .comments_section {
        
-        &::-webkit-scrollbar {
-            width: 0px;
+
+        .comments_block {
+            @apply overflow-y-scroll pb-2 h-20 transition-all duration-200;
+           
+            max-height: 27rem;
+            word-wrap: break-word;
+            scrollbar-width: 0;
+            
+            &::-webkit-scrollbar {
+                width: 0px;
+            }
+
+            @screen md { 
+                height: 17rem;
+                max-height: 17rem;               
+            }
         }
+
     }
     
 
@@ -29,6 +40,7 @@
         @apply mt-7;
 
         >div > div > {
+            
             div {
                 &:first-child {
                     @apply text-xs;
@@ -45,8 +57,8 @@
     
 
     .bottomForm {  
-        @apply absolute bottom-1 bg-gray-900;      
-        width: calc(100% - 2.5rem);
+        @apply bg-gray-900 w-full mt-3;      
+        
 
         .wrapper {
             @apply relative flex bg-gray-900 rounded-lg justify-between shadow-md transition-all duration-150 hover:shadow ;
@@ -55,6 +67,11 @@
                 @apply bg-gray-900;
                 box-shadow: none;
             }
+        }
+
+        @screen md {
+            @apply absolute bottom-1 mt-0;
+            width: calc(100% - 2.5rem)
         }
        
     }

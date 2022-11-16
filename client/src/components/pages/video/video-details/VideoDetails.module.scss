@@ -1,39 +1,81 @@
 
 .wrapper {
 
-    @apply flex;
+    @apply flex flex-wrap;
 
     .description {
-        @apply text-white;
-        width: 80%;
+        @apply text-white mt-5;
+        width: 100%;
         
 
         >h2 {
-            @apply text-base ml-1  my-5;
+            @apply ml-1  my-2;
+            font-size: 1rem;            
             font-weight: 500;
         }
 
         >p {
             @apply text-sm text-gray-500 ml-1;
         }
+
+        @screen md {
+            >h2 {
+                @apply text-base my-5;
+            }
+        }
     }
 
     .stats {
-        @apply w-1/3;
+        @apply w-full mt-5;
 
         .buttons {
-            @apply flex items-center gap-2 mt-1 w-full;
+            @apply flex items-center gap-2 w-full justify-between my-5;
+
+            @screen md {
+                @apply justify-start
+            }
             
         }
 
         .video_perfomance {
-            @apply flex flex-col gap-3 mt-3;
-
+            @apply flex flex-wrap justify-center gap-3 mt-3;
 
             >div {
                 @apply text-gray-500 flex items-center gap-2;
+                font-size: .8rem;
+            }
+            @screen sm {
+                @apply flex-nowrap;
+
+                >div {
+                    font-size: 1rem;
+                }
+            }
+
+            @screen md {
+                @apply flex-col 
             }
         }
+
+        
+
+        @screen lg {
+            @apply w-1/3;
+
+            .buttons {
+                @apply justify-start mt-1 my-0;
+            }
+
+            .video_perfomance {
+                @apply flex flex-col;
+                flex-wrap: none;
+            }
+        }
+        
+    }
+
+    @screen md {
+        @apply flex-nowrap;
     }
     
 }

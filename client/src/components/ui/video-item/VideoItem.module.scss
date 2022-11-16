@@ -21,7 +21,7 @@
             @apply my-8;
 
             display: -webkit-box;
-            width: 50%;          
+            width: 80%;          
             font-weight: 500;  
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
@@ -30,6 +30,10 @@
            >h3 {
             @apply text-white text-2xl my-5;
           
+           }
+           @screen lg {               
+                width: 50%;         
+                
            }
         }
 

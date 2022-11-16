@@ -23,7 +23,6 @@ export const useVideoLogic = () => {
     }, [videoRef.current?.duration])
 
     const togglePlay = useCallback(() => {
-        console.log(isPlaying)
         if (isPlaying) {
             videoRef.current?.pause();
             setIsPlaying(false)

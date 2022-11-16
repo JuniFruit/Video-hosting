@@ -1,8 +1,9 @@
 .search_wrapper {
-    @apply relative w-7/12;
 
-    >label {
+    @apply relative w-full;
 
+    >label > form {
+    
         >div {
            
             >input {
@@ -17,20 +18,27 @@
         }
     }
 
-    .search_results {
-        @apply absolute mt-2 bg-gray-900 rounded-md flex flex-wrap gap-5 left-0 top-full z-40 w-full p-5 animate-fadeIn duration-75;
-     
+    @screen md {
+        @apply relative w-7/12;   
     
-        >div {
-            @apply mb-1;            
-            width: 25%;
+        
+    
+        .search_results {
+            @apply absolute mt-2 bg-gray-900 rounded-md flex flex-wrap gap-5 left-0 top-full z-40 w-full p-5 animate-fadeIn duration-75;
+         
+        
+            >div {
+                @apply mb-1;            
+                width: 25%;
+            }
+           
+            
+            
         }
-       
-        
-        
-    }
-    .search_no_vids {
-        @apply flex justify-center text-gray-300;
-        font-weight: 500;
+        .search_no_vids {
+            @apply flex justify-center text-gray-300;
+            font-weight: 500;
+        }
+
     }
 }

@@ -39,7 +39,10 @@ export const Catalog: FC<ICatalog> = ({ videosToRender, title, removeHandler, up
                             key={item.id}
                         />
                     })
-                    : null
+                    : 
+                    <div className={styles.not_found}> 
+                        No videos here
+                    </div>
                 }
             </div>
         </div>

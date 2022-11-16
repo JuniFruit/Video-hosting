@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { commentApi } from '../../../../store/api/comment.api';
 import { ICommentDto } from '../../../../types/comment.interface';
-import {MdSend} from 'react-icons/md';
+import { MdSend } from 'react-icons/md';
 import Field from '../../../ui/fields/Fields';
 import styles from './Comments.module.scss';
 
@@ -31,14 +31,14 @@ export const CommentForm: FC<{ videoId: number }> = ({ videoId }) => {
                     error={errors.body}
                 />
 
-                <button 
+                <button
                     disabled={isLoading}
                     className="text-xl text-purple mx-2"
                 >
                     <MdSend />
                 </button>
 
-              
+
             </div>
 
         </form>

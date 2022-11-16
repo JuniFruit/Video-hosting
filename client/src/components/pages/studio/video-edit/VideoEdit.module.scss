@@ -1,6 +1,6 @@
 
 .edit_wrapper {
-    @apply mt-7  p-5;
+    @apply mt-7  p-2;
 
     >form {
         >div {
@@ -14,5 +14,8 @@
             }
 
         }
+    }
+    @screen md {
+        @apply p-5;
     }
 }

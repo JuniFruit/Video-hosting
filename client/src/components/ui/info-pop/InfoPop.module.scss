@@ -1,5 +1,6 @@
 .message_body {
-    @apply rounded-lg block shadow-sm absolute top-5 right-5 z-50 overflow-hidden bg-gray-700 animate-fadeIn duration-150; 
+    @apply rounded-lg block shadow-sm absolute top-5 right-5 overflow-hidden bg-gray-700 animate-fadeIn duration-150; 
+    z-index: 110;
     min-height: 2rem;
     
 

@@ -81,7 +81,7 @@ export const VideoPlayer: FC<{ videoPath: string, thumbnailPath: string }> = ({ 
                 </div>
 
                 <button title='Toggle fullscreen' className={styles.button} onClick={functions.requestFullscreen}>
-                    <BsFullscreen className={'text-tiny'} />
+                    <BsFullscreen />
                 </button>
 
 
