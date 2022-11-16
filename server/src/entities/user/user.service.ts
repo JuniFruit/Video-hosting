@@ -31,7 +31,7 @@ export const UserService = {
        
         const user = await userRepository.findOne({
             where: {
-                id: id,               
+                id: id               
             },
             relations: {
 

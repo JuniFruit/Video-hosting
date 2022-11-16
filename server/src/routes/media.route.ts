@@ -6,7 +6,7 @@ import {FILE_SIZE_LIMIT} from '../utils/utils';
 const router = express.Router();
 
 
-router.post('/upload', authGuard, fileUpload(
+router.post('/upload', fileUpload(
     {createParentPath: true, 
         limits: { fileSize: FILE_SIZE_LIMIT}, 
         responseOnLimit: "File exceeded the limit. Max is 1GB"}), async (req, res) => {
