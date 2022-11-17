@@ -2,7 +2,7 @@
     @apply shadow rounded-2xl h-72 overflow-hidden relative transition-all;
    
     .img {
-        @apply w-full bg-gray-600 relative;
+        @apply w-full bg-gray-600 relative overflow-hidden;
         height: 50%;
     }
     .small_content {

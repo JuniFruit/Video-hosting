@@ -1,9 +1,11 @@
+import { AxiosError } from 'axios';
 import { FC } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { useActions } from '../../../hooks/useActions';
 import { useAuth } from '../../../hooks/useAuth';
 import { UserService } from '../../../services/user/user.service';
+import { IUser } from '../../../types/user.interface';
 import { Layout } from '../../layout/Layout';
 import { ShortInfo } from '../../ui/short-info/ShortInfo';
 import { Subscribe } from '../../ui/subscribe-button/Subscribe';
@@ -20,9 +22,9 @@ export const Channel: FC = () => {
         isError,
         isLoading,
         error
-    } = useQuery(`Channel/${id}`, () => UserService.getById(Number(id)))
+    } = useQuery<IUser, AxiosError>(`Channel/${id}`, () => UserService.getById(Number(id)))
 
-    if (isError) addMsg({ message: error, status: 500 })
+    if (isError) addMsg({ message: error.message, status: 500 })
 
     const filterVideos = () => {
         //filtering public videos to avoid showing hidden videos. If it's our own channel then return everything

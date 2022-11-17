@@ -1,8 +1,10 @@
+import { AxiosError } from "axios";
 import { FC } from "react";
 import { useQuery } from "react-query";
 import { useActions } from "../../../../hooks/useActions";
 import { useIsMobile } from "../../../../hooks/useMobile";
 import { VideoService } from "../../../../services/video/video.service";
+import { IVideo } from "../../../../types/video.interface";
 import { randomize } from "../../../../utils/generalUtils";
 import { LargeVideo } from "../../../ui/video-item/LargeVideo";
 import styles from './Discover.module.scss';
@@ -14,10 +16,10 @@ export const Discover: FC = () => {
         error,
         data,
         isError        
-    } = useQuery('Video_query', VideoService.getMostViewed)
+    } = useQuery<IVideo[], AxiosError>('Video_query', VideoService.getMostViewed)
 
     if (isError) {
-        addMsg({ message: error, status: 500 })
+        addMsg({ message: error.message, status: 500 })
         return null;
     };
 

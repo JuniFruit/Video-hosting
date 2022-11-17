@@ -1,7 +1,9 @@
+import { AxiosError } from 'axios';
 import { FC } from 'react';
 import { useQuery } from 'react-query';
 import { useActions } from '../../../hooks/useActions';
 import { VideoService } from '../../../services/video/video.service';
+import { IVideo } from '../../../types/video.interface';
 import { Layout } from '../../layout/Layout';
 import { Catalog } from '../home/catalog/Catalog';
 
@@ -14,9 +16,9 @@ const Trending: FC = () => {
         isLoading,
         isError,
         data: videos
-    } = useQuery('Videos_query', VideoService.getMostViewed);
+    } = useQuery<IVideo[], AxiosError>('Videos_query', VideoService.getMostViewed);
 
-    if (isError) addMsg({ message: error, status: 500 });
+    if (isError) addMsg({ message: error.message, status: 500 });
 
 
     return (
