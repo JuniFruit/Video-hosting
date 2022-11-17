@@ -7,7 +7,7 @@ export const UploadVideoInfo: FC<IUploadVideoInfo> = ({ thumbnailPath, error }) 
         <div className={styles.wrapper}>
             <div className={styles.img_container}>
                 <img
-                    src={'/files' + thumbnailPath}
+                    src={thumbnailPath}
                     alt='Video thumbnail'
                 />
             </div>
