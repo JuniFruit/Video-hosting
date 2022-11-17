@@ -2,16 +2,16 @@ import { IsString } from "class-validator";
 
 export class VideoDto {
     @IsString()
-    name: string
+    name!: string
 
     isPublic?: boolean
 
     @IsString()
-    description: string
+    description!: string
 
     @IsString()
-    videoPath: string
+    videoPath!: string
 
     @IsString()
-    thumbnailPath: string
+    thumbnailPath!: string
 }

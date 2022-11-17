@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import path from 'path';
 
 import authRouter from './routes/auth.route';
 import userRouter from './routes/user.route';
@@ -18,12 +19,19 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.resolve(__dirname, "../../client/build")));
+app.use('/uploads', express.static(path.resolve(__dirname, "/uploads")));
 
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/comment', commentRouter);
 app.use('/videos', videoRouter);
 app.use('/media', mediaRouter);
+
+app.get("*", function (request, response) {
+    response.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
+  });
+
 
 app.listen(port, () => {
     console.log('Server is online');

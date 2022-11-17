@@ -1,10 +1,10 @@
 import express from 'express';
-import { CommentService } from '../entities/comments/comment.service';
 import { authGuard } from '../auth/auth.guard';
-
+import { CommentService } from '../entities/comments/comment.service';
+import commentValidate from '../pipes/commentValidation.pipe';
 const router = express.Router();
 
-router.post('/create',  async (req, res) => {
+router.post('/create', authGuard, commentValidate, async (req, res) => {
     try {
         const comment = await CommentService.create(Number(req.body.currentUser), req.body.dto)
         res.send(comment)

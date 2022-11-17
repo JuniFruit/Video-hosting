@@ -7,10 +7,8 @@ export class UserEditDto {
     name!: string;
     
     @IsString()
-    description!: string;
+    description?: string;
 
     @IsString()
-    avatarPath!: string;
-    @IsNumber()
-    id!: number;
+    avatarPath?: string;    
 }

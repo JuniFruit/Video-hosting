@@ -1,7 +1,7 @@
 import express from 'express';
 import { authGuard } from '../auth/auth.guard';
 import { VideoService } from '../entities/video/video.service';
-
+import {videoValidation} from '../pipes/videoValidation.pipe';
 const router = express.Router();
 
 
@@ -15,7 +15,7 @@ router.get('/all', async (req, res) => {
 })
 
 
-router.put('/update/:id', authGuard,async (req, res) => {
+router.put('/update/:id', authGuard, videoValidation, async (req, res) => {
     try {
         const id = req.params.id;
         const videoDto = req.body.dto;
@@ -64,7 +64,7 @@ router.post('/create', authGuard, async (req, res) => {
     }
 })
 
-router.delete('/delete/:id', async(req,res) => {
+router.delete('/delete/:id', authGuard, async(req,res) => {
     try {   
         const deletedResults = await VideoService.delete(Number(req.params.id));
         res.status(200).send()

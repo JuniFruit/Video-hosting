@@ -5,7 +5,7 @@ export class AuthDto {
     email!: string
 
     @MinLength(6, {
-        message: 'Password must contain at least 6 symbols'
+        message: 'Password must contain at least 6 characters'
     })
     
     @IsString()
@@ -17,20 +17,20 @@ export class RegisterDto {
     email!: string
 
     @MinLength(6, {
-        message: 'Password must contain at least 6 symbols'
+        message: 'Password must contain at least 6 characters'
     })
     @IsString()
     password!: string
 
     @MaxLength(200,{
-        message: 'Description is too big'
+        message: 'Description is too big. Max is 200 characters'
     })
     
     @IsString()
-    description!: string
+    description?: string
 
     @IsString()
-    avatarPath!: string
+    avatarPath?: string
 
     @IsString()
     name!: string
