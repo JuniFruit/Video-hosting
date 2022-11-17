@@ -48,7 +48,11 @@
     width: fit-content;
 
     >div {
-        @apply w-10 h-10;
+        @apply w-10 h-10 rounded-full overflow-hidden;
+
+        >img {
+            @apply w-full h-full;
+        }
 
         @screen md {
             @apply w-14 h-14; 

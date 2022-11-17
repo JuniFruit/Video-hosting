@@ -7,7 +7,7 @@ const AvatarElement: FC<{avatarPath?:string}> = ({avatarPath}) => {
     return (
         <div className={styles.avatar}>
             <img
-                src={`${avatarPath}`}
+                src={avatarPath}
                 
                 onError={(e:any) => {e.target.onerror = null; e.target.src = mockups.defaultAvatar}}
             />

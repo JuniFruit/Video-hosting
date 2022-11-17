@@ -3,9 +3,12 @@
     @apply p-3 ;
 
     .img_container {
-        @apply rounded-xl shadow-md p-2 bg-gray-800;
+        @apply rounded-xl shadow-md p-2 bg-gray-800 overflow-hidden;
         height: 11rem;
        
+       >img {
+            @apply w-full h-full;
+       }
     }
     
     .error {

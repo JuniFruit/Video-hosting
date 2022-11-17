@@ -4,7 +4,7 @@
     >button {
         @apply flex items-center justify-center gap-2 outline-none;
         >div {
-            width: fit-content;
+            @apply overflow-hidden rounded-full;
             >img {
                 @apply w-9 h-9;
             }

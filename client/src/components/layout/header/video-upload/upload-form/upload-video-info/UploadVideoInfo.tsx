@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { mockups } from "../../../../../../assets/mockups/images";
 import { IUploadVideoInfo } from "./UploadVideoInfo.interface";
 import styles from './UploadVideoInfo.module.scss';
 
