@@ -1,6 +1,5 @@
 import express from 'express';
 import fileUpload from 'express-fileupload';
-import { authGuard } from '../auth/auth.guard';
 import { MediaService } from '../media/media.service';
 import {FILE_SIZE_LIMIT} from '../utils/utils';
 const router = express.Router();

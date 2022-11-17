@@ -1,0 +1,23 @@
+{
+  "name": "me-tube-videohosting",
+  "version": "1.0.0",
+  "description": "Attempt to recreate a full-stack app with guidance to see how big apps should be built. This is a small implementation of video hosting.",
+  "main": "index.js",
+  "scripts": {
+    "postbuild": "cd client && npm install && npm run build",
+    "build": "cd server && npm install && npm run tsc && npm run postbuild",
+    "start": "node server/build/app.js"
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuniFruit/Video-hosting.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuniFruit/Video-hosting/issues"
+  },
+  "homepage": "https://github.com/JuniFruit/Video-hosting#readme"
+}

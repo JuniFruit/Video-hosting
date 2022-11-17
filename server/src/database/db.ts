@@ -5,6 +5,7 @@ import { VideoEntity } from '../entities/video/video.entity';
 import { CommentEntity } from '../entities/comments/comment.entity';
 import { SubscriptionEntity } from '../entities/user/subscriptions.entity';
 
+
 const postgresDB = new DataSource(getConfigTypeOrm());
 
 postgresDB.initialize()

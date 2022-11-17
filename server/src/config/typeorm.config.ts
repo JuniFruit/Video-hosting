@@ -3,8 +3,9 @@ import { VideoEntity } from '../entities/video/video.entity';
 import { UserEntity } from '../entities/user/user.entity';
 import { CommentEntity } from '../entities/comments/comment.entity';
 import { DataSourceOptions } from 'typeorm';
-import dotenv from 'dotenv';
 import { SubscriptionEntity } from '../entities/user/subscriptions.entity';
+import dotenv from 'dotenv';
+
 dotenv.config();
 
 export const getConfigTypeOrm = ():DataSourceOptions => {
