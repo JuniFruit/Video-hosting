@@ -14,7 +14,7 @@ export class CommentEntity extends Base {
     @Column({type: 'text'})
     body!: string
 
-    @ManyToOne(() =>  VideoEntity, video => video.comments)
+    @ManyToOne(() =>  VideoEntity, video => video.comments,{onDelete: 'SET NULL'})
     @JoinColumn({name: 'video_id'})
     video!: VideoEntity
 }

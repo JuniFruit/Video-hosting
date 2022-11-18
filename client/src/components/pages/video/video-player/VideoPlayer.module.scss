@@ -6,13 +6,11 @@
     }
 
     .controls {
-        @apply left-5 bottom-5 absolute flex items-center justify-between rounded-lg bg-gray-900 bg-opacity-80 transition-all duration-300;
+        @apply left-5 bottom-5 absolute flex items-center justify-between rounded-lg bg-gray-900 bg-opacity-80 opacity-100 transition-all duration-300;
         padding: .25rem .15rem .25rem .15rem;
         width: calc(100% - 2.5rem);
 
-        &.hide {
-            @apply bottom-0 opacity-0;
-        }
+        
 
         .button {
             @apply mx-1 flex justify-center items-center text-purple text-opacity-80 transition-colors hover:text-opacity-100;

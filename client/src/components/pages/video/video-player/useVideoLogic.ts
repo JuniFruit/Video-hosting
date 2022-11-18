@@ -5,7 +5,6 @@ export const useVideoLogic = () => {
 
     const videoRef = useRef<IVideoElement>(null);
     const progressBarRef = useRef<HTMLDivElement>(null)
-    const controlsRef = useRef<HTMLDivElement>(null);
     const videoWrapperRef = useRef<HTMLDivElement>(null);
 
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -141,7 +140,7 @@ export const useVideoLogic = () => {
 
     useEffect(() => {
         
-        if (!controlsRef.current) return;
+     
 
         let timeout: any;
 
@@ -159,7 +158,7 @@ export const useVideoLogic = () => {
 
         }
 
-    }, [isPlaying, controlsRef, controlsOpen])
+    }, [isPlaying, controlsOpen])
 
     useEffect(() => {
 
@@ -217,7 +216,7 @@ export const useVideoLogic = () => {
         refs: {
             videoRef,
             progressBarRef,
-            controlsRef,
+            
             videoWrapperRef,
         },
         functions: {

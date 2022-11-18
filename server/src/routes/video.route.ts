@@ -15,7 +15,7 @@ router.get('/all', async (req, res) => {
 })
 
 
-router.put('/update/:id', authGuard, videoValidation, async (req, res) => {
+router.put('/update/:id', authGuard, async (req, res) => {
     try {
         const id = req.params.id;
         const videoDto = req.body.dto;

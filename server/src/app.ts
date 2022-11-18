@@ -28,6 +28,11 @@ app.use('/comment', commentRouter);
 app.use('/videos', videoRouter);
 app.use('/media', mediaRouter);
 
+app.get("*", function (request, response) {
+    response.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
+  });
+
+
 
 app.listen(port, () => {
     console.log('Server is online');

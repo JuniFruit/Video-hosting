@@ -38,10 +38,10 @@ export class VideoEntity extends Base {
     @JoinColumn({name: 'user_id'})
     user!: UserEntity
 
-    @OneToMany(() => CommentEntity, comment => comment.video)
+    @OneToMany(() => CommentEntity, comment => comment.video, {cascade: true, onDelete: 'SET NULL'})
     @JoinColumn({name: 'comments'})
     comments!: CommentEntity[]
 
-    @ManyToMany(() => UserEntity, user => user.likedVideos)   
+    @ManyToMany(() => UserEntity, user => user.likedVideos, {onDelete: 'CASCADE'})   
     likedBy!: UserEntity[]
 }

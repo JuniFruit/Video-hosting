@@ -22,8 +22,8 @@ export const VideoPlayer: FC<{ videoPath: string, thumbnailPath: string }> = mem
                 className={styles.player}
             />
             <div
-                className={`${styles.controls} ${status.controlsOpen ? styles.controls_active : styles.controls_disabled}`}
-                ref={refs.controlsRef}>
+                className={`${styles.controls} ${status.controlsOpen ? styles.controls_active : styles.controls_disabled}`}>
+               
 
                 <div className='flex items-center'>
                     <button title='Play' className={styles.button} onClick={functions.togglePlay}>

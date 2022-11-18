@@ -53,7 +53,9 @@ export const VideoService = {
 
     updateVideo: async function (id: number, dto: VideoDto): Promise<VideoEntity> {
         const video = await videoRepository.findOneBy({ id: id });
-        return await videoRepository.save({ ...video, ...dto });
+        const info = dto;
+        info.duration = video?.duration
+        return await videoRepository.save({ ...video, ...info });
     },
 
     getAll: async function (searchTerm?: string) {
