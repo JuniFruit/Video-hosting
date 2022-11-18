@@ -11,11 +11,7 @@ dotenv.config();
 export const getConfigTypeOrm = ():DataSourceOptions => {
     return {
         type: "postgres",
-        host: process.env.DB_HOST,
-        database: process.env.DB_NAME,
-        password: process.env.DB_PASSWORD,
-        username: process.env.DB_USERNAME,
-        port: Number(process.env.DB_PORT),
+        url: process.env.DB_URL,
         synchronize: true,
         logging: false,
         entities: [VideoEntity, UserEntity, CommentEntity, SubscriptionEntity]

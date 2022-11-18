@@ -14,4 +14,6 @@ export class VideoDto {
 
     @IsString()
     thumbnailPath!: string
+
+    
 }

@@ -23,10 +23,10 @@ export const Discover: FC = () => {
         return null;
     };
 
-    if (!data) return null;
+    if (!data?.length) return null;
 
     const randomVideo = data.filter(video => video.id !== data[0].id)[randomize(0, data.length -1 )]
-
+    console.log(data);
     return (
 
         <section className={styles.wrapper}>
@@ -34,7 +34,7 @@ export const Discover: FC = () => {
                 <div className={styles.top_video}>
                   <LargeVideo {...data[0]} />
                 </div>
-                {!isMobile && <div className={styles.random_video}>
+                {(!isMobile && randomVideo) && <div className={styles.random_video}>
                  <LargeVideo {...randomVideo} />
                 </div>}
 
