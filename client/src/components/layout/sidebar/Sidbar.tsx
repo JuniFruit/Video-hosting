@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { api } from "../../../store/api/api";
 import { Logo } from "../../ui/logo/Logo";

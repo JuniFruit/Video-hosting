@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler, useMemo } from "react";
 import { RiDislikeFill, RiHeart2Fill } from "react-icons/ri";
 import { useActions } from "../../../hooks/useActions";
 import { useAuth } from "../../../hooks/useAuth";
@@ -17,7 +17,7 @@ const LikeVideoButton: FC<{ videoId: number }> = ({ videoId }) => {
         skip: !user
     })
     
-    const isLiked = profile?.likedVideos.some(video => video.id === videoId);
+    const isLiked = useMemo(() => profile?.likedVideos.some(video => video.id === videoId), [videoId, profile?.likedVideos.length]);
 
 
     const [updateReaction, { isLoading }] = videoApi.useUpdateReactionMutation()

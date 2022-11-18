@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler, useState } from 'react';
+import { FC, memo, MouseEventHandler, useState } from 'react';
 import { IoChevronDown, IoChevronUp } from 'react-icons/io5';
 import { useAuth } from '../../../../hooks/useAuth';
 import { useIsMobile } from '../../../../hooks/useMobile';
@@ -7,7 +7,7 @@ import { CommentForm } from './CommentForm';
 import { CommentItem } from './CommentItem';
 import styles from './Comments.module.scss';
 
-export const Comments: FC<{ comments: IComment[], videoId: number }> = ({ comments, videoId }) => {
+export const Comments: FC<{ comments: IComment[], videoId: number }> = memo(({ comments, videoId }) => {
     const [open, setIsOpen] = useState(false);
     const { user } = useAuth();
     const {isMobile} = useIsMobile();
@@ -54,4 +54,4 @@ export const Comments: FC<{ comments: IComment[], videoId: number }> = ({ commen
 
         </div>
     )
-}
+})

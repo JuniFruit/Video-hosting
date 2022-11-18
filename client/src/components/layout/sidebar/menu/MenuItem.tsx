@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../../../hooks/useAuth";
 import { IMenuItem } from "./Menu.interface";

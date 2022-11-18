@@ -18,12 +18,13 @@ export const Discover: FC = () => {
         isError        
     } = useQuery<IVideo[], AxiosError>('Video_query', VideoService.getMostViewed)
 
+    
     if (isError) {
         addMsg({ message: error.message, status: 500 })
         return null;
     };
 
-    if (!data?.length) return null;
+    if (!data) return null;
 
     const randomVideo = data.filter(video => video.id !== data[0].id)[randomize(0, data.length -1 )]
     return (

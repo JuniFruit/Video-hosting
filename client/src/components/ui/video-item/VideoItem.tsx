@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { IVideoItem } from "./VideoItem.interface";
 import { VideoManipulations } from "./VideoManipulations";
 import { VideoStats } from "./VideoStats";
@@ -9,7 +9,7 @@ import { VideoDuration } from "./VideoDuration";
 import { Link } from "react-router-dom";
 
 
-export const VideoItem: FC<IVideoItem> = ({ removeHandler, item, isSmall, updateHandler }) => {
+export const VideoItem: FC<IVideoItem> = memo(({ removeHandler, item, isSmall, updateHandler }) => {
 
 
     return (
@@ -55,4 +55,4 @@ export const VideoItem: FC<IVideoItem> = ({ removeHandler, item, isSmall, update
             </div>
         </div>
     )
-}
+})

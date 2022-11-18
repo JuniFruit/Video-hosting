@@ -11,8 +11,11 @@ const Studio: FC = () => {
     const { isLoading, user } = useAuth();
 
     const navigate = useNavigate();
-    const { data: profile } = api.useGetProfileQuery(user?.id!, {
-        skip: !user
+    const { videos } = api.useGetProfileQuery(user?.id!, {
+        skip: !user,
+        selectFromResult: ({data}) => ({
+            videos: data?.videos
+        })
     })
     const [deleteVideo] = videoApi.useDeleteMutation()
     const {addMsg} = useActions()
@@ -32,8 +35,6 @@ const Studio: FC = () => {
             navigate('/')
         };
     }, [user, isLoading])
-
-    const videos = profile?.videos;
 
     return (
 

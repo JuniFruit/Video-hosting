@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { useActions } from '../../../hooks/useActions';
@@ -21,17 +21,17 @@ export const Channel: FC = () => {
         data: user,
         isError,
         isLoading,
-        error
-    } = useQuery<IUser, AxiosError>(`Channel/${id}`, () => UserService.getById(Number(id)))
-
+        error,
+        isFetching
+    } = useQuery<IUser, AxiosError>([`Channel`, id], () => UserService.getById(Number(id)))
+  
     if (isError) addMsg({ message: error.message, status: 500 })
-
-    const filterVideos = () => {
+     const filterVideos = useMemo(() => {
         //filtering public videos to avoid showing hidden videos. If it's our own channel then return everything
         if (!user) return;
 
         return authUser?.id === user.id ? user.videos : user.videos!.filter(video => video.isPublic == true);
-    }
+    }, [user?.videos])
     return (
 
         <Layout title={`${user?.name} - video channel` || 'Channel'}>
@@ -43,7 +43,7 @@ export const Channel: FC = () => {
                 <article className={styles.channel_description}>{user?.description}</article>
             </div>
             <Catalog
-                videosToRender={filterVideos() || []}
+                videosToRender={filterVideos || []}
                 title='User videos' 
                 isLoading={isLoading}
                 />

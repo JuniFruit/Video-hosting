@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { mockups } from "../../../assets/mockups/images";
 import styles from './UserAvatar.module.scss';
 
-const AvatarElement: FC<{avatarPath?:string}> = ({avatarPath}) => {
+const AvatarElement: FC<{avatarPath?:string}> = memo(({avatarPath}) => {
 
     return (
         <div className={styles.avatar}>
@@ -13,6 +13,6 @@ const AvatarElement: FC<{avatarPath?:string}> = ({avatarPath}) => {
             />
         </div>
     )
-} 
+}) 
 
 export default AvatarElement

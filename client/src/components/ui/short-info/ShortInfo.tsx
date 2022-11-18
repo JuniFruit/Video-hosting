@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { IUser } from '../../../types/user.interface';
 import { formatToKilo } from '../../../utils/format.utils';
 import { UserAvatar } from '../user-avatar/UserAvatar';
 import styles from './ShortInfo.module.scss';
 
-export const ShortInfo: FC<{ channel: IUser, message?: string }> = ({ channel, message }) => {
+export const ShortInfo: FC<{ channel: IUser, message?: string }> = memo(({ channel, message }) => {
     return (
 
         <div className={styles.info_wrapper}>
@@ -25,4 +25,4 @@ export const ShortInfo: FC<{ channel: IUser, message?: string }> = ({ channel, m
         </div>
 
     )
-}
+})

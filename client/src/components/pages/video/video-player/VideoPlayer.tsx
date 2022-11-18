@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { BsFullscreen } from 'react-icons/bs';
 import { IoPause, IoPlay, IoVolumeMuteSharp, IoVolumeHigh } from 'react-icons/io5';
 import { useVideoLogic } from './useVideoLogic';
 import styles from './VideoPlayer.module.scss';
 
-export const VideoPlayer: FC<{ videoPath: string, thumbnailPath: string }> = ({ videoPath, thumbnailPath }) => {
+export const VideoPlayer: FC<{ videoPath: string, thumbnailPath: string }> = memo(({ videoPath, thumbnailPath }) => {
     const {
         refs,
         functions,
@@ -89,4 +89,4 @@ export const VideoPlayer: FC<{ videoPath: string, thumbnailPath: string }> = ({ 
 
         </div>
     )
-}
+})
