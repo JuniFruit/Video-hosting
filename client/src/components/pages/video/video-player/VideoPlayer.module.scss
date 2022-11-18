@@ -1,5 +1,5 @@
 .wrapper {
-    @apply relative rounded-2xl overflow-hidden shadow;
+    @apply relative rounded-2xl overflow-hidden shadow h-full;
    
     .player {
         @apply w-full h-full;
