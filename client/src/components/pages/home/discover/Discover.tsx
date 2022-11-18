@@ -26,7 +26,6 @@ export const Discover: FC = () => {
     if (!data?.length) return null;
 
     const randomVideo = data.filter(video => video.id !== data[0].id)[randomize(0, data.length -1 )]
-    console.log(data);
     return (
 
         <section className={styles.wrapper}>
