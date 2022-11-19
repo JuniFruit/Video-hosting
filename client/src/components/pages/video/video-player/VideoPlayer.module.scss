@@ -2,14 +2,19 @@
     @apply relative rounded-2xl overflow-hidden shadow h-full;
    
     .player {
-        @apply w-full h-full;
-    }
-
+        @apply w-full h-full relative;
+        z-index: 1;
+        
+        @screen md {
+            max-height: 32rem;
+        }
+    }    
+   
     .controls {
         @apply left-5 bottom-5 absolute flex items-center justify-between rounded-lg bg-gray-900 bg-opacity-80 opacity-100 transition-all duration-300;
         padding: .25rem .15rem .25rem .15rem;
         width: calc(100% - 2.5rem);
-
+        z-index: 2;
         
 
         .button {
@@ -122,7 +127,5 @@
     .controls_disabled {
         @apply opacity-0;
     }
-    @screen md {
-        max-height: 25rem
-    }
+    
 }

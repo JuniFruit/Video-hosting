@@ -98,7 +98,9 @@ export const UploadForm: FC<{ handleCloseModal: () => void, videoId: number, isE
                 (
                     <Controller
                         control={form.control}
-                        name="videoPath"
+                        {...form.register('videoPath', {
+                            required: ''
+                        })}
                         render={() => (
 
                             <UploadField

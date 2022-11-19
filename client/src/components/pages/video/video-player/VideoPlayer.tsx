@@ -1,6 +1,7 @@
 import { FC, memo } from 'react';
 import { BsFullscreen } from 'react-icons/bs';
 import { IoPause, IoPlay, IoVolumeMuteSharp, IoVolumeHigh } from 'react-icons/io5';
+import { mockups } from '../../../../assets/mockups/images';
 import { useVideoLogic } from './useVideoLogic';
 import styles from './VideoPlayer.module.scss';
 
@@ -15,12 +16,15 @@ export const VideoPlayer: FC<{ videoPath: string, thumbnailPath: string }> = mem
         <div className={styles.wrapper} ref={refs.videoWrapperRef}>
             <video
                 ref={refs.videoRef}
-                poster={thumbnailPath}
+                poster={thumbnailPath || mockups.defaultThumbnail}
+                onError={(e:any) => {e.target.onerror=null;e.target.poster=mockups.defaultThumbnail}}
                 onClick={functions.togglePlay}
                 src={videoPath}
                 preload='metadata'
                 className={styles.player}
+                
             />
+           
             <div
                 className={`${styles.controls} ${status.controlsOpen ? styles.controls_active : styles.controls_disabled}`}>
                

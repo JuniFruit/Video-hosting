@@ -51,7 +51,7 @@ export const useUploadForm = (
 
     const handleUploadVideo = (value: IMediaResponse) => {
         setValue('videoPath', value.url);
-        setValue('name', value.name)
+        // setValue('name', value.name)
     }
 
     const [isChosen, setIsChosen] = useState<boolean>(false);

@@ -1,5 +1,6 @@
 import { FC } from "react"
 import { Link } from "react-router-dom";
+import { mockups } from "../../../assets/mockups/images";
 import { IVideo } from "../../../types/video.interface"
 import { truncTitle } from "../../../utils/format.utils";
 import { UserAvatar } from "../user-avatar/UserAvatar";
@@ -15,6 +16,7 @@ export const LargeVideo: FC<IVideo> = ({ views, duration, name, user, thumbnailP
                     src={thumbnailPath}
                     className={styles.large_thumbnail}
                     alt={name}
+                    onError={(e:any) => {e.target.onerror=null; e.target.src = mockups.defaultThumbnail}}
                 />
                 <div className={styles.large_content}>
                     <div className={styles.large_name}>

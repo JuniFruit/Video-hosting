@@ -7,6 +7,7 @@ import { UserAvatar } from "../user-avatar/UserAvatar";
 import { truncTitle } from "../../../utils/format.utils";
 import { VideoDuration } from "./VideoDuration";
 import { Link } from "react-router-dom";
+import { mockups } from "../../../assets/mockups/images";
 
 
 export const VideoItem: FC<IVideoItem> = memo(({ removeHandler, item, isSmall, updateHandler }) => {
@@ -20,6 +21,8 @@ export const VideoItem: FC<IVideoItem> = memo(({ removeHandler, item, isSmall, u
                     <img
                         src={item.thumbnailPath}
                         alt={item.name}
+                        onError={(e:any) => {e.target.onerror=null; e.target.src = mockups.defaultThumbnail}}
+                        
                     />
 
                     <VideoDuration duration={item.duration} position={'top-r'} />
@@ -28,7 +31,7 @@ export const VideoItem: FC<IVideoItem> = memo(({ removeHandler, item, isSmall, u
                         {!isSmall ?
                             <>
                                 <span className={styles.span}>{item.user?.name || 'No name'}</span>
-                                <h3 title={item.name}>{truncTitle(item.name, 100)}</h3>
+                                <h3 title={item.name}>{truncTitle(item.name, 50)}</h3>
 
                             </>
                             :

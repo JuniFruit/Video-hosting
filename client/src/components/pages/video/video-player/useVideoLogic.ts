@@ -18,7 +18,10 @@ export const useVideoLogic = () => {
     const [controlsOpen, setControlsOpen] = useState<boolean>(true);
 
     useEffect(() => {
-        if (videoRef.current?.duration) setVideoTime(videoRef.current.duration)
+        if (videoRef.current?.duration) {
+            setVideoTime(videoRef.current.duration)
+            changeVolume({target: {value: Number(window.localStorage.userVideoVolume || 1)}})
+        }
     }, [videoRef.current?.duration])
 
     const togglePlay = useCallback(() => {
@@ -52,9 +55,10 @@ export const useVideoLogic = () => {
 
         if (Number(e.target.value) <= 0) setIsMuted(true);
         if (Number(e.target.value) > 0) setIsMuted(false);
-
+        if (isMuted) toggleMute()
         videoRef.current.volume = e.target.value;
         setVolume(Number(e.target.value));
+        window.localStorage.setItem('userVideoVolume', e.target.value.toString())
     }
 
 
@@ -138,9 +142,7 @@ export const useVideoLogic = () => {
         }
     }, [videoTime])
 
-    useEffect(() => {
-        
-     
+    useEffect(() => {    
 
         let timeout: any;
 

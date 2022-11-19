@@ -8,8 +8,9 @@ export const UploadVideoInfo: FC<IUploadVideoInfo> = ({ thumbnailPath, error }) 
         <div className={styles.wrapper}>
             <div className={styles.img_container}>
                 <img
-                    src={thumbnailPath}
+                    src={thumbnailPath || mockups.defaultThumbnail}
                     alt='Video thumbnail'
+                    onError={(e:any) => {e.target.onerror=null;e.target.src=mockups.defaultThumbnail}}
                 />
             </div>
             <div className={styles.error}>

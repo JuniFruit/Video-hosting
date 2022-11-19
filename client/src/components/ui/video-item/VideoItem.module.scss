@@ -108,12 +108,13 @@
     }
 
     >a {
+        @apply h-full;
         img {
             @apply w-full object-cover;
             height: 50%;
         }
         .small_content {
-            @apply text-white px-5 flex flex-col gap-5;       
+            @apply text-white px-5 flex flex-col h-1/2 justify-around;       
     
           
                 >span {
