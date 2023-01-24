@@ -1,4 +1,5 @@
-# MeTube - Full-stack video-hosting service app
+
+# [MeTube - Full-stack video-hosting service app ](https://me-tube.onrender.com/)
 ## Idea
 
 Attempt to recreate a full-stack app with guidance to see how big apps should be built. This is a small implementation of video hosting.
@@ -6,6 +7,8 @@ Attempt to recreate a full-stack app with guidance to see how big apps should be
 ## Description
 
 This app is meant to be a copy of a video-hosting platform (such as YouTube). Here you can watch videos, subscribe to channels, upload your own videos, have your own studio with the profile and more. To check the final result go [here](https://me-tube.onrender.com/)
+
+*It may take up to 2 minutes to load the web-page as the app is in a sleep mode, once you "wake it up" there will be no delays*
 
 ### Technologies used:
 * React
