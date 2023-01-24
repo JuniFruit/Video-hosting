@@ -6,13 +6,12 @@ import { useActions } from '../../../hooks/useActions';
 import { useAuth } from '../../../hooks/useAuth';
 import { UserService } from '../../../services/user/user.service';
 import { IUser } from '../../../types/user.interface';
-import { Layout } from '../../layout/Layout';
-import { ShortInfo } from '../../ui/short-info/ShortInfo';
+import { setTabTitle } from '../../../utils/generalUtils';
 import { Subscribe } from '../../ui/subscribe-button/Subscribe';
-import { Catalog } from '../home/catalog/Catalog';
+import { Catalog, ShortInfo } from '../../ui/SuspenseWrapper';
 import styles from './Channel.module.scss';
 
-export const Channel: FC = () => {
+const Channel: FC = () => {
     const { id } = useParams();
     const { addMsg } = useActions();
     const { user: authUser } = useAuth()
@@ -22,19 +21,22 @@ export const Channel: FC = () => {
         isError,
         isLoading,
         error,
-        isFetching
     } = useQuery<IUser, AxiosError>([`Channel`, id], () => UserService.getById(Number(id)))
-  
+
     if (isError) addMsg({ message: error.message, status: 500 })
-     const filterVideos = useMemo(() => {
+
+    setTabTitle(`${user?.name || 'User'}`)
+
+    const filterVideos = useMemo(() => {
         //filtering public videos to avoid showing hidden videos. If it's our own channel then return everything
         if (!user) return;
 
         return authUser?.id === user.id ? user.videos : user.videos!.filter(video => video.isPublic == true);
     }, [user?.videos])
+    
     return (
 
-        <Layout title={`${user?.name} - video channel` || 'Channel'}>
+        <>
             <div className={styles.channel_wrapper}>
                 <div className={styles.channel_top}>
                     {user ? <ShortInfo channel={user} /> : null}
@@ -44,9 +46,11 @@ export const Channel: FC = () => {
             </div>
             <Catalog
                 videosToRender={filterVideos || []}
-                title='User videos' 
-                isLoading={isLoading}
-                />
-        </Layout>
+                title='User videos'
+                isLoading={isLoading} />
+
+        </>
     )
 }
+
+export default Channel

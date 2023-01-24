@@ -5,8 +5,8 @@ import { validEmail, validPassword } from "../../../utils/generalUtils";
 import { Button } from "../button/Button";
 import Field from "../fields/Fields";
 import { UploadField } from "../fields/upload-field/UploadField";
+import { AvatarElement } from "../SuspenseWrapper";
 import TextArea from "../text-area/TextArea";
-import AvatarElement from "../user-avatar/AvatarElement";
 import { IProfileForm } from "./ProfileForm.interface";
 import styles from './ProfileForm.module.scss';
 
@@ -80,7 +80,6 @@ const ProfileForm: FC<IProfileForm> = ({ form, title, fieldsToExclude, buttonTit
                                     form.setValue('avatarPath', res.url);
                                     setAvatarPath(res.url)
                                 }}
-                                folder="avatars"
                                 type="image"
                             />
                         )}

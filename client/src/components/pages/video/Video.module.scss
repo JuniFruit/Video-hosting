@@ -17,11 +17,25 @@
         
             >div:last-child {
                 @apply basis-1/3;
+                max-height: 30rem;
             }
 
     }
 
     @screen lg {
         @apply space-x-8
+    }
+}
+
+.mobile_layout {
+   
+    .video_container {
+        height: 15rem;
+        @screen sm {
+            height: 20rem;
+        }
+    }
+    .video_bottom {
+        @apply relative;       
     }
 }

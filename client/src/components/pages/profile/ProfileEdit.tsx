@@ -4,16 +4,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useActions } from "../../../hooks/useActions";
 import { useAuth } from "../../../hooks/useAuth";
 import { api } from "../../../store/api/api";
-import { Layout } from "../../layout/Layout";
+import { setTabTitle } from "../../../utils/generalUtils";
 import ProfileEditForm from "../../ui/profile-form/ProfileForm";
 import { IProfileEditForm } from "./ProfileEdit.interface";
 import styles from './ProfileEdit.module.scss';
 
 const ProfileEditPage: FC = () => {
-
+    setTabTitle('Edit Profile')
     const { id } = useParams();
-    const {user} = useAuth()
-    const { data: profile } = api.useGetProfileQuery(user?.id!,{
+    const { user } = useAuth()
+    const { data: profile } = api.useGetProfileQuery(user?.id!, {
         skip: !user
     });
     const navigate = useNavigate();
@@ -40,7 +40,7 @@ const ProfileEditPage: FC = () => {
     }
 
     return (
-        <Layout title="MeTube profile edit">
+        <>
             {profile && <section className={styles.container}>
                 <ProfileEditForm
                     form={{
@@ -56,7 +56,7 @@ const ProfileEditPage: FC = () => {
                         email: 'email',
                         password: 'password',
                     }}
-                    defaultValues= {{
+                    defaultValues={{
                         name: profile.name,
                         description: profile.description,
                         avatar: profile.avatarPath
@@ -64,7 +64,10 @@ const ProfileEditPage: FC = () => {
                 />
             </section>
             }
-        </Layout>
+
+        </>
+
+
     )
 }
 

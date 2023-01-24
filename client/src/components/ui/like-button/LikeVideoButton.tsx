@@ -10,13 +10,13 @@ import styles from './LikeVideoBtn.module.scss'
 
 const LikeVideoButton: FC<{ videoId: number }> = ({ videoId }) => {
 
-    const {user} = useAuth();
-    const {addMsg} = useActions();
+    const { user } = useAuth();
+    const { addMsg } = useActions();
 
-    const {data:profile} = api.useGetProfileQuery(user?.id!, {
+    const { data: profile } = api.useGetProfileQuery(user?.id!, {
         skip: !user
     })
-    
+
     const isLiked = useMemo(() => profile?.likedVideos.some(video => video.id === videoId), [videoId, profile?.likedVideos.length]);
 
 
@@ -24,20 +24,21 @@ const LikeVideoButton: FC<{ videoId: number }> = ({ videoId }) => {
 
     const onUpdateReaction: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
-        if (!user) return addMsg({message: 'You are not logged in', status: 500})
+        if (!user) return addMsg({ message: 'You are not logged in', status: 500 })
         updateReaction(videoId)
     }
 
     return (
-        <div className={styles.wrapper}>
-            <Button
-                disabled={isLoading}
-                onClick={onUpdateReaction}
-            >
-               {isLiked ? <RiDislikeFill /> : <RiHeart2Fill />}
-               {isLiked?  'Liked' : 'Like'}
-            </Button>
-        </div>
+
+        <Button
+            disabled={isLoading}
+            onClick={onUpdateReaction}
+            className={styles.like_button}
+        >
+            {isLiked ? <RiDislikeFill /> : <RiHeart2Fill />}
+            {isLiked ? 'Liked' : 'Like'}
+        </Button>
+
     )
 }
 

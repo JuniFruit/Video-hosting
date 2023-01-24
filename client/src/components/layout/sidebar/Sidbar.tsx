@@ -1,13 +1,13 @@
-import { FC, memo } from "react";
+import { FC, } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { api } from "../../../store/api/api";
 import { Logo } from "../../ui/logo/Logo";
-import { Menu } from "./menu/Menu";
+import { Menu } from "../../ui/SuspenseWrapper";
 import { MenuArr } from "./menu/menu.data";
 import styles from './Sidebar.module.scss';
 
 
-export const Sidebar: FC = () => {
+const Sidebar: FC = () => {
 
     const { user } = useAuth();
     const { data } = api.useGetProfileQuery(user?.id!, {
@@ -28,3 +28,5 @@ export const Sidebar: FC = () => {
         }
     </aside>
 }
+
+export default Sidebar;

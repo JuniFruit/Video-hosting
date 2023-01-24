@@ -10,7 +10,10 @@
     
     
         >img {
-            @apply rounded-full h-10 w-10 overflow-hidden;
+            @apply rounded-full h-8 w-8 overflow-hidden;
+            @screen sm {
+                @apply h-10 w-10;
+            }
         }
     }
     

@@ -13,7 +13,6 @@ export const useDetectScrollDirection = () => {
         const detectScroll = (e: Event): void => {
             const target = e.currentTarget as Window;
             const scrollPos = target.scrollY;
-            console.log(scrollPos, lastScrollTop)
             if (lastScrollTop < scrollPos) {
                 setIsScrollDown(true);
                

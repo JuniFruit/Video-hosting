@@ -2,11 +2,11 @@ import { FC, useState } from "react";
 import { HiUpload } from "react-icons/hi";
 import { useAuth } from "../../../../hooks/useAuth";
 import { videoApi } from "../../../../store/api/video.api";
-import { UploadModal } from "./UploadModal";
+import { UploadModal } from "../../../ui/SuspenseWrapper";
 import styles from './VideoUpload.module.scss';
 
 
-export const VideoUpload: FC = () => {
+const VideoUpload: FC = () => {
     const [videoId, setVideoId] = useState<number>();
     const [isOpen, setIsOpen] = useState(false);
     const { user } = useAuth()
@@ -33,3 +33,5 @@ export const VideoUpload: FC = () => {
         </>
     )
 }
+
+export default VideoUpload

@@ -1,5 +1,5 @@
 
-import {IoCheckmark} from 'react-icons/io5';
+import { IoCheckmark } from 'react-icons/io5';
 import styles from './UserAvatar.module.scss';
 
 export const UserCheckMark = () => {

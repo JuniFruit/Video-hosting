@@ -1,16 +1,16 @@
-import { FC, useEffect } from "react"
+import { FC, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../hooks/useActions";
 import { useAuth } from "../../../hooks/useAuth";
-import { Layout } from "../../layout/Layout"
+import { setTabTitle } from "../../../utils/generalUtils";
 import RegisterForm from "../../ui/profile-form/ProfileForm";
 import { IRegisterForm } from "./Register.interface";
 import styles from './Register.module.scss';
 
 const RegisterPage: FC = () => {
-   
-    const {user} = useAuth()
+    setTabTitle("Create Account")
+    const { user } = useAuth()
     const { register: registerAction } = useActions();
     const navigate = useNavigate()
 
@@ -31,27 +31,23 @@ const RegisterPage: FC = () => {
 
     const onSubmit: SubmitHandler<IRegisterForm> = (data) => {
         console.log(data);
-        registerAction(data)       
+        registerAction(data)
     }
 
     return (
-
-        <Layout title="MeTube registration">
-            <section className={styles.container}>
-                <RegisterForm 
-                    form = {{
-                        handleSubmit: handleSubmit(onSubmit),
-                        setValue,
-                        control,
-                        register,
-                        errors
-                    }}
-                    title={"Please fill out fields to register an account"}
-                    buttonTitle="Create account"
-                />
-            </section>
-
-        </Layout>
+        <section className={styles.container}>
+            <RegisterForm
+                form={{
+                    handleSubmit: handleSubmit(onSubmit),
+                    setValue,
+                    control,
+                    register,
+                    errors
+                }}
+                title={"Please fill out fields to register an account"}
+                buttonTitle="Create account"
+            />
+        </section>
     )
 }
 

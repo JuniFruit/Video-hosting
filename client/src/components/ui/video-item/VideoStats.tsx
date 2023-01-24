@@ -7,7 +7,7 @@ import { IVideoStats } from "./VideoItem.interface";
 
 dayjs.extend(relativeTime);
 
-export const VideoStats: FC<IVideoStats> = ({ createdAt, views, isSmall }) => {
+const VideoStats: FC<IVideoStats> = ({ createdAt, views, isSmall }) => {
     return (
         <div className={styles.stats}>
 
@@ -28,3 +28,5 @@ export const VideoStats: FC<IVideoStats> = ({ createdAt, views, isSmall }) => {
         </div>
     )
 }
+
+export default VideoStats

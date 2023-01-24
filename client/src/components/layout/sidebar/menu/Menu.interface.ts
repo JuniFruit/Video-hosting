@@ -6,3 +6,8 @@ export interface IMenuItem {
     icon?: IconType,
     image?: string,
 }
+
+export interface IMenu {
+    title: string;
+    items: IMenuItem[]
+}

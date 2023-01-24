@@ -9,13 +9,15 @@ import { UploadVideoInfo } from "./upload-video-info/UploadVideoInfo";
 import { UploadFormFooter } from "./upload-footer/UploadFormFooter";
 import { ToggleSwitch } from "../../../../ui/switcher/ToggleSwitch";
 import styles from './UploadForm.module.scss';
+import { IUploadForm } from "./UploadForm.interface";
 
 
-export const UploadForm: FC<{ handleCloseModal: () => void, videoId: number, isEdit?: boolean }> = (
+export const UploadForm: FC<IUploadForm> = (
     {
         handleCloseModal,
         videoId,
-        isEdit
+        isEdit,
+        onCloseUnfinished
     }) => {
 
     const { form, media, status } = useUploadForm({ handleCloseModal, videoId });
@@ -35,7 +37,7 @@ export const UploadForm: FC<{ handleCloseModal: () => void, videoId: number, isE
                                 placeholder="Name"
                                 error={form.errors.name}
                             />
-                                                        
+
                             <TextArea
                                 {...form.register('description', {
                                     required: "Description is required"
@@ -43,7 +45,7 @@ export const UploadForm: FC<{ handleCloseModal: () => void, videoId: number, isE
                                 placeholder="Description"
                                 error={form.errors.description}
                             />
-                            <div className="mt-8">
+                            <div className={styles.upload_field}>
                                 <Controller
                                     control={form.control}
 
@@ -53,7 +55,6 @@ export const UploadForm: FC<{ handleCloseModal: () => void, videoId: number, isE
                                     render={({ field: { onChange } }) => (
 
                                         <UploadField
-                                            folder="thumbnails"
                                             title="Choose a thumbnail"
                                             onChange={(value: IMediaResponse) => onChange(value.url)}
                                             type={'image'}
@@ -90,6 +91,8 @@ export const UploadForm: FC<{ handleCloseModal: () => void, videoId: number, isE
                         progress={status.percent}
                         isUploaded={status.isUploaded}
                         isEdit={isEdit}
+                        isProcessing={status.isProcessing}
+                        onCloseUnfinished={onCloseUnfinished}
                     />
 
 
@@ -105,7 +108,6 @@ export const UploadForm: FC<{ handleCloseModal: () => void, videoId: number, isE
 
                             <UploadField
                                 title={'Choose a video to upload'}
-                                folder="videos"
                                 setValue={status.setProgress}
                                 onChange={media.handleUploadVideo}
                                 onChooseFile={status.setIsChosen}

@@ -3,14 +3,28 @@ import { IoCheckmarkCircle } from "react-icons/io5";
 import { Button } from "../../../../../ui/button/Button";
 import { IUploadFormFooter } from "./UploadFormFooter.interface";
 import styles from './UploadFormFooter.module.scss';
-export const UploadFormFooter: FC<IUploadFormFooter> = ({ progress, isUploaded, isEdit }) => {
+
+
+export const UploadFormFooter: FC<IUploadFormFooter> = ({ progress, isUploaded, isEdit, onCloseUnfinished, isProcessing }) => {
+
+    const handleOnClick = () => {
+        if (!isEdit) {
+            if (!isUploaded || isProcessing) return onCloseUnfinished()
+        }
+    }
+
     return (
         <div className={styles.wrapper}>
             {!isEdit && <div className={styles.progress}>
-                {isUploaded && <IoCheckmarkCircle />}
-                {!isUploaded ? `Video is uploading ${progress}%` : 'Video is uploaded'}
+                {isUploaded && !isProcessing ? <IoCheckmarkCircle /> : null}
+                {!isUploaded ? `Video is uploading ${progress}%` : ''}
+                {isProcessing ? 'Video is processing. Please wait...' : ''}
+                {isUploaded && !isProcessing ? 'Video is ready!' : ''}
             </div>}
-            <Button>Save</Button>
+            <Button
+                onClick={() => handleOnClick()}
+            >Save
+            </Button>
         </div>
     )
 }

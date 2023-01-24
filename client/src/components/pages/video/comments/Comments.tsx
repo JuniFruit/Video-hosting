@@ -2,15 +2,17 @@ import { FC, memo, MouseEventHandler, useState } from 'react';
 import { IoChevronDown, IoChevronUp } from 'react-icons/io5';
 import { useAuth } from '../../../../hooks/useAuth';
 import { useIsMobile } from '../../../../hooks/useMobile';
-import { IComment } from '../../../../types/comment.interface';
 import { CommentForm } from './CommentForm';
 import { CommentItem } from './CommentItem';
+import { IComments } from './Comments.interface';
 import styles from './Comments.module.scss';
 
-export const Comments: FC<{ comments: IComment[], videoId: number }> = memo(({ comments, videoId }) => {
+
+
+const Comments: FC<IComments> = memo(({ comments, videoId }) => {
     const [open, setIsOpen] = useState(false);
     const { user } = useAuth();
-    const {isMobile} = useIsMobile();
+    const { isMobile } = useIsMobile();
 
     const handleClick: MouseEventHandler = (e) => {
         e.preventDefault();
@@ -25,11 +27,11 @@ export const Comments: FC<{ comments: IComment[], videoId: number }> = memo(({ c
                     Comments
                     {isMobile && open ? <IoChevronUp /> : <IoChevronDown />}
                 </h2>
-                
+
                 <div className={styles.line}></div>
-                <div 
+                <div
                     className={styles.comments_block}
-                    style={{height: open && isMobile ? '27rem' : !open && isMobile ? '5rem' : ''}}>
+                    style={{ height: open && isMobile ? '27rem' : !open && isMobile ? '5rem' : '' }}>
 
                     {
                         comments.length
@@ -55,3 +57,5 @@ export const Comments: FC<{ comments: IComment[], videoId: number }> = memo(({ c
         </div>
     )
 })
+
+export default Comments

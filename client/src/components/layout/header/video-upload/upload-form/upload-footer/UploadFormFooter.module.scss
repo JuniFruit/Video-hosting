@@ -1,7 +1,7 @@
 
 
 .wrapper {
-    @apply flex justify-between items-center;
+    @apply flex justify-between items-center gap-1;
 
     .progress {
         @apply text-gray-500 text-sm flex items-center;

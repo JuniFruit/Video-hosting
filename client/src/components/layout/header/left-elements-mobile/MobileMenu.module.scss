@@ -3,7 +3,11 @@
     @apply inline-flex;
 
     >button {
-        @apply ml-1;
+        @apply ml-1 text-base;
+        @screen sm {
+            @apply text-2xl;
+        }
+        
     }
 
     .sidebar {

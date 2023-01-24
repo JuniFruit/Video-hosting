@@ -3,7 +3,10 @@
     @apply mb-10 mt-5 w-full;
     
     .channel_top {
-        @apply flex items-center flex-wrap gap-12;
+        @apply flex items-center flex-wrap gap-5;
+        @screen sm {
+            @apply gap-12
+        }
 
     }
 

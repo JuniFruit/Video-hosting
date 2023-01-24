@@ -27,9 +27,9 @@ export const useUploadForm = (
         reset
     } = useForm<IVideoDto>({
         mode: 'onChange'
-    })   
+    })
 
-    const {addMsg} = useActions();
+    const { addMsg } = useActions();
 
     const [updateVideo, { isSuccess }] = videoApi.useUpdateMutation()
 
@@ -37,32 +37,36 @@ export const useUploadForm = (
         if (!videoId) return;
         const videoFileds = data;
         videoFileds.duration = Number(window.sessionStorage.videoDuration);
+        videoFileds.isProcessing = false
 
         updateVideo({ ...videoFileds, id: videoId }).unwrap().then(() => {
             handleCloseModal();
-            addMsg({message: 'Video saved', status: 200})
+            addMsg({ message: 'Video saved', status: 200 })
             window.sessionStorage.clear();
             reset();
         });
     }
-    const [videoFile, setVideoFile] = useState('');
     const thumbnailPath = watch('thumbnailPath');
     const videoPath = watch('videoPath');
 
     const handleUploadVideo = (value: IMediaResponse) => {
         setValue('videoPath', value.url);
-        // setValue('name', value.name)
+        setIsProcessing(false)
     }
 
     const [isChosen, setIsChosen] = useState<boolean>(false);
     const [percent, setPercent] = useState(0);
     const [isUploaded, setIsUploaded] = useState(false);
+    const [isProcessing, setIsProcessing] = useState(false);
 
     const setProgress = (val: number) => {
 
-        if (val == 100) setIsUploaded(true);
+        if (val == 100) {
+            setIsUploaded(true);
+            setIsProcessing(true);
+        }
         setPercent(val);
-    }   
+    }
 
     return {
         form: {
@@ -76,7 +80,7 @@ export const useUploadForm = (
         media: {
             handleUploadVideo,
             videoPath,
-            thumbnailPath,           
+            thumbnailPath,
             videoId
         },
         status: {
@@ -85,7 +89,8 @@ export const useUploadForm = (
             isUploaded,
             setProgress,
             setIsChosen,
-            isSuccess
+            isSuccess,
+            isProcessing
         }
     }
 }

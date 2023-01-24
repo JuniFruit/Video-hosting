@@ -1,31 +1,35 @@
-import dayjs from "dayjs";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { HiCalendar } from "react-icons/hi";
+import { HiOutlineChatBubbleOvalLeftEllipsis } from "react-icons/hi2";
 import { IoEyeSharp } from "react-icons/io5";
 import { RiHeart2Fill } from 'react-icons/ri';
+import { useIsMobile } from "../../../../hooks/useMobile";
 import { IVideo } from "../../../../types/video.interface";
 import { formatToKilo } from "../../../../utils/format.utils";
 import LikeVideoButton from "../../../ui/like-button/LikeVideoButton";
-import { ShortInfo } from "../../../ui/short-info/ShortInfo";
 import { Subscribe } from "../../../ui/subscribe-button/Subscribe";
-import { HiOutlineChatBubbleOvalLeftEllipsis } from "react-icons/hi2";
+import { ShortInfo } from "../../../ui/SuspenseWrapper";
+import relativeTime from 'dayjs/plugin/relativeTime';
 import styles from './VideoDetails.module.scss';
+import dayjs from "dayjs";
+dayjs.extend(relativeTime);
+
+const VideoDetails: FC<IVideo> = (video) => {
 
 
-export const VideoDetails: FC<IVideo> = (video) => {
-
-    if (!Object.keys(video).length) return null;
+    const { isMobile } = useIsMobile()
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.description}>
+                {isMobile ? <h2>{video.name}</h2> : null}
                 {video.user && <ShortInfo channel={video.user} />}
-                <h2>{video.name}</h2>
+                {!isMobile ? <h2>{video.name}</h2> : null}
                 <p>{video.description}</p>
             </div>
             <div className={styles.stats}>
                 <div className={styles.buttons}>
-                   {video.user && <Subscribe channelIdToSub={video.user.id} />}
+                    {video.user && <Subscribe channelIdToSub={video.user.id} />}
                     <LikeVideoButton videoId={video.id} />
                 </div>
                 <div className={styles.video_perfomance}>
@@ -54,3 +58,5 @@ export const VideoDetails: FC<IVideo> = (video) => {
         </div>
     )
 }
+
+export default VideoDetails

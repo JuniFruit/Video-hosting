@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { useSearch } from "../../../../hooks/useSearch";
 import Field from "../../../ui/fields/Fields";
-import { VideoItem } from "../../../ui/video-item/VideoItem";
 import { IoSearchOutline } from 'react-icons/io5';
 import styles from './Search.module.scss';
 import { useClickOutside } from "../../../../hooks/useClickOutside";
 import { useIsMobile } from "../../../../hooks/useMobile";
 import { useNavigate } from "react-router-dom";
+import { VideoItem } from "../../../ui/video-item/suspense/VideoSuspense";
 
 
 export const Search: FC = () => {

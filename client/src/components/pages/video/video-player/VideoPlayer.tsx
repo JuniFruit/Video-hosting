@@ -17,17 +17,17 @@ export const VideoPlayer: FC<{ videoPath: string, thumbnailPath: string }> = mem
             <video
                 ref={refs.videoRef}
                 poster={thumbnailPath || mockups.defaultThumbnail}
-                onError={(e:any) => {e.target.onerror=null;e.target.poster=mockups.defaultThumbnail}}
+                onError={(e: any) => { e.target.onerror = null; e.target.poster = mockups.defaultThumbnail }}
                 onClick={functions.togglePlay}
                 src={videoPath}
                 preload='metadata'
                 className={styles.player}
-                
+
             />
-           
+
             <div
                 className={`${styles.controls} ${status.controlsOpen ? styles.controls_active : styles.controls_disabled}`}>
-               
+
 
                 <div className='flex items-center'>
                     <button title='Play' className={styles.button} onClick={functions.togglePlay}>

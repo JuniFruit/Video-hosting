@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { VideoItem } from "../../video-item/VideoItem";
 import UserAvatarLoader from "../avatar/UserAvatarLoader";
 import { Shimmer } from "../Shimmer";
 import styles from './VideoItemLoader.module.scss';

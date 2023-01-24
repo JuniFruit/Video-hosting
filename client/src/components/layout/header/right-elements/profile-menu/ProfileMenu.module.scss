@@ -6,7 +6,10 @@
         >div {
             @apply overflow-hidden rounded-full;
             >img {
-                @apply w-9 h-9;
+                @apply w-8 h-8;
+                @screen sm {
+                    @apply w-10 h-10;
+                }
             }
         }
 
@@ -25,11 +28,13 @@
     .menu {
         @apply absolute left-0 w-full p-3 rounded-lg z-50 shadow bg-gray-800 min-w-max animate-fadeIn duration-150;
         top: calc(100% + 1.4rem);
+        left: calc(-30% - 1rem);
         
         >ul {
-            @apply flex-col flex gap-4;
+            @apply flex-col flex gap-2;
             >li {
                 @apply text-white  opacity-75 relative;
+                font-size: .85rem;
 
                 &:hover::before {
                     @apply w-full
@@ -40,6 +45,15 @@
                     
                 }
             }
+            @screen sm {
+                @apply gap-4;
+                >li {
+                    @apply text-sm;
+                }
+            }
+        }
+        @screen md {
+            left: 0;
         }
     }
 }

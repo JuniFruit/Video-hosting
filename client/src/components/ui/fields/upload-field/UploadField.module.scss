@@ -7,12 +7,29 @@
     }
 
     >label {
-        @apply block; 
+        @apply block;
 
         >input {
-            @apply cursor-pointer inline-block text-sm text-gray-500 file:bg-purple file:rounded-full
-            file:bg-opacity-80 file:text-sm file:text-white hover:file:bg-opacity-100 file:border-0 file:mr-4 file:px-4 file:py-2;
-            max-width: 10rem;
+            @apply cursor-pointer inline-block text-gray-500;
+            font-size: .85rem;
+            @screen sm {
+                @apply text-sm;
+            }
+
+            &::file-selector-button {
+                @apply border-0 mr-2 px-2 py-1 bg-opacity-80 bg-purple rounded-full text-white;
+                font-size: .75rem; 
+                
+                @media (hover: hover) {
+                    @apply cursor-pointer hover:bg-opacity-100;
+                }
+                
+                @screen sm {
+                    @apply text-sm px-4 py-2;
+                }
+            }
+            
+            /* max-width: 10rem; */
             
             
 

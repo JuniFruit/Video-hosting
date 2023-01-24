@@ -1,31 +1,30 @@
 import { FC } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useSearch } from "../../../hooks/useSearch";
 import { videoApi } from "../../../store/api/video.api";
-import { Layout } from "../../layout/Layout";
-import { Catalog } from "../home/catalog/Catalog";
+import { setTabTitle } from "../../../utils/generalUtils";
+import { Catalog } from "../../ui/SuspenseWrapper";
 
 
 const SearchResult: FC = () => {
+    setTabTitle("Search")
     const [searchParams] = useSearchParams();
     const searchTerm = searchParams.get('q')
 
-    const {isLoading, data} = videoApi.useGetBySearchTermQuery(searchTerm!, {
+    const { isLoading, data } = videoApi.useGetBySearchTermQuery(searchTerm!, {
         skip: !searchTerm,
-        selectFromResult: ({data, ...rest}) => ({
-           data: data?.slice(0, 25),
-           ...rest
+        selectFromResult: ({ data, ...rest }) => ({
+            data: data?.slice(0, 25),
+            ...rest
         })
     });
 
     return (
-        <Layout title="MeTube search">
-            <Catalog 
-                videosToRender={data || []}
-                title={`Results for ${searchTerm}`}
-                isLoading={isLoading}
-            />
-        </Layout>
+        <Catalog
+            videosToRender={data || []}
+            title={`Results for ${searchTerm}`}
+            isLoading={isLoading}
+        />
+
     )
 }
 

@@ -1,20 +1,22 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { FC, Fragment, useState } from 'react'
+import { FC, Fragment, useCallback, useState } from 'react'
 import { videoApi } from '../../../../store/api/video.api';
-import ConfirmationDialog from '../../../ui/dialog/Dialog';
 import { UploadForm } from './upload-form/UploadForm';
 import { IVideoModal } from './VideoUpload.interface'
 import styles from './VideoUpload.module.scss';
+import ConfirmationDialog from '../../../ui/dialog/Dialog';
 
-export const UploadModal: FC<IVideoModal> = ({ setIsOpen, isOpen, videoId }) => {
+const UploadModal: FC<IVideoModal> = ({ setIsOpen, isOpen, videoId }) => {
 
     const [dialogOpen, setDialogOpen] = useState(false);
 
-    const handleCloseModal = () => {
-       return setIsOpen(false);
-    }
+    const handleCloseModal = useCallback(() => {
+        return setIsOpen(false);
+    }, [])
 
-
+    const handleConfirmDialogOpen = useCallback(() => {
+        return setDialogOpen(true)
+    }, [])
     const [deleteVideo] = videoApi.useDeleteMutation()
 
     const handleDelete = () => {
@@ -28,7 +30,7 @@ export const UploadModal: FC<IVideoModal> = ({ setIsOpen, isOpen, videoId }) => 
                 <Dialog
                     as="div"
                     className={styles.dialog_wrapper}
-                    onClose={() => setDialogOpen(true)}>
+                    onClose={() => handleConfirmDialogOpen()}>
 
                     <Transition.Child
                         as={Fragment}
@@ -54,7 +56,10 @@ export const UploadModal: FC<IVideoModal> = ({ setIsOpen, isOpen, videoId }) => 
                                 leaveTo="opacity-0 scale-95"
                             >
                                 <Dialog.Panel className={styles.panel}>
-                                    <UploadForm handleCloseModal={handleCloseModal} videoId={videoId} />
+                                    <UploadForm
+                                        handleCloseModal={handleCloseModal}
+                                        videoId={videoId}
+                                        onCloseUnfinished={handleConfirmDialogOpen} />
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>
@@ -77,3 +82,5 @@ export const UploadModal: FC<IVideoModal> = ({ setIsOpen, isOpen, videoId }) => 
         </>
     )
 }
+
+export default UploadModal

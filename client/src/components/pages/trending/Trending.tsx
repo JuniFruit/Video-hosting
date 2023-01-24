@@ -4,11 +4,11 @@ import { useQuery } from 'react-query';
 import { useActions } from '../../../hooks/useActions';
 import { VideoService } from '../../../services/video/video.service';
 import { IVideo } from '../../../types/video.interface';
-import { Layout } from '../../layout/Layout';
-import { Catalog } from '../home/catalog/Catalog';
+import { setTabTitle } from '../../../utils/generalUtils';
+import { Catalog } from '../../ui/SuspenseWrapper';
 
 const Trending: FC = () => {
-
+    setTabTitle("Popular")
     const { addMsg } = useActions();
 
     const {
@@ -22,13 +22,11 @@ const Trending: FC = () => {
 
 
     return (
-        <Layout title='Trending videos'>
-            <Catalog
-                title='Trending'
-                videosToRender={videos || []}
-                isLoading={isLoading}
-            />
-        </Layout>
+        <Catalog
+            title='Trending'
+            videosToRender={videos || []}
+            isLoading={isLoading}
+        />
     )
 }
 

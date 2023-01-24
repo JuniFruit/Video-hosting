@@ -1,4 +1,15 @@
 .button {
-    @apply py-1.5 rounded-lg px-5 text-white bg-primary opacity-80 transition-colors duration-150 hover:opacity-100;
-    font-size: 1.2rem; 
+    @apply p-2 text-white text-sm rounded-md bg-primary opacity-80 transition-colors duration-150;
+    
+    @media (hover: hover) {
+        &:hover {
+            @apply opacity-100;
+        }
+    }
+    
+   
+    @screen md {
+        @apply py-1.5 rounded-lg px-5 text-tiny;
+        
+    }
 }

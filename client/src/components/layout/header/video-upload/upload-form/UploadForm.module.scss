@@ -1,17 +1,28 @@
 
 
+form {
 
-.form_wrapper {
-    @apply flex flex-wrap flex-grow;    
+    @apply p-2;
 
-    .fields_wrapper {
-        @apply  pr-6 pt-3;
-        width: 60%;
-    }
-
-    >div:last-child {
-        width: 40%; 
-
+    .form_wrapper {
+        @apply flex flex-wrap flex-grow;    
+    
+    
+        .fields_wrapper {
+            @apply  pt-3 w-full;
+            @screen md {
+                @apply w-8/12;
+            }
+        }
+    
+        .upload_field {
+            @apply mt-3;
+        }
+    
+        @screen md {
+            @apply flex-nowrap
+        }
+    
     }
 
 }

@@ -5,7 +5,7 @@ import { useAuth } from "../../../../hooks/useAuth";
 import { IMenuItem } from "./Menu.interface";
 import styles from './Menu.module.scss';
 
-export const MenuItem: FC<{ item: IMenuItem }> = ({ item }) => {
+export const MenuItem: FC<{ item: IMenuItem }> = memo(({ item }) => {
     const { user } = useAuth();
     let link = item.link;
     if (item.link === '/channel') {
@@ -22,11 +22,11 @@ export const MenuItem: FC<{ item: IMenuItem }> = ({ item }) => {
                     src={item.image}
                     alt={item.title}
                     width={40} height={40}
-                    onError={(e:any) => { e.target.onerror = null; e.target.src = mockups.defaultAvatar }} />
+                    onError={(e: any) => { e.target.onerror = null; e.target.src = mockups.defaultAvatar }} />
                 }
             </span>
             <p>{item.title}</p>
         </NavLink>
 
     </li>
-}
+})

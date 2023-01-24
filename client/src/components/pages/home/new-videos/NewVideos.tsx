@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { useActions } from "../../../../hooks/useActions";
 import { VideoService } from "../../../../services/video/video.service";
 import { IVideo } from "../../../../types/video.interface";
-import { Catalog } from "../catalog/Catalog";
+import { Catalog } from "../../../ui/SuspenseWrapper";
 
 
 const NewVideos: FC = () => {

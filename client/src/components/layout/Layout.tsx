@@ -1,18 +1,16 @@
 
-import { FC, PropsWithChildren } from "react";
-import { Header } from "./header/Header";
-import { Sidebar } from "./sidebar/Sidbar";
-import styles from './Layout.module.scss';
-import { setTabTitle } from "../../utils/generalUtils";
-import { InfoPop } from "../ui/info-pop/InfoPop";
+import { FC, Suspense } from "react";
+import { Outlet } from "react-router-dom";
 import { useIsMobile } from "../../hooks/useMobile";
+import { Header, InfoPop, Sidebar } from "../ui/SuspenseWrapper";
+import styles from './Layout.module.scss';
 
 
-export const Layout:FC<PropsWithChildren<{title:string}>> = ({title, children}) => {
-    setTabTitle(title);
-    const {isMobile} = useIsMobile();
+const Layout: FC = () => {
+
+    const { isMobile } = useIsMobile();
     return (
-        <>            
+        <>
             <main className={styles.main}>
                 <InfoPop />
                 {!isMobile ? <Sidebar /> : null}
@@ -20,10 +18,14 @@ export const Layout:FC<PropsWithChildren<{title:string}>> = ({title, children}) 
                 <section className={styles.content}>
                     <Header />
                     <div className={styles.wrapper}>
-                        {children}
+                        <Suspense fallback={null}>
+                            <Outlet />
+                        </Suspense >
                     </div>
                 </section>
             </main>
         </>
     )
 }
+
+export default Layout

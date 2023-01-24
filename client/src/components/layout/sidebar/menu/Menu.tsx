@@ -1,11 +1,11 @@
-import { FC, memo } from "react";
+import { FC } from "react";
 import { Line } from "../../../ui/misc/Line";
-import { IMenuItem } from "./Menu.interface";
+import { IMenu, IMenuItem } from "./Menu.interface";
 
 import styles from './Menu.module.scss';
 import { MenuItem } from "./MenuItem";
 
-export const Menu: FC<{ title: string, items: IMenuItem[] }> = memo(({ title, items }) => {
+const Menu: FC<IMenu> = ({ title, items }) => {
     return <nav className={styles.menu_sidebar}>
         <h3>{title}</h3>
         <ul>
@@ -17,4 +17,6 @@ export const Menu: FC<{ title: string, items: IMenuItem[] }> = memo(({ title, it
         </ul>
         <Line />
     </nav>
-}, (prev, next) => prev.items.length == next.items.length)
+}
+
+export default Menu

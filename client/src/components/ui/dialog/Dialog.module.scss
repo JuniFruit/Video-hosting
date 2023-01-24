@@ -24,8 +24,18 @@
                 @apply flex justify-between items-center;
 
                 >button {
-                    @apply bg-purple p-2 rounded-lg bg-opacity-70 text-white transition-colors hover:bg-opacity-100;
-                    font-size: 1rem;
+                    @apply bg-purple p-2 rounded-lg bg-opacity-70 text-white transition-colors;
+                    font-size: .85rem;
+
+                    @media (hover: hover) {
+                        &:hover {
+                            @apply bg-opacity-100
+                        }
+                    }
+
+                    @screen sm {
+                        @apply text-sm;
+                    }
                 }
             }
         }

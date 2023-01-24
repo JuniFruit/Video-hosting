@@ -4,7 +4,7 @@ import { IDuration } from "./VideoItem.interface";
 import styles from './VideoItem.module.scss';
 
 
-export const VideoDuration: FC<IDuration> = ({duration, position = 'bot-r'}) => {
+const VideoDuration: FC<IDuration> = ({duration, position = 'bot-r'}) => {
 
     if (!duration) return null;
     
@@ -14,3 +14,5 @@ export const VideoDuration: FC<IDuration> = ({duration, position = 'bot-r'}) => 
         </div>
     )
 }
+
+export default VideoDuration

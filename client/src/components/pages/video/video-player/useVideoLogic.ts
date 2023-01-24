@@ -17,12 +17,7 @@ export const useVideoLogic = () => {
     const [volume, setVolume] = useState<number>(1);
     const [controlsOpen, setControlsOpen] = useState<boolean>(true);
 
-    useEffect(() => {
-        if (videoRef.current?.duration) {
-            setVideoTime(videoRef.current.duration)
-            changeVolume({target: {value: Number(window.localStorage.userVideoVolume || 1)}})
-        }
-    }, [videoRef.current?.duration])
+
 
     const togglePlay = useCallback(() => {
         if (isPlaying) {
@@ -50,7 +45,7 @@ export const useVideoLogic = () => {
 
     }, [isMuted]);
 
-    const changeVolume = (e: any) => {
+    const changeVolume = useCallback((e: any) => {
         if (!videoRef.current) return;
 
         if (Number(e.target.value) <= 0) setIsMuted(true);
@@ -59,10 +54,10 @@ export const useVideoLogic = () => {
         videoRef.current.volume = e.target.value;
         setVolume(Number(e.target.value));
         window.localStorage.setItem('userVideoVolume', e.target.value.toString())
-    }
+    }, [videoRef.current, toggleMute])
 
 
-    const previewScrubbing = (e: MouseEvent) => {
+    const previewScrubbing = useCallback((e: MouseEvent) => {
         if (!progressBarRef.current) return;
         const node = progressBarRef.current.getBoundingClientRect();
         const percentage = Number(((Math.min(Math.max(0, e.x - node.x), node.width) / node.width) * 100).toFixed(4));
@@ -72,31 +67,31 @@ export const useVideoLogic = () => {
             videoRef.current!.currentTime = Number(((percentage / 100) * videoTime).toFixed(4));
         }
         setPreview(percentage)
-    }
+    }, [progressBarRef.current, isScrubbing, videoRef.current])
 
-    const startScrubbing = (e: MouseEvent) => {
+    const startScrubbing = useCallback((e: MouseEvent) => {
         setIsScrubbing(true);
-    }
+    }, [])
 
-    const endScrubbing = (e: MouseEvent) => {
+    const endScrubbing = useCallback((e: MouseEvent) => {
         setIsScrubbing(false);
         previewScrubbing(e);
-    }
+    }, [previewScrubbing])
 
 
-    const skipForward = () => {
+    const skipForward = useCallback(() => {
         if (videoRef.current) {
             videoRef.current.currentTime += 5
         }
-    }
+    }, [videoRef.current])
 
-    const skipBackwards = () => {
+    const skipBackwards = useCallback(() => {
         if (videoRef.current) {
             videoRef.current.currentTime -= 5
         }
-    }
+    }, [videoRef.current])
 
-    const requestFullscreen = () => {
+    const requestFullscreen = useCallback(() => {
         const video = videoRef.current;
         if (!video) return;
 
@@ -109,13 +104,18 @@ export const useVideoLogic = () => {
         } else if (video.webkitRequestFullscreen) {
             video.webkitRequestFullscreen();
         }
-    }
+    }, [videoRef.current])
 
-    const toggleControls = (switcher:boolean) => {
+    const toggleControls = useCallback((switcher: boolean) => {
         setControlsOpen(switcher);
-    }
+    }, [])
 
-
+    useEffect(() => {
+        if (videoRef.current?.duration) {
+            setVideoTime(videoRef.current.duration)
+            changeVolume({ target: { value: Number(window.localStorage.userVideoVolume || .5) } })
+        }
+    }, [videoRef.current, videoRef.current?.duration])
 
     useEffect(() => {
         const video = videoRef.current;
@@ -142,7 +142,7 @@ export const useVideoLogic = () => {
         }
     }, [videoTime])
 
-    useEffect(() => {    
+    useEffect(() => {
 
         let timeout: any;
 
@@ -218,7 +218,7 @@ export const useVideoLogic = () => {
         refs: {
             videoRef,
             progressBarRef,
-            
+
             videoWrapperRef,
         },
         functions: {

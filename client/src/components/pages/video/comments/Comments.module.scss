@@ -3,7 +3,11 @@
     @apply rounded-xl p-5 relative bg-gray-900 shadow;
 
     h2 {
-        @apply text-gray-500 text-tiny flex items-center gap-2;
+        @apply text-gray-500 flex items-center text-sm gap-2;
+        @screen sm {
+            @apply text-tiny;
+        }
+        
     }
 
     .line {
@@ -11,6 +15,10 @@
     }
     p {
         @apply text-gray-500 mb-4;
+        font-size: .85rem;
+        @screen sm {
+            @apply text-sm;
+        }
     }
 
     .comments_section {
@@ -43,13 +51,24 @@
             
             div {
                 &:first-child {
-                    @apply text-xs;
+                    @apply opacity-60;
+                    font-size: .75rem;
+                    @screen sm {
+                        font-size: .85rem;
+                    }
+                    
+                  
                 }
 
                 &:last-child {
+                    @apply text-white opacity-100;
                     word-wrap:break-word;
                     max-width: 10rem;
-                    font-size: 1rem;
+                    font-size: .9rem;
+                    @screen sm {
+                        @apply text-sm;
+                    }
+                   
                 }
             }
         }

@@ -9,8 +9,8 @@ export const VideoLoader: FC<{amount:number}> = ({ amount }) => {
     const generateItems = () => {
         const items = Array(amount).fill(null);
 
-        return items.map(item => (
-            <VideoItemLoader />
+        return items.map((item, ind) => (
+            <VideoItemLoader key={ind} />
         ))
     }
 

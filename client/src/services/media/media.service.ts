@@ -4,9 +4,8 @@ import { IMediaResponse } from "./Media.interface"
 
 export const MediaService = {
 
-    upload: async function (media: FormData, folder?:string, setValue?: (val:number) => void) {
+    upload: async function (media: FormData, setValue?: (val:number) => void) {
         return await axiosRequest.post<IMediaResponse>('/media/upload', media, {
-            params: {folder},
             headers: {'Content-Type': 'multipart/form-data'},
             
             onUploadProgress: (event:AxiosProgressEvent) => {

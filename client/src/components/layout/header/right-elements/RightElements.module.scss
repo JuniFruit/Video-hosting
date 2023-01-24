@@ -3,5 +3,16 @@
 }
 
 .button {
-    @apply inline-flex mx-2 text-3xl ml-6 text-purple items-center justify-center opacity-60 transition-opacity hover:opacity-100;
+    @apply inline-flex mx-2 text-base ml-6 text-purple items-center justify-center opacity-60 transition-opacity ;
+
+    @media (hover: hover) {
+        @apply hover:opacity-100;
+    }
+
+    @screen sm {
+        @apply text-2xl;
+    }
+    @screen md {
+        @apply text-3xl;
+    }
 }

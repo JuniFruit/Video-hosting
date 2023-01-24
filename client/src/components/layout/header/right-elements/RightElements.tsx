@@ -1,11 +1,10 @@
 import { FC } from "react";
 import { useAuth } from "../../../../hooks/useAuth";
-import { AuthForm } from "./auth-form/AuthForm";
-import { ProfileMenu } from "./profile-menu/ProfileMenu";
-import { VideoUpload } from "../video-upload/VideoUpload";
+import { AuthButton, ProfileMenu, VideoUpload } from "../../../ui/SuspenseWrapper";
+
 import styles from './RightElements.module.scss';
 
-export const RightElements: FC = () => {
+const RightElements: FC = () => {
 
     const { user } = useAuth();
 
@@ -18,8 +17,10 @@ export const RightElements: FC = () => {
                 <VideoUpload />
             </>
             :
-            <AuthForm />
+            <AuthButton />
         }
     </div>
 
 }
+
+export default RightElements

@@ -1,13 +1,24 @@
 .wrapper {
-    @apply relative rounded-2xl overflow-hidden shadow h-full;
-   
+    @apply rounded-none overflow-hidden h-full fixed w-full;
+    left: -.05rem;
+    background-color: black;   
+    height: 15rem; 
+    z-index: 20;
+
+    @screen sm {        
+        height: 20rem;
+    }
+    @screen xl {
+        height: 30rem;
+    }
+
+    @screen md {
+        @apply rounded-3xl relative shadow;
+    }
+
     .player {
-        @apply w-full h-full relative;
-        z-index: 1;
-        
-        @screen md {
-            max-height: 32rem;
-        }
+        @apply relative w-full h-full;
+        z-index: 1;    
     }    
    
     .controls {

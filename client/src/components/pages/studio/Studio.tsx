@@ -4,31 +4,32 @@ import { useActions } from '../../../hooks/useActions';
 import { useAuth } from '../../../hooks/useAuth';
 import { api } from '../../../store/api/api';
 import { videoApi } from '../../../store/api/video.api';
-import { Layout } from '../../layout/Layout';
-import { Catalog } from '../home/catalog/Catalog';
+import { setTabTitle } from '../../../utils/generalUtils';
+import { Catalog } from '../../ui/SuspenseWrapper';
 
 const Studio: FC = () => {
+    setTabTitle("Studio")
     const { isLoading, user } = useAuth();
 
     const navigate = useNavigate();
     const { videos } = api.useGetProfileQuery(user?.id!, {
         skip: !user,
-        selectFromResult: ({data}) => ({
+        selectFromResult: ({ data }) => ({
             videos: data?.videos
         })
     })
     const [deleteVideo] = videoApi.useDeleteMutation()
-    const {addMsg} = useActions()
-    
-    const handleDelete = (id:number) => {
-  
-        deleteVideo(id).unwrap().then(() => addMsg({message: 'Video was deleted', status: 200}));
+    const { addMsg } = useActions()
+
+    const handleDelete = (id: number) => {
+
+        deleteVideo(id).unwrap().then(() => addMsg({ message: 'Video was deleted', status: 200 }));
     }
 
-    const handleUpdate = (id:number) => {
+    const handleUpdate = (id: number) => {
         navigate(`/studio/edit/video/${id}`)
     }
-    
+
     useEffect(() => {
         if (isLoading) return;
         if (!user) {
@@ -37,16 +38,14 @@ const Studio: FC = () => {
     }, [user, isLoading])
 
     return (
+        <Catalog
+            videosToRender={videos || []}
+            title='My videos'
+            removeHandler={handleDelete}
+            updateHandler={handleUpdate}
+            isLoading={isLoading}
+        />
 
-        <Layout title='MeTube studio'>
-            <Catalog
-                videosToRender={videos || []}
-                title='My videos'
-                removeHandler={handleDelete}
-                updateHandler={handleUpdate}
-                isLoading={isLoading}
-            />
-        </Layout>
     )
 }
 

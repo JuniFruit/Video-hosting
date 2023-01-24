@@ -1,37 +1,48 @@
-import { FC } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { Channel } from '../components/pages/channel/Channel';
-import Home from '../components/pages/home/Home';
-import NotFoundPage from '../components/pages/not-found/NotFound';
-import ProfileEditPage from '../components/pages/profile/ProfileEdit';
-import RegisterPage from '../components/pages/register/Register';
-import SearchResult from '../components/pages/search-results/SearchResults';
-import Studio from '../components/pages/studio/Studio';
-import VideoEdit from '../components/pages/studio/video-edit/VideoEdit';
-import SubscriptionsPage from '../components/pages/subscriptions/SubscriptionsPage';
-import Trending from '../components/pages/trending/Trending';
-import { Video } from '../components/pages/video/Video';
+import { FC, lazy, Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import { Route, Routes } from 'react-router-dom';
+import { ErrorFallback } from '../components/ui/error/ErrorFallback';
+
+
+const Layout = lazy(() => import('../components/layout/Layout'));
+const Home = lazy(() => import('../components/pages/home/Home'));
+const Channel = lazy(() => import('../components/pages/channel/Channel'));
+const NotFoundPage = lazy(() => import('../components/pages/not-found/NotFound'));
+const ProfileEditPage = lazy(() => import('../components/pages/profile/ProfileEdit'));
+const RegisterPage = lazy(() => import('../components/pages/register/Register'));
+const Video = lazy(() => import('../components/pages/video/Video'));
+const SearchResult = lazy(() => import('../components/pages/search-results/SearchResults'));
+const Studio = lazy(() => import('../components/pages/studio/Studio'));
+const VideoEdit = lazy(() => import('../components/pages/studio/video-edit/VideoEdit'));
+const SubscriptionsPage = lazy(() => import('../components/pages/subscriptions/SubscriptionsPage'));
+const Trending = lazy(() => import('../components/pages/trending/Trending'));
+
 
 
 
 const App: FC = () => {
   return (
-    <Routes>
-
-      <Route path='/' element={<Home />} />
-      <Route path='/studio' element={<Studio />} />
-      <Route path='/studio/edit/video/:id' element={<VideoEdit />} />
-      <Route path='/channel/:id' element={<Channel />} />
-      <Route path='/popular' element={<Trending />} />
-      <Route path='/subscriptions' element={<SubscriptionsPage />} />
-      <Route path='/videos/:name/:id' element={<Video />} />
-      <Route path='/registration' element={<RegisterPage />} />
-      <Route path='/user/profile/:id' element={<ProfileEditPage />} />
-      <Route path='/search' element={<SearchResult />} />
-      <Route path='*' element={<NotFoundPage />} />
-
-
-    </Routes>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <Routes>
+        <Route path='/' element={
+          <Suspense fallback={null}>
+            <Layout />
+          </Suspense>
+        }>
+          <Route path='/' element={<Home />} />
+          <Route path='/studio' element={<Studio />} />
+          <Route path='/studio/edit/video/:id' element={<VideoEdit />} />
+          <Route path='/channel/:id' element={<Channel />} />
+          <Route path='/popular' element={<Trending />} />
+          <Route path='/subscriptions' element={<SubscriptionsPage />} />
+          <Route path='/videos/:name/:id' element={<Video />} />
+          <Route path='/registration' element={<RegisterPage />} />
+          <Route path='/user/profile/:id' element={<ProfileEditPage />} />
+          <Route path='/search' element={<SearchResult />} />
+          <Route path='*' element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </ErrorBoundary>
   );
 }
 

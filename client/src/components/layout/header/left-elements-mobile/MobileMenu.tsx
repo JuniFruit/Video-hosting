@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { HiMenu } from "react-icons/hi";
-import { Sidebar } from "../../sidebar/Sidbar";
 import { Search } from "../search-bar/Search";
 import styles from './MobileMenu.module.scss';
 import styleElements from '../right-elements/RightElements.module.scss';
 import { useClickOutside } from "../../../../hooks/useClickOutside";
+import { Sidebar } from "../../../ui/SuspenseWrapper";
 
-export const MobileMenu: FC = () => {
+const MobileMenu: FC = () => {
     const { ref, isShow, setIsShow } = useClickOutside(false);
 
     return (
@@ -30,3 +30,5 @@ export const MobileMenu: FC = () => {
 
     )
 }
+
+export default MobileMenu

@@ -4,18 +4,20 @@ import { IManipulation } from "./VideoItem.interface";
 import styles from './VideoItem.module.scss';
 
 
-export const VideoManipulations: FC<IManipulation> = ({removeHandler, updateHandler, id}) => {
+const VideoManipulations: FC<IManipulation> = ({ removeHandler, updateHandler, id }) => {
 
 
     return (
         <div className={styles.manipulations}>
-            <button onClick={() => {!!removeHandler && removeHandler(id)}}>
+            <button onClick={() => { !!removeHandler && removeHandler(id) }}>
                 <HiTrash />
             </button>
-            <button onClick={() => {!!updateHandler &&updateHandler(id)}}>
+            <button onClick={() => { !!updateHandler && updateHandler(id) }}>
                 <HiPencil />
             </button>
         </div>
 
     )
 }
+
+export default VideoManipulations

@@ -1,16 +1,14 @@
 import { FC, memo } from "react";
 import { IVideoItem } from "./VideoItem.interface";
-import { VideoManipulations } from "./VideoManipulations";
-import { VideoStats } from "./VideoStats";
-import styles from './VideoItem.module.scss';
-import { UserAvatar } from "../user-avatar/UserAvatar";
 import { truncTitle } from "../../../utils/format.utils";
-import { VideoDuration } from "./VideoDuration";
+import { UserAvatar } from "../user-avatar/UserAvatar";
+import styles from './VideoItem.module.scss';
 import { Link } from "react-router-dom";
 import { mockups } from "../../../assets/mockups/images";
+import { VideoDuration, VideoManipulations, VideoStats } from "./suspense/VideoSuspense";
 
 
-export const VideoItem: FC<IVideoItem> = memo(({ removeHandler, item, isSmall, updateHandler }) => {
+const VideoItem: FC<IVideoItem> = memo(({ removeHandler, item, isSmall, updateHandler }) => {
 
 
     return (
@@ -21,8 +19,8 @@ export const VideoItem: FC<IVideoItem> = memo(({ removeHandler, item, isSmall, u
                     <img
                         src={item.thumbnailPath}
                         alt={item.name}
-                        onError={(e:any) => {e.target.onerror=null; e.target.src = mockups.defaultThumbnail}}
-                        
+                        onError={(e: any) => { e.target.onerror = null; e.target.src = mockups.defaultThumbnail }}
+
                     />
 
                     <VideoDuration duration={item.duration} position={'top-r'} />
@@ -59,3 +57,5 @@ export const VideoItem: FC<IVideoItem> = memo(({ removeHandler, item, isSmall, u
         </div>
     )
 })
+
+export default VideoItem

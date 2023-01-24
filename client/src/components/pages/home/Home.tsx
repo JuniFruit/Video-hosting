@@ -1,14 +1,16 @@
-import { Layout } from '../../layout/Layout';
 import { FC } from "react";
-import { Discover } from "./discover/Discover";
-import NewVideos from './new-videos/NewVideos';
+import { setTabTitle } from "../../../utils/generalUtils";
+import { Discover, NewVideos } from "../../ui/SuspenseWrapper";
 
-const Home: FC = () => {    
+const Home: FC = () => {
+    setTabTitle("Broadcast Service")
+    return (
+        <>
+            <Discover />
+            <NewVideos />
+        </>
+    )
 
-    return <Layout title="MeTube - New broadcasting service">
-        <Discover />
-        <NewVideos />
-    </Layout>
 
 }
 

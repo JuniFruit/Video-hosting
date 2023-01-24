@@ -4,11 +4,10 @@ import { mockups } from "../../../assets/mockups/images";
 import { IVideo } from "../../../types/video.interface"
 import { truncTitle } from "../../../utils/format.utils";
 import { UserAvatar } from "../user-avatar/UserAvatar";
-import { VideoDuration } from "./VideoDuration";
+import { VideoDuration, VideoStats } from "./suspense/VideoSuspense";
 import styles from './VideoItem.module.scss';
-import { VideoStats } from "./VideoStats";
 
-export const LargeVideo: FC<IVideo> = ({ views, duration, name, user, thumbnailPath, createdAt, id }) => {
+const LargeVideo: FC<IVideo> = ({ views, duration, name, user, thumbnailPath, createdAt, id }) => {
     return (
         <div className={styles.large_wrapper}>
             <Link to={`/videos/${name}/${id}`}>
@@ -16,7 +15,7 @@ export const LargeVideo: FC<IVideo> = ({ views, duration, name, user, thumbnailP
                     src={thumbnailPath}
                     className={styles.large_thumbnail}
                     alt={name}
-                    onError={(e:any) => {e.target.onerror=null; e.target.src = mockups.defaultThumbnail}}
+                    onError={(e: any) => { e.target.onerror = null; e.target.src = mockups.defaultThumbnail }}
                 />
                 <div className={styles.large_content}>
                     <div className={styles.large_name}>
@@ -44,3 +43,4 @@ export const LargeVideo: FC<IVideo> = ({ views, duration, name, user, thumbnailP
         </div>
     )
 }
+export default LargeVideo

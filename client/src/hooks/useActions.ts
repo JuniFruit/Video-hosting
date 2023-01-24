@@ -8,3 +8,4 @@ export const useActions = () => {
     const dispatch = useDispatch();
     return bindActionCreators(rootActions, dispatch);
 }
+

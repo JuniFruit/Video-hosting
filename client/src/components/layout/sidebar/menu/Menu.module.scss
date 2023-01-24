@@ -3,7 +3,7 @@
     @apply my-8;
 
     >h3 {
-        @apply text-gray-600 mb-6;
+        @apply text-gray-600 mb-6 text-sm;
         font-weight: 500
     }
     >ul {
@@ -17,6 +17,10 @@
 
             >a {
                 @apply flex items-center font-medium relative;
+                font-size: .85rem;
+                @screen sm {
+                    @apply text-sm;
+                }
 
                 &.active {
                     @apply text-white;
@@ -35,11 +39,17 @@
                     &.img {
                         @apply flex justify-center items-center;
                         border: 1px solid '#363440';
+
+                    }
+                    >img {
+                        @apply w-8 h-8;
+                        @screen sm {
+                            @apply w-10 h-10;
+                        }
                     }
                 }
                 >p {
                     @apply text-gray-600;
-                    font-size: 500;
                 }
 
                 &::before {
@@ -47,9 +57,13 @@
                     content: '';
                 }
 
-                &:hover:before {
-                    @apply opacity-70; 
+                @media (hover: hover) {
+                    &:hover:before {
+                        @apply opacity-70;
+                    }
+
                 }
+
             }
         }
     }

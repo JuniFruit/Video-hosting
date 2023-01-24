@@ -3,16 +3,16 @@ import { IUploadField } from "./UploadField.interface";
 import { useUpload } from "./useUpload";
 import styles from './UploadField.module.scss';
 
-export const UploadField: FC<IUploadField> = ({title, onChange, onChooseFile, setValue, folder, type}) => {
+export const UploadField: FC<IUploadField> = ({ title, type, ...rest }) => {
 
-    const {uploadFile} = useUpload(onChange, setValue, folder, onChooseFile);
+    const { uploadFile } = useUpload({ type, ...rest });
 
     return (
         <div className={styles.file}>
             {title && <h2>{title}</h2>}
             <label>
                 <span className="sr-only">Choose a file</span>
-                <input type='file' onChange={uploadFile} accept={`${type}/*`}/>
+                <input type='file' onChange={uploadFile} accept={`${type}/*`} />
             </label>
         </div>
 
