@@ -1,22 +1,16 @@
+import { ValidationError } from 'class-validator';
 import { RequestHandler } from 'express';
-import { validate } from 'class-validator';
 import { AuthDto, RegisterDto } from '../auth/auth.dto';
 import { UserEditDto } from '../entities/user/user.dto';
 import { formErrorMessage } from '../utils/utils';
+import { validationPipe } from './validationPipe';
 
 export const userRegisterValidation: RequestHandler = async (req, res, next) => {
 
-    const user = new RegisterDto();
-    user.avatarPath = req.body.avatarPath;
-    user.description = req.body.description;
-    user.email = req.body.email;
-    user.name = req.body.name;
-    user.password = req.body.password;
+    const result = await validationPipe(RegisterDto, { ...req.body })
 
-    const errors = await validate(user);
-
-    if (errors.length) {
-        return res.status(500).send({message: formErrorMessage(errors)});
+    if ((result as ValidationError[]).length) {
+        return res.status(500).send({ message: formErrorMessage(result as ValidationError[]) });
 
     }
     next()
@@ -24,30 +18,23 @@ export const userRegisterValidation: RequestHandler = async (req, res, next) => 
 
 export const userAuthValidation: RequestHandler = async (req, res, next) => {
 
-    const user = new AuthDto();
-    user.password = req.body.password;
-    user.email = req.body.email;
 
 
-    const errors = await validate(user);
+    const result = await validationPipe(AuthDto, { ...req.body })
 
-    if (errors.length) {        
-        return res.status(500).send({message: formErrorMessage(errors)});
+    if ((result as ValidationError[]).length) {
+        return res.status(500).send({ message: formErrorMessage(result as ValidationError[]) });
+
     }
     next()
 }
 
 export const userEditValidation: RequestHandler = async (req, res, next) => {
 
-    const user = new UserEditDto();
-    user.description = req.body.data.description;
-    user.avatarPath = req.body.data.avatarPath;
-    user.name = req.body.data.name;
+    const result = await validationPipe(UserEditDto, { ...req.body.data })
 
-    const errors = await validate(user);
-
-    if (errors.length) {
-        return res.status(500).send({message: formErrorMessage(errors)});
+    if ((result as ValidationError[]).length) {
+        return res.status(500).send({ message: formErrorMessage(result as ValidationError[]) });
 
     }
     next()

@@ -1,21 +1,15 @@
+import { ValidationError } from 'class-validator';
 import { RequestHandler } from 'express';
-import { validate } from 'class-validator';
-import {VideoDto} from '../entities/video/video.dto';
+import { VideoDto } from '../entities/video/video.dto';
 import { formErrorMessage } from '../utils/utils';
+import { validationPipe } from './validationPipe';
 
 export const videoValidation: RequestHandler = async (req, res, next) => {
 
-    const video = new VideoDto();
-    video.description = req.body.dto.description;
-    video.isPublic = req.body.dto.isPublic;
-    video.name = req.body.dto.name;
-    video.thumbnailPath = req.body.dto.thumbnailPath;
-    video.videoPath = req.body.dto.videoPath;
+    const result = await validationPipe(VideoDto, { ...req.body.dto })
 
-    const errors = await validate(video);
-
-    if (errors.length) {
-        return res.status(500).send({message: formErrorMessage(errors)});
+    if ((result as ValidationError[]).length) {
+        return res.status(500).send({ message: formErrorMessage(result as ValidationError[]) });
 
     }
     next()

@@ -1,10 +1,8 @@
-import { IsString } from "class-validator";
+import { IsBoolean, IsNumber, IsString, ValidateIf } from "class-validator";
 
 export class VideoDto {
     @IsString()
     name!: string
-
-    isPublic?: boolean
 
     @IsString()
     description!: string
@@ -15,5 +13,15 @@ export class VideoDto {
     @IsString()
     thumbnailPath!: string
 
-    duration?:number
+    @ValidateIf(o => o.isPublic !== undefined)
+    @IsBoolean()
+    isPublic?: boolean
+
+    @ValidateIf(o => o.duration !== undefined)
+    @IsNumber()
+    duration?: number;
+
+    @ValidateIf(o => o.isProcessing !== undefined)
+    @IsBoolean()
+    isProcessing?: boolean
 }

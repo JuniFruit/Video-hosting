@@ -1,27 +1,36 @@
-import path from 'path';
 import { IMediaResponse } from './media.interface';
+import stream from 'stream';
+import drive from '../drive/drive.service'
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 
 export const MediaService = {
-    saveMedia: async function (file: any, folder = 'default'): Promise<IMediaResponse> {
-        const dir = path.join(__dirname, '..', 'uploads', `${folder}/${file.media.name}`);
 
-        if (file.media.mimetype.includes('video') || file.media.mimetype.includes('image')) {
 
-            try {
-                await file.media.mv(dir, (err: any) => {
-                    if (err) throw new Error('Upload failed. Reason: ' + err);
-                })
+    saveMedia: async function (fileObject: any): Promise<IMediaResponse> {
+        const folderId = process.env.FOLDER_ID
 
-                return {
-                    url: `/uploads/${folder}/${file.media.name}`,
-                    name: file.media.name,
-                }
-            } catch (e: any) {
-                throw new Error(e.message);
-            }
-        } else {
-            throw new Error('Unsupported file type')
+        if (!folderId) throw new Error('Something went wrong!')
+        const bufferStream = new stream.PassThrough();
+        bufferStream.end(fileObject.media.data);
+
+        const { data } = await drive().files.create({
+            media: {
+                mimeType: fileObject.media.mimeType,
+                body: bufferStream,
+            },
+            requestBody: {
+                name: fileObject.media.name,
+                parents: [folderId],
+            },
+            fields: '*',
+        });
+        console.log(`Uploaded file ${data.name} ${data.id}`);
+        return {
+            url: data.webContentLink || '',
+            name: fileObject.media.name
         }
+    },
 
-    }
 }

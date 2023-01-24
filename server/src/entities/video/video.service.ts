@@ -53,9 +53,8 @@ export const VideoService = {
 
     updateVideo: async function (id: number, dto: VideoDto): Promise<VideoEntity> {
         const video = await videoRepository.findOneBy({ id: id });
-        const info = dto;
-        info.duration = video?.duration
-        return await videoRepository.save({ ...video, ...info });
+        
+        return await videoRepository.save({ ...video, ...dto });
     },
 
     getAll: async function (searchTerm?: string) {
@@ -69,11 +68,15 @@ export const VideoService = {
         return await videoRepository.find({
             where: {
                 ...options,
-                isPublic: true
+                isPublic: true,
+                isProcessing: false
             },
             relations: {
                 comments: true,
                 user: true
+            },
+            order: {
+                createdAt: 'DESC'
             },
             select: {
                 user: {
@@ -88,8 +91,9 @@ export const VideoService = {
     getMostViewed: async function (): Promise<VideoEntity[]> {
         const videos = await videoRepository.find({
             where: {
-                views: MoreThan(0),
-                isPublic: true
+                views: MoreThan(50),
+                isPublic: true,
+                isProcessing: false
             },
             relations: {
                 user: true,
@@ -114,7 +118,8 @@ export const VideoService = {
             thumbnailPath: '',
             description: '',
             user: { id: userId },
-            name: ''
+            name: '',
+            isProcessing: true
         }
         const newVideo = videoRepository.create(defaultFields);
         const video = await videoRepository.save(newVideo);
@@ -140,7 +145,7 @@ export const VideoService = {
     updateReaction: async function (id: number, userId: number) {
         const video = await this.getById(id);
         const isLiked = video.likedBy.some(user => user.id === userId);
-       
+
         if (isLiked) {
             video.likes--;
             video.likedBy = video.likedBy.filter(user => user.id !== userId);

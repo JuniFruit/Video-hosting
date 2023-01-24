@@ -36,8 +36,7 @@ export const UserService = {
             relations: {
 
                 videos: {
-                    user: true,
-
+                    user: true,                   
                 },
                 subscribers: {
                     fromUser: true,
@@ -50,7 +49,10 @@ export const UserService = {
                 likedVideos: true
             },
             order: {
-                createdAt: "DESC"
+                createdAt: "DESC",
+                videos: {
+                    createdAt: 'DESC'
+                }
             }
 
         })
