@@ -37,7 +37,7 @@ const App: FC = () => {
           <Route path='/subscriptions' element={<SubscriptionsPage />} />
           <Route path='/videos/:name/:id' element={<Video />} />
           <Route path='/registration' element={<RegisterPage />} />
-          <Route path='/user/profile/:id' element={<ProfileEditPage />} />
+          <Route path='/user/profile-edit/:id' element={<ProfileEditPage />} />
           <Route path='/search' element={<SearchResult />} />
           <Route path='*' element={<NotFoundPage />} />
         </Route>

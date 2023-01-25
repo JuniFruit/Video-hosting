@@ -45,7 +45,7 @@ const ProfileMenu: FC = () => {
                             <Link onClick={() => setIsShow(!isShow)} to={`/studio`}>Studio</Link>
                         </li>
                         <li>
-                            <Link onClick={() => setIsShow(!isShow)} to={`/user/profile/${user?.id}`}>Edit profile</Link>
+                            <Link onClick={() => setIsShow(!isShow)} to={`/user/profile-edit/${user?.id}`}>Edit profile</Link>
                         </li>
                         <li>
                             <button onClick={() => { logout({}); setIsShow(!isShow) }}>Logout</button>
