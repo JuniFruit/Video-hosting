@@ -14,8 +14,11 @@ export const MediaService = {
         if (!folderId) throw new Error('Something went wrong!')
         const bufferStream = new stream.PassThrough();
         bufferStream.end(fileObject.media.data);
+        const connectedDrive = await drive()
 
-        const { data } = await drive().files.create({
+        if (!connectedDrive) throw new Error('Something went wrong!');
+
+        const { data } = await connectedDrive.files.create({
             media: {
                 mimeType: fileObject.media.mimeType,
                 body: bufferStream,

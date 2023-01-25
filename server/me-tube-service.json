@@ -1,12 +1,3 @@
 {
-  "type": "service_account",
-  "project_id": "me-tube-hosting",
-  "private_key_id": "5aa82e4dce578ba375ee1a18c132006d6d708186",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDmPQDRKfcfUEmS\nZE0UYbrsjfT0i/J3ph9ikwleqTgaWXywAOu71JCc0KLgk5P52lFR5AMYlIEDCXHM\n9XyGSGHCf4CTGs93ovIKI6dr1EDCX/uYyokZox90+qLCMKSahjj8w2f2RtcUz3K6\nW/EiRVSVEA+7492qh3zvXmqNjk9AsM+qZt/LgRh47rvQzOr34MA1diouObVhBvP5\nDvFPHzG+5rjpWPjPkNJ8FuzFlqzi3pAGL4+zlNa1tGb1sOejpmb/CNCxJmxDKqzc\nHml6X9zbeLixDyKhlO4PNcGtGa6Z4yrIrf8gDRomOhK5oZKHSE+6A4tl0FXvqISz\n4vuuheTdAgMBAAECggEAUViOWFheYqboR5u+jAv3kiqZuGlVsqZ0Akz3C4X4N38U\nic7ZexSgP3eLhJM/vhA/mRJZca7OYjdNCOBXLc6XE7Qexlq7oIZmw+RS+8sTUlm9\nN/+fLvquW5NOPBQZpCr2KYAU1DO1PDoLTAK+EKC0QLJbDMR2hhC2uJAAT6FPKQhj\n1ihm8DM4sPlfdz6tstD46bQh1iqonv6QbsbA1JSXGX0n/S3NdL7Z3KoXNztG76Jp\n7ms3Nblsx5ld4pHPLUPpilmJUZ+xYQ7yQfiTfOo+glYXqnPF2LfuNih3H+LDpKK9\nlKN5n0mcZnSptN5UfkfsNFOy6fWlibSeB4OlA3RMVQKBgQD1Z4QfPAarB2uTEY8r\nBI2wjhdkC/WLFpvJlBa3TTneulyIDXTB7H8grPwXu54A5cDqTVvU2erRy/p3fcXP\npVwMGzbS7xq2x5MfDmBdvtrudLtCYXcMk6Nvb/GyzI0tuQCgkc1FkVNQell9LaFz\nBFFz0KA9ElfBigy7MsWayvjC2wKBgQDwLdrQHtxcs9u2WDLIb5uXTXOsvC5xUVwU\nofDmnrKGnWhEF7H9ycI6mSnY8v3gmAQ8DSB79v0OAC3lTDTiP+gJbUzFXvkzheom\nNebvxxYzkmSu2yBH45+rpBFUlLTXNbOmOdRDDTmer2obZ/rYbR/OCKIOhq0GA8iz\nAQvnfmLYpwKBgBKrj3e432D/rYWA3n2NWSJHjSwFZObyD2Qkqh3D+FUjpIqNS4a9\ncWaRApTjpz+2OxkYTZZCBgV0GVgh73y+veQF5gPiQQwK3vyL4XUAYjOmGeEQ/Tet\nu89smtzZhxwlaRDORum2BrqmtEw7vn67o17GToqW7KpC0HklgbcnHgnlAoGARQL3\n/5sOeHiZpiBbnyoqi+QOW9DKi3b0PV12yd1JsNJj1kT0uNaTP6Eo3BSeDD3B4btn\n3RbQCYjVpzApdeUk+Ch2ybOLaVmOOSJ90+HhqDnlQjTmZqGqDHidHi+IctoUX6v4\nKLgRGV6P34YWFr/sRphGcGQULUlDDuQ7Fm5DWrsCgYAJRh9ByjT1xYo5EunMDDfB\nQzuCniAmxIZ3Cuh85HeYHfuPjCKIT5NveuQ8er/yQE5/qWvQWWsweKAafEiTOX4/\nv5Mi6JSKXOjZgTfWRreM5dRNl/EJi/L9Dq0+GFBP747lO9s0CzjeUpuhC2HMG2xj\noQGK1d9OJ+CEhmRFf/xjUA==\n-----END PRIVATE KEY-----\n",
-  "client_email": "me-tube-service@me-tube-hosting.iam.gserviceaccount.com",
-  "client_id": "112869483181998085143",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/me-tube-service%40me-tube-hosting.iam.gserviceaccount.com"
+  
 }
