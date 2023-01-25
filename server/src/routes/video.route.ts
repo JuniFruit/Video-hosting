@@ -66,7 +66,7 @@ router.post('/create', authGuard, async (req, res) => {
 
 router.delete('/delete/:id', authGuard, async (req, res) => {
     try {
-        const deletedResults = await VideoService.delete(Number(req.params.id));
+        await VideoService.delete(Number(req.params.id));
         res.status(200).send()
     } catch (e: any) {
         res.status(500).send({ message: e.message });

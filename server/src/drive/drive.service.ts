@@ -1,12 +1,10 @@
-import { google } from 'googleapis';
-import path from 'path';
-import fs from 'fs';
 import * as dotenv from 'dotenv';
+import fs from 'fs';
+import { google } from 'googleapis';
 dotenv.config();
 
 const getDriveService = async () => {
     try {
-
         const keys = process.env.CREDS
         if (!keys) return;
         const parsedKeys = JSON.parse(keys);
